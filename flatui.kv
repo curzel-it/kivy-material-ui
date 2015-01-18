@@ -1,0 +1,165 @@
+<FlatTextInput>:
+
+    canvas.before:
+
+		#Background
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+		#Cursor
+        Color:
+            rgba: ( self.cursor_color if self.focus and not self.cursor_blink else [0,0,0,0] )
+        Rectangle:
+            pos: [int(x) for x in self.cursor_pos]
+            size: sp(2), -self.line_height
+
+		#Underline
+        Color:
+            rgba: self.cursor_color if self.focus else (0,0,0,0)
+        Rectangle:
+            size: ( self.size[0]-3, 1 )
+            pos: self.pos[0], self.cursor_pos[1] - self.line_height - 1
+
+		#Set text color
+        Color:
+            rgba: self.disabled_foreground_color if self.disabled else (self.hint_text_color if not self.text and not self.focus else self.foreground_color)
+
+
+<FloatingAction>:
+
+	background_normal: 'images/transparent.png' 
+	background_disabled: 'images/transparent.png'
+	background_down: 'images/transparent.png'
+
+	canvas.before:
+
+        PushMatrix:
+        Translate:
+            x: root.center_x
+            y: root.center_y
+        
+		#Shadow
+		Color:
+            rgba: [ 0.3, 0.3, 0.3, root.shadow_alpha if root.state != 'down' else 0 ]
+		Ellipse:
+			size: root.diameter*root.shadow_ratio, root.diameter*root.shadow_ratio
+			pos: -root.diameter*root.shadow_ratio/2+root.shadow_offset_x, -root.diameter*root.shadow_ratio/2-root.shadow_offset_y
+
+		#Content
+		Color:
+            rgba: ( root.background_color if root.state == 'normal' else root.background_color_down ) if not root.disabled else root.background_color_disabled
+		Ellipse:
+			size: root.diameter, root.diameter
+			pos: -root.diameter/2, -root.diameter/2
+    
+        PopMatrix:
+
+    canvas.after:
+        Rectangle:
+            source: self.icon
+            pos: self.center[0]-3*self.diameter/14.0, self.center[1]-3*self.diameter/14.0
+            size: 3*self.diameter/7.0, 3*self.diameter/7.0
+
+
+<FlatButton>:
+
+    background_normal: 'images/transparent.png'
+    background_down: 'images/transparent.png'
+    background_disabled_normal: 'images/transparent.png'
+    background_disabled_down: 'images/transparent.png'
+
+	canvas.before:
+
+        PushMatrix:
+        Translate:
+            x: root.pos[0]
+            y: root.pos[1]
+
+        PushMatrix:
+        Translate:
+            y: -1
+
+		#Shadow
+		Color:
+            rgba: [ 0.4, 0.4, 0.4, root.shadow_alpha if root.state != 'down' else 0 ]
+
+        #Fill
+		Rectangle:
+			size: root.size[0]/2, root.size[1]-2*root.corner_radius
+			pos: 0, root.corner_radius
+		Rectangle:
+			size: root.size[0]/2, root.size[1]-2*root.corner_radius
+			pos: root.size[0]/2, root.corner_radius
+		Rectangle:
+			size: root.size[0]-2*root.corner_radius, root.corner_radius
+			pos: root.corner_radius, root.size[1]-root.corner_radius
+		Rectangle:
+			size: root.size[0]-2*root.corner_radius, root.corner_radius
+			pos: root.corner_radius, 0
+
+        #Corners
+        Ellipse:
+            size: root.corner_radius*2, root.corner_radius*2
+            pos: 0, 0
+        Ellipse:
+            size: root.corner_radius*2, root.corner_radius*2
+            pos: root.size[0]-2*root.corner_radius, 0
+        Ellipse:
+            size: root.corner_radius*2, root.corner_radius*2
+            pos: 0, root.size[1]-2*root.corner_radius
+        Ellipse:
+            size: root.corner_radius*2, root.corner_radius*2
+            pos: root.size[0]-2*root.corner_radius, root.size[1]-2*root.corner_radius
+
+        PopMatrix:
+
+#Content color
+		Color:
+            rgba: ( root.background_color if root.state == 'normal' else root.background_color_down ) if not root.disabled else root.background_color_disabled
+
+    #Fill
+		Rectangle:
+			size: root.size[0]/2, root.size[1]-2*root.corner_radius
+			pos: 0, root.corner_radius
+		Rectangle:
+			size: root.size[0]/2, root.size[1]-2*root.corner_radius
+			pos: root.size[0]/2, root.corner_radius
+		Rectangle:
+			size: root.size[0]-2*root.corner_radius, root.corner_radius
+			pos: root.corner_radius, root.size[1]-root.corner_radius
+		Rectangle:
+			size: root.size[0]-2*root.corner_radius, root.corner_radius
+			pos: root.corner_radius, 0
+
+    #Corners
+        Ellipse:
+            size: root.corner_radius*2, root.corner_radius*2
+            pos: 0, 0
+        Ellipse:
+            size: root.corner_radius*2, root.corner_radius*2
+            pos: root.size[0]-2*root.corner_radius, 0
+        Ellipse:
+            size: root.corner_radius*2, root.corner_radius*2
+            pos: 0, root.size[1]-2*root.corner_radius
+        Ellipse:
+            size: root.corner_radius*2, root.corner_radius*2
+            pos: root.size[0]-2*root.corner_radius, root.size[1]-2*root.corner_radius
+
+        PopMatrix:
+
+    canvas.after:
+
+        Color:
+            rgba: [1,1,1,1] if self.icon and self.icon != '' else [0,0,0,0]
+        Rectangle:
+            source: self.icon
+            pos: root.center[0]-min(root.size)/2.4, root.center[1]-min(root.size)/2.4
+            size: min(root.size)/1.2, min(root.size)/1.2
+
+<PopupComboBox>:
+    markup: True
+    text_size: self.width, None 
+    valign: 'middle'
