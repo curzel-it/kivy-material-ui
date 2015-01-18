@@ -13,16 +13,19 @@ I've also developed some fork of kivy.uix.popup, adding title font, color and al
 ### Widgets
 Most widget are direct subclasses of standard ones.
 
-####FlatTextInput
+#### FlatTextInput
 Flat version of the standard TextInput.
 
-####FlatButton
+#### FlatButton
 Flat button, supports fill color and shadow.
 
-####FloatingAction
+#### FloatingAction
 Round and flat button, supports fill color and shadow.
 
-####PopupComboBox
-When a click on this button occur, a popup will be shown to pick a value.
+#### PopupComboBox
+When a click on this button occur, a popup will be shown to pick a value.  
 Arguments named popup_* will be passed down to the popup for customizations.
 
+#### FlatPopup
+Code is simply copy-pasted from kivy.uix.popup.  
+There are just a fiew more properties.
