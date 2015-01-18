@@ -105,7 +105,7 @@
                     text: 'More things'
 
         BoxLayout:    
-            size_hint: 0.7, 1
+            size_hint: 0.4, 1
             orientation: 'vertical'
             padding: ( 10, 10, 10, 10 )
             spacing: 10
@@ -115,13 +115,11 @@
                 font_name: 'font/Roboto-Light.ttf'
                 text: "FlatButton"
                 color: 0,0,0,.9
-                size_hint: .3, .1
 
             FlatButton:
                 font_name: 'font/Roboto-Light.ttf'
                 text: "FlatButton"
                 color: 0,0,0,.9
-                size_hint: .3, .1
                 background_color: [.25,.83,.49,1]
                 background_color_down: [.133,.68,.38,1]
 
@@ -129,7 +127,7 @@
                 font_name: 'font/Roboto-Light.ttf'
                 text: "FlatButton"
                 color: 0,0,0,.9
-                size_hint: .3, .1
+                corner_radius:5
                 background_color: [.95,.8,.06,1]
                 background_color_down: [.95,.61,.07,1]
 
@@ -137,7 +135,7 @@
                 font_name: 'font/Roboto-Light.ttf'
                 text: "FlatButton"
                 color: 0,0,0,.9
-                size_hint: .3, .1
+                corner_radius:10
                 background_color: [.61,.35,.81,1]
                 background_color_down: [.57,.27,.67,1]
 
@@ -145,22 +143,28 @@
                 font_name: 'font/Roboto-Light.ttf'
                 text: "FlatButton"
                 color: 0,0,0,.9
-                size_hint: .3, .1
+                corner_radius:20
                 background_color: [0,1,1,1]
 
-            FlatButton:
+            FlatTextInput:
                 font_name: 'font/Roboto-Light.ttf'
-                text: "FlatButton"
-                color: 0,0,0,.9
-                size_hint: .3, .1
-                background_color: [0,0,1,1]
+                text: "FlatTextInput"
+                hint_text: "FlatTextInput"
 
-            FlatButton:
+            FlatTextInput:
                 font_name: 'font/Roboto-Light.ttf'
-                text: "FlatButton"
-                color: 0,0,0,.9
-                size_hint: .3, .1
-                background_color: [0,1,0,1]
+                hint_text: "FlatTextInput"
+
+            FlatTextInput:
+                font_name: 'font/Roboto-Light.ttf'
+                text: "FlatTextInput"
+                hint_text: "FlatTextInput with blue cursor"
+                cursor_color: (0,0,1,1)
+
+            FlatTextInput:
+                font_name: 'font/Roboto-Light.ttf'
+                hint_text: "FlatTextInput with blue cursor"
+                cursor_color: (0,0,1,1)
 
     
         GridLayout:
