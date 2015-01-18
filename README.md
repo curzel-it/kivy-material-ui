@@ -1,8 +1,6 @@
 # kivy-material-ui
-Bunch of classes, layouts and images I use in my projects.
-
-### Code and documentation
-I've documented almost everything, so this is good...
+Bunch of classes, layouts and images I use in my projects.  
+I've documented almost everything, so this is good.
 
 ### Custom kivy theme
 You will need to replace the 'defaulttheme-0.png' with mine.
