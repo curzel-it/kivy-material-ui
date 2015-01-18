@@ -95,7 +95,8 @@ class FloatingAction( _ColorButton ) :
     '''
 
     diameter = NumericProperty( 1 )
-    '''Represents the diameter of the button. NOT UPDATED CHANGING SIZE.
+    '''Represents the diameter of the button. 
+    Will update widget size.
 
     .. versionadded:: 1.0
 
@@ -130,7 +131,6 @@ class FloatingAction( _ColorButton ) :
 
         if not 'color' in kargs.keys() : 
             kargs[ 'color' ] = [ 1, 1, 1, 1 ]
-
         super( FloatingAction, self ).__init__( **kargs )
 
 
