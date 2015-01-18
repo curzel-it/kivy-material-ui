@@ -7,7 +7,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.listview import ListItemButton, ListView
 from kivy.uix.modalview import ModalView
-from kivy.uix.popup import Popup
+from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
 
 import pkg_resources
@@ -252,47 +252,6 @@ class PopupComboBox( Label ) :
         self.text = self.list_data[ i ][ 'label' ]
         self.list_adapter.get_view(i).trigger_action( duration=0 )
 
-        
-class FlatPopup(ModalView):
-    '''Popup class. See module documentation for more information.
-
-    :Events:
-        `on_open`:
-            Fired when the Popup is opened.
-        `on_dismiss`:
-            Fired when the Popup is closed. If the callback returns True, the
-            dismiss will be canceled.
-    '''
-
-    title_align = OptionProperty('left', options=['left', 'center', 'right','justify'])
-    '''Horizontal alignment of the title.
-
-    :attr:`title_align` is a :class:`~kivy.properties.OptionProperty` and
-    defaults to 'left'. Available options are left, middle, right and justify.
-    '''
-
-    title_font = StringProperty('DroidSans')
-    '''Font used to render the title text.
-
-    :attr:`title_font` is a :class:`~kivy.properties.StringProperty` and
-    defaults to 'DroidSans'.
-    '''
-
-    content = ObjectProperty(None)
-    '''Content of the popup that is displayed just under the title.
-
-    :attr:`content` is an :class:`~kivy.properties.ObjectProperty` and defaults
-    to None.
-    '''
-
-    title_color = ListProperty([1, 1, 1, 1])
-    '''Color used by the Title.
-
-    .. versionadded:: 1.8.0
-
-    :attr:`title_color` is a :class:`~kivy.properties.ListProperty` and
-    defaults to [1, 1, 1, 1].
-    '''
 
 
 class FlatPopup(ModalView):
@@ -374,7 +333,7 @@ class FlatPopup(ModalView):
                     'Popup can have only one widget as content')
             self.content = widget
         else:
-            super(Popup, self).add_widget(widget)
+            super(FlatPopup, self).add_widget(widget)
 
     def on_content(self, instance, value):
         if not hasattr(value, 'popup'):
@@ -393,7 +352,7 @@ class FlatPopup(ModalView):
     def on_touch_down(self, touch):
         if self.disabled and self.collide_point(*touch.pos):
             return True
-        return super(Popup, self).on_touch_down(touch)
+        return super(FlatPopup, self).on_touch_down(touch)
 
 
 
