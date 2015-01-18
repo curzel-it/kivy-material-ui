@@ -6,8 +6,9 @@ I've documented almost everything, so this is good.
 ![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/images/screenshot.png )
 
 ### Custom kivy theme
-You will need to replace the 'defaulttheme-0.png' with mine.
-( Path is ~kivy/data/images )
+You will need to replace the 'defaulttheme-0.png' with mine.  
+( Path is ~kivy/data/images )  
+I've also developed some fork of kivy.uix.popup, adding title font, color and align customizations.  
 
 ### Widgets
 Most widget are direct subclasses of standard ones.
