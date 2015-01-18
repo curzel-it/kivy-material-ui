@@ -2,6 +2,9 @@
 Bunch of classes, layouts and images I use in my projects.  
 I've documented almost everything, so this is good.
 
+### Test.py screenshot
+![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/images/screenshot.png )
+
 ### Custom kivy theme
 You will need to replace the 'defaulttheme-0.png' with mine.
 ( Path is ~kivy/data/images )
