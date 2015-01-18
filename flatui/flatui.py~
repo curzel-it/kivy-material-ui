@@ -10,10 +10,12 @@ from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
 
 import pkg_resources
+raw = pkg_resources.resource_string(__name__,'flatui.kv')
+flatuikv = str( raw )
 
 path = pkg_resources.resource_filename( __name__, 'flatui.kv' )
 Builder.load_file( path )
-
+#Builder.load_string( flatuikv ) 
 
 class FlatTextInput( TextInput ) :
     '''
