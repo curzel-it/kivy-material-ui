@@ -1,0 +1,105 @@
+#:kivy 1.8
+
+<RecordForm>:
+    mainArea: mainArea
+    orientation: 'vertical'
+    size: root.size
+    pos: root.pos
+
+    canvas.before:
+        Color:
+            rgba: .93, .93, .93, 1
+        BorderImage:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        size_hint:(1, 0.15)
+        orientation: 'horizontal'
+
+        canvas.before:
+            Color:
+                rgba: .32, .18, .7, 1
+            BorderImage:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            size_hint: ( 0.1, 1 )
+
+            FlatButton:
+                text: '<'
+                font_size: 36    
+                color: (1,1,1,1)
+                shadow_alpha: 0
+                background_color: (0,0,0,0)
+
+        BoxLayout:
+            size_hint: ( 0.8, 1 )
+            Label:
+                font_name: 'font/Roboto-Light.ttf'
+                font_size: 36
+                text: 'Main Header'
+                color: [ 1, 1, 1, 1 ]
+                text_size: self.size[0], self.parent.height
+                halign: 'left'
+                valign: 'middle'
+
+        BoxLayout:
+            size_hint: ( 0.1, 1 )
+    
+    BoxLayout:
+        orientation: 'horizontal'    
+        size_hint:(1, 0.85)
+    
+        Accordion:
+            size_hint: ( 0.2, 1 )
+            orientation: 'vertical'
+
+            AccordionItem:
+                title: 'People'
+                height: 150
+                Label:
+                    font_name: 'font/Roboto-Light.ttf'
+                    font_size: 18
+                    color: ( 0, 0, 0, 1 )
+                    text: 'Things about people'
+            AccordionItem:
+                title: 'Marketing'
+                height: 150
+                Label:
+                    font_name: 'font/Roboto-Light.ttf'
+                    font_size: 18
+                    color: ( 0, 0, 0, 1 )
+                    text: 'Marketing!'
+            AccordionItem:
+                title: 'More'
+                Label:
+                    font_name: 'font/Roboto-Light.ttf'
+                    font_size: 18
+                    color: ( 0, 0, 0, 1 )
+                    text: 'More things'
+
+        ScrollView:
+            size_hint: ( 0.7, 1 )
+        
+            GridLayout:    
+                size_hint: 1, None
+                cols: 1
+                padding: ( 20, 5, 10, 5 )
+                spacing: ( 0, 4 )
+                id: mainArea
+    
+        GridLayout:
+            size_hint: ( 0.1, 0.2 )
+            cols: 1
+
+            FloatingAction:
+                icon: 'images/done-32.png'
+                diameter: 70
+                font_size: 24
+                background_color: ( 1, .1, .1, 1 )
+                background_color_down: ( .9, .1, .1, 1 )
+                color: [1,1,1,1]
+                on_press: root.commit()
+
