@@ -1,7 +1,31 @@
 #:kivy 1.8
 
+[AccordionItemTitle@Label]:
+    text: ctx.title
+    font_name: 'font/Roboto-Light.ttf' if ctx.item.collapse else 'font/Roboto-Medium.ttf'
+    font_size: 20
+    color: [ .17, .17, .17, 1 ] if ctx.item.collapse else ( 1, 1, 1, 1 )
+
+    canvas.before:
+        Color:
+            rgb: 1, 1, 1
+        BorderImage:
+            source:
+                ctx.item.background_normal if ctx.item.collapse else ctx.item.background_selected
+            pos: self.pos
+            size: self.size
+        PushMatrix
+        Translate:
+            xy: self.center_x, self.center_y
+        Rotate:
+            angle: 90 if ctx.item.orientation == 'horizontal' else 0
+            axis: 0, 0, 1
+        Translate:
+            xy: -self.center_x, -self.center_y
+    canvas.after:
+        PopMatrix
+
 <Test>:
-    mainArea: mainArea
     orientation: 'vertical'
     size: root.size
     pos: root.pos
@@ -80,15 +104,64 @@
                     color: ( 0, 0, 0, 1 )
                     text: 'More things'
 
-        ScrollView:
-            size_hint: ( 0.7, 1 )
-        
-            GridLayout:    
-                size_hint: 1, None
-                cols: 1
-                padding: ( 20, 5, 10, 5 )
-                spacing: ( 0, 4 )
-                id: mainArea
+        BoxLayout:    
+            size_hint: 0.7, 1
+            orientation: 'vertical'
+            padding: ( 10, 10, 10, 10 )
+            spacing: 10
+            id: mainArea
+
+            FlatButton:
+                font_name: 'font/Roboto-Light.ttf'
+                text: "FlatButton"
+                color: 0,0,0,.9
+                size_hint: .3, .1
+
+            FlatButton:
+                font_name: 'font/Roboto-Light.ttf'
+                text: "FlatButton"
+                color: 0,0,0,.9
+                size_hint: .3, .1
+                background_color: [.25,.83,.49,1]
+                background_color_down: [.133,.68,.38,1]
+
+            FlatButton:
+                font_name: 'font/Roboto-Light.ttf'
+                text: "FlatButton"
+                color: 0,0,0,.9
+                size_hint: .3, .1
+                background_color: [.95,.8,.06,1]
+                background_color_down: [.95,.61,.07,1]
+
+            FlatButton:
+                font_name: 'font/Roboto-Light.ttf'
+                text: "FlatButton"
+                color: 0,0,0,.9
+                size_hint: .3, .1
+                background_color: [.6,.35,.8,1]
+                background_color_down: [.57,.27,.67,1]
+
+            FlatButton:
+                font_name: 'font/Roboto-Light.ttf'
+                text: "FlatButton"
+                color: 0,0,0,.9
+                size_hint: .3, .1
+                background_color: [0,1,1,1]
+
+            FlatButton:
+                font_name: 'font/Roboto-Light.ttf'
+                text: "FlatButton"
+                color: 0,0,0,.9
+                size_hint: .3, .1
+                background_color: [0,0,1,1]
+
+            FlatButton:
+                font_name: 'font/Roboto-Light.ttf'
+                text: "FlatButton"
+                color: 0,0,0,.9
+                size_hint: .3, .1
+                background_color: [0,1,0,1]
+
     
         GridLayout:
             size_hint: ( 0.1, 0.2 )
@@ -101,5 +174,4 @@
                 background_color: ( 1, .1, .1, 1 )
                 background_color_down: ( .9, .1, .1, 1 )
                 color: [1,1,1,1]
-                on_press: root.commit()
 

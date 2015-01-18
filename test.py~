@@ -1,5 +1,4 @@
 import sys
-sys.path.append( '..' )
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -8,8 +7,7 @@ from kivy.uix.boxlayout import BoxLayout
 
 from flatui.flatui import FlatButton, FloatingAction
 
-Builder.load_file( 'test.kv' )
-
+#Builder.load_file( 'test.kv' )
 
 class Test( BoxLayout ) :
     
@@ -19,9 +17,7 @@ class Test( BoxLayout ) :
 
 class TestApp( App ) :
     
-    def build( self ) :
-        self.t = Test()
-        return self.t
+    def build( self ) : return Test()
 
 if __name__ == '__main__':
     TestApp().run()
