@@ -3,6 +3,7 @@ from kivy.event import EventDispatcher
 from kivy.lang import Builder
 from kivy.properties import *
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.listview import ListItemButton, ListView
@@ -353,6 +354,52 @@ class FlatPopup(ModalView):
         if self.disabled and self.collide_point(*touch.pos):
             return True
         return super(FlatPopup, self).on_touch_down(touch)
+
+
+class AlertPopup( FlatPopup ) :
+    """
+    Quick flat popup to show a generic alert message.
+    Provide cancel_button_text or cancel_button_on_press to show a second button.
+    """
+
+    ok_button_text = StringProperty( 'OK' )
+    cancel_button_text = StringProperty( 'No' )
+    text = StringProperty( 'No text argument was provided.' )
+    ok_button_on_press = ObjectProperty( None )
+    cancel_button_on_press = ObjectProperty( None )
+
+    def __init__( self, **kargs ) :
+
+        if not 'title' in kargs.keys() : kargs['title'] = 'Warning'
+        if not 'title_size' in kargs.keys() : kargs['title_size'] = 16
+        if not 'size_hint' in kargs.keys() : kargs['size_hint'] = (.4,.3)
+        if not 'title_color' in kargs.keys() : kargs['title_color'] = (0,0,0,.8)
+
+        super( AlertPopup, self ).__init__( **kargs )
+
+        ok_button = Button( text=self.ok_button_text )
+        ok_button.bind( on_press=self.on_ok )
+        
+        cancel_button = Button( text=self.cancel_button_text )
+        cancel_button.bind( on_press=self.on_cancel )
+
+        button_bar = BoxLayout( orientation='horizontal', size_hint=(1,.1) )
+        button_bar.add_widget( BoxLayout() )
+        button_bar.add_widget( cancel_button )
+        button_bar.add_widget( ok_button )
+
+        self.content = BoxLayout( orientation='vertical' )        
+        lbl = Label( text=self.text, size_hint=(1,.9), color=self.title_color )
+        self.content.add_widget( lbl )
+        self.content.add_widget( button_bar )
+        
+    def on_ok( self, *args ) :
+        self.dismiss()
+        if self.ok_button_on_press : self.ok_button_on_press( *args )
+        
+    def on_cancel( self, *args ) :
+        self.dismiss()
+        if self.cancel_button_on_press : self.cancel_button_on_press( *args )
 
 
 
