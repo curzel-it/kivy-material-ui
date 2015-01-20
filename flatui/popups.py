@@ -163,3 +163,39 @@ class AlertPopup( FlatPopup ) :
         self.dismiss()
         if self.cancel_button_on_press : self.cancel_button_on_press( *args )
 
+
+
+class OkButtonPopup( FlatPopup ) :
+    """
+    Quick flat popup to show a generic hint to the user.
+    Has and OK button to dismiss itself and nothing more
+    """
+
+    ok_button_text = StringProperty( 'OK' )
+    text = StringProperty( 'No text argument was provided.' )
+
+    def __init__( self, **kargs ) :
+
+        if not 'title' in kargs.keys() : kargs['title'] = 'Info'
+        if not 'title_size' in kargs.keys() : kargs['title_size'] = 16
+        if not 'size_hint' in kargs.keys() : kargs['size_hint'] = (.8,.5)
+        if not 'title_color' in kargs.keys() : kargs['title_color'] = (0,0,0,.8)
+
+        super( OkButtonPopup, self ).__init__( **kargs )
+
+        ok_button = Button( text=self.ok_button_text, size_hint=(.2,1) )
+        ok_button.bind( on_press=self.on_ok )
+
+        button_bar = BoxLayout( orientation='horizontal', size_hint=(1,.1) )
+        button_bar.add_widget( BoxLayout( size_hint=(.8,1) ) )
+        button_bar.add_widget( ok_button )
+
+        self.content = BoxLayout( orientation='vertical' )        
+        lbl = Label( text=self.text, size_hint=(1,.9), color=self.title_color )
+        self.content.add_widget( lbl )
+        self.content.add_widget( button_bar )
+        
+    def on_ok( self, *args ) :
+        self.dismiss()
+        if self.ok_button_on_press : self.ok_button_on_press( *args )
+        
