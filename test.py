@@ -24,9 +24,12 @@ class Test( BoxLayout ) :
         p.open()
 
     def show_popup2( self ) :
-        AlertPopup( text='This is a quick alert!', cancel_button_title='Cancel' ).open()
+        AlertPopup( text='This is a quick alert!\nWith two buttons...', cancel_button_text='Cancel' ).open()
 
     def show_popup3( self ) :
+        AlertPopup( text='This is a quick alert!' ).open()
+
+    def show_popup4( self ) :
         OkButtonPopup( text='This is an other shortcut,\nto be used for quick messages' ).open()
 
 
