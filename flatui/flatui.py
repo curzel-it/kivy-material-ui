@@ -11,9 +11,10 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
 
-import pkg_resources
+from pkg_resources import resource_filename
 
-path = pkg_resources.resource_filename( __name__, 'flatui.kv' )
+#KV Files
+path = resource_filename( __name__, 'flatui.kv' )
 Builder.load_file( path )
 
 

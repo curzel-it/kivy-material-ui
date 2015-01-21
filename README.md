@@ -22,6 +22,9 @@ AlertPopup with two buttons
 You will need to replace the 'defaulttheme-0.png' with mine.  
 ( Path is ~kivy/data/images )  
 I've also developed some fork of kivy.uix.popup, adding title font, color and align customizations.  
+  
+Needs a little addition to defaulttheme.atlas :  
+{"defaulttheme-0.png": {**"transparent": [0,0,0,0], **"progress...
 
 ### Widgets
 Most widget are direct subclasses of standard ones.
