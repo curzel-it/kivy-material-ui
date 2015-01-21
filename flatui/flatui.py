@@ -22,6 +22,11 @@ class FlatTextInput( TextInput ) :
     Flat version of the standard TextInput.
     '''
 
+    show_underline = BooleanProperty( True )
+    '''
+    If true a line of the same color of the cursor will be drawn under the text.
+    '''
+
     cursor_color = ListProperty( [ 1, 0, 0, 1 ] )
     '''Represents the rgba color used to render the cursor.
 

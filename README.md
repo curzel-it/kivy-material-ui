@@ -27,7 +27,8 @@ I've also developed some fork of kivy.uix.popup, adding title font, color and al
 Most widget are direct subclasses of standard ones.
 
 #### FlatTextInput
-Flat version of the standard TextInput.
+Flat version of the standard TextInput.  
+Supports cursor color and underlined text while editing.
 
 #### FlatButton
 Flat button, supports fill color, icons, and shadow.
