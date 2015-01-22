@@ -8,7 +8,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.listview import ListItemButton, ListView
 from kivy.uix.modalview import ModalView
-from kivy.uix.popup import PopupException
+from kivy.uix.popup import Popup, PopupException
 from kivy.uix.textinput import TextInput
 
 from pkg_resources import resource_filename
