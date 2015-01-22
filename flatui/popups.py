@@ -28,26 +28,29 @@ class AlertPopup( FlatPopup ) :
     text = StringProperty( 'No text argument was provided.' )
 
     ok_button_text = StringProperty( 'OK' )
+    ok_button_text_color = ListProperty( [1,1,1,1] )
     ok_button_on_press = ObjectProperty( None )
     ok_button_color = ListProperty( [0,.59,.53,1] )
     ok_button_color_down = ListProperty( [0,.41,.36,1] )
 
     cancel_button_text = StringProperty( None )
+    cancel_button_text_color = ListProperty( [1,1,1,1] )
     cancel_button_on_press = ObjectProperty( None )
     cancel_button_color = ListProperty( [0,.59,.53,1] )
     cancel_button_color_down = ListProperty( [0,.41,.36,1] )
 
     def __init__( self, **kargs ) :
 
-        if not 'title' in kargs.keys() : kargs['title'] = 'Warning'
-        if not 'title_size' in kargs.keys() : kargs['title_size'] = 16
-        if not 'size_hint' in kargs.keys() : kargs['size_hint'] = (.4,.3)
+        if not 'title'       in kargs.keys() : kargs['title'      ] = 'Warning'
+        if not 'title_size'  in kargs.keys() : kargs['title_size' ] = 16
+        if not 'size_hint'   in kargs.keys() : kargs['size_hint'  ] = (.4,.3)
         if not 'title_color' in kargs.keys() : kargs['title_color'] = (0,0,0,.8)
 
         super( AlertPopup, self ).__init__( **kargs )
 
         ok_button = FlatButton( 
             text=self.ok_button_text,\
+            color=self.ok_button_text_color,\
             background_color=self.ok_button_color,\
             background_color_down=self.ok_button_color_down 
         )
@@ -55,6 +58,7 @@ class AlertPopup( FlatPopup ) :
         
         cancel_button = FlatButton( 
             text=self.cancel_button_text or '',\
+            color=self.cancel_button_text_color,\
             background_color=self.cancel_button_color,\
             background_color_down=self.cancel_button_color_down 
         )
@@ -93,13 +97,14 @@ class OkButtonPopup( FlatPopup ) :
     ok_button_text = StringProperty( 'OK' )
     text = StringProperty( 'No text argument was provided.' )
     ok_button_color = ListProperty( [0,.59,.53,1] )
+    ok_button_text_color = ListProperty( [1,1,1,1] )
     ok_button_color_down = ListProperty( [0,.41,.36,1] )
 
     def __init__( self, **kargs ) :
 
-        if not 'title' in kargs.keys() : kargs['title'] = 'Info'
-        if not 'title_size' in kargs.keys() : kargs['title_size'] = 16
-        if not 'size_hint' in kargs.keys() : kargs['size_hint'] = (.8,.5)
+        if not 'title'       in kargs.keys() : kargs['title'      ] = 'Info'
+        if not 'title_size'  in kargs.keys() : kargs['title_size' ] = 16
+        if not 'size_hint'   in kargs.keys() : kargs['size_hint'  ] = (.8,.5)
         if not 'title_color' in kargs.keys() : kargs['title_color'] = (0,0,0,.8)
 
         super( OkButtonPopup, self ).__init__( **kargs )
@@ -107,6 +112,7 @@ class OkButtonPopup( FlatPopup ) :
         ok_button = FlatButton( 
             text=self.ok_button_text,\
             size_hint=(.2,1),\
+            color=self.ok_button_text_color,\
             background_color=self.ok_button_color,\
             background_color_down=self.ok_button_color_down 
         )
@@ -115,7 +121,7 @@ class OkButtonPopup( FlatPopup ) :
         button_bar = BoxLayout( 
             orientation='horizontal',\
             size_hint=(1,None), height=55,\
-            spacing=10, padding=[10,10,10,10] 
+            spacing=10, padding=[10,10,10,10]
         )
         button_bar.add_widget( BoxLayout( size_hint=(.8,1) ) )
         button_bar.add_widget( ok_button )
