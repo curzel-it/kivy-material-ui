@@ -202,3 +202,17 @@
 
         BoxLayout:
             id: container
+
+#==============================================================================
+<BindedLabel>:
+#==============================================================================
+    text_size: self.size
+    padding_x: self.padding_x
+    padding_y: self.padding_y
+
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:  
+            pos: self.pos
+            size: self.size

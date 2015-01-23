@@ -359,6 +359,16 @@ class FlatPopup(ModalView):
             return True
         return super(FlatPopup, self).on_touch_down(touch)
 
+"""
+Label with binded text size and background color.
+"""
+class BindedLabel( Label ) :
+
+    background_color = ListProperty( [ .95, .95, .95, 1 ] )
+
+    def __init__( self, **kargs ) : 
+        kargs['text'] = str( kargs['text'] )
+        super( BindedLabel, self ).__init__( **kargs )
 
 
 
