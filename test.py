@@ -6,6 +6,7 @@ from kivy.properties import *
 from kivy.uix.boxlayout import BoxLayout
 
 from flatui.flatui import *
+from flatui.labels import *
 from flatui.popups import *
 
 class Test( BoxLayout ) :

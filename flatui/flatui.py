@@ -360,19 +360,6 @@ class FlatPopup(ModalView):
         return super(FlatPopup, self).on_touch_down(touch)
 
 
-class BindedLabel( Label ) :
-    '''
-    Standard label with some additions :
-        - Binded text_size to size ( so you can center text )
-        - Background color
-        - Some more user-friendly padding usage
-    '''
-
-    background_color = ListProperty( [0,0,0,0] )
-
-    def __init__( self, **kargs ) : 
-        kargs['text'] = str( kargs['text'] )
-        super( BindedLabel, self ).__init__( **kargs )
 
 
 
