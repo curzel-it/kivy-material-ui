@@ -16,6 +16,7 @@ from pkg_resources import resource_filename
 path = resource_filename( __name__, 'flatui.kv' )
 Builder.load_file( path )
 
+from flatui.labels import BindedLabel
 
 class FlatTextInput( TextInput ) :
     '''
@@ -42,10 +43,22 @@ class FlatTextInput( TextInput ) :
         super( FlatTextInput, self ).__init__( **kargs )
 
 
-class _ColorButton( Button ) :
+class _ColorButton( ButtonBehavior, BindedLabel ) :
+    '''
+    Replacement for Button class, just more flexible...
+    '''
+
+    background_color = ListProperty([1, 1, 1, 1])
+    '''Represents the rgba color used to render the frame in the normal state.
+
+    .. versionadded:: 1.0
+
+    The :attr:`background_color` is a
+    :class:`~kivy.properties.ListProperty` and defaults to [1, 1, 1, 1].
+    '''
 
     background_color_down = ListProperty( [ 0.2, 0.65, 0.81, 1 ] )
-    '''Represents the rgba color used to render the frame in the normal state.
+    '''Represents the rgba color used to render the frame in the down state.
 
     .. versionadded:: 1.0
 
@@ -78,6 +91,11 @@ class _ColorButton( Button ) :
     :attr:`shadow_alpha` is a :class:`~kivy.properties.NumericProperty`, default to 0.4.
     '''
     
+    def __init__( self, **kargs ) :
+        if not 'valign' in kargs.keys() : kargs['valign'] = 'middle'
+        if not 'halign' in kargs.keys() : kargs['halign'] = 'center'
+        super( _ColorButton, self ).__init__( **kargs )
+
 
 class FlatButton( _ColorButton ) :
     '''
