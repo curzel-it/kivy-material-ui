@@ -1,3 +1,6 @@
+import sys
+sys.path.append( '..' )
+
 from kivy.adapters.listadapter import ListAdapter
 from kivy.event import EventDispatcher
 from kivy.lang import Builder

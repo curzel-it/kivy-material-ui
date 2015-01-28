@@ -1,0 +1,53 @@
+<NavigationController>:
+    orientation:'vertical'
+    actionprev:actionprev
+    actiontext:actiontext
+    content:content
+
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            pos: self.pos
+            size: self.size    
+
+    BoxLayout:
+        id: content
+        orientation: 'horizontal'
+        size_hint: (1,None)
+        height: root.nav_height
+
+        canvas.before:
+            Color:
+                rgba: root.nav_color
+            Rectangle:
+                pos: self.pos
+                size: self.size    
+
+        FlatButton:
+            id: actionprev
+            font_size: 3 * root.nav_height / 5
+            halign: 'left'
+            background_color: [0,0,0,0]
+            background_color_down: [0,0,0,0]
+            background_color_disabled: [0,0,0,0]
+            shadow_alpha: 0
+            color: root.text_color
+            corner_radius: 0
+            on_press: root.pop()
+            size_hint: None, 1
+            width: self.height
+
+        BindedLabel:
+            id: actiontext
+            text: root.title
+            font_size: root.font_size
+            halign: 'left'
+            valign: 'middle'
+            shadow_alpha: 0
+            color: root.text_color
+            corner_radius: 0
+
+    BoxLayout:
+        id: content
+
