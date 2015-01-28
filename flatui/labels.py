@@ -25,7 +25,7 @@ class BindedLabel( Label ) :
         - Some more user-friendly padding usage
     '''
 
-    background_color = ListProperty( [0,0,0,0] )
+    fill_color = ListProperty( [0,0,0,0] )
 
     def __init__( self, **kargs ) : 
         t = str( kargs['text'] if 'text' in kargs.keys() else '' )

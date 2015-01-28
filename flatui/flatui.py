@@ -11,12 +11,16 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
 
+from flatui.labels import BindedLabel
+
 from pkg_resources import resource_filename
 #KV Files
 path = resource_filename( __name__, 'flatui.kv' )
 Builder.load_file( path )
 
-from flatui.labels import BindedLabel
+#icons
+#transparent = resource_filename( __name__, 'transparent.png' )
+
 
 class FlatTextInput( TextInput ) :
     '''
@@ -48,7 +52,7 @@ class _ColorButton( ButtonBehavior, BindedLabel ) :
     Replacement for Button class, just more flexible...
     '''
 
-    background_color = ListProperty([1, 1, 1, 1])
+    background_color = ListProperty( [1, 1, 1, 1] )
     '''Represents the rgba color used to render the frame in the normal state.
 
     .. versionadded:: 1.0
