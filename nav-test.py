@@ -17,7 +17,7 @@ from flatui.popups import *
 
 from navigation.control import *
 
-Builder.load_file( 'demo.kv' )
+Builder.load_file( 'nav-test.kv' )
 
 
 class TestApp( App ) :

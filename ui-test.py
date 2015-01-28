@@ -9,6 +9,8 @@ from flatui.flatui import *
 from flatui.labels import *
 from flatui.popups import *
 
+Builder.load_file( 'ui-test.kv' )
+
 class Test( BoxLayout ) :
     
     def __init__( self, **kargs ) :
@@ -32,7 +34,6 @@ class Test( BoxLayout ) :
 
     def show_popup4( self ) :
         OkButtonPopup( text='This is an other shortcut,\nto be used for quick messages' ).open()
-
 
 
 class TestApp( App ) :

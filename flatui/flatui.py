@@ -21,9 +21,6 @@ from pkg_resources import resource_filename
 path = resource_filename( __name__, 'flatui.kv' )
 Builder.load_file( path )
 
-#icons
-#transparent = resource_filename( __name__, 'transparent.png' )
-
 
 class FlatTextInput( TextInput ) :
     '''
