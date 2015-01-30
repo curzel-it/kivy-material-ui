@@ -57,6 +57,12 @@ class NavigationController( BoxLayout ) :
     Left or right, will push/pop views from/to the given direction.
     '''
 
+    disable_widget = BooleanProperty( False ) 
+    '''
+    If true, root widget will be disabled during animations.
+    This will hide animations!
+    '''
+
     #Navigation bar
 
     title = StringProperty( 'Navigation control!' )
@@ -109,14 +115,6 @@ class NavigationController( BoxLayout ) :
         else :
             raise EmptyNavigationStack()
 
-    def _pop_temp_view( self, *args ) :
-
-        self.content.remove_widget( self.root_widget )
-        self.root_widget, self._last_kargs = self.stack.pop()
-        if len(self.stack) > 0 : self._last_kargs = self.stack[-1][1]        
-        self.content.add_widget( self.root_widget )
-        self._update_nav()
-
     def push( self, view, **kargs ) :
         '''
         Will append the last view to the list and show the new one.
@@ -134,6 +132,7 @@ class NavigationController( BoxLayout ) :
 
     def _run_push_animation( self ) :
         try : 
+            self._temp_view.disabled = self.disable_widget 
             anim = Animation( 
                 x=0, 
                 duration=self.animation_duracy if self._has_root else 0
@@ -144,6 +143,7 @@ class NavigationController( BoxLayout ) :
 
     def _run_pop_animation( self ) :
         try : 
+            self._temp_view.disabled = self.disable_widget 
             x = self._temp_view.width * ( -1 if self.push_mode == 'left' else 1 )
             anim = Animation( x=x, duration=self.animation_duracy )
             anim.bind( on_complete=self._pop_temp_view )
@@ -151,6 +151,8 @@ class NavigationController( BoxLayout ) :
         except : pass
 
     def _push_temp_view( self, *args ) :
+
+        self._temp_view.disabled = False
               
         if self._has_root :            
             self.content.remove_widget( self.root_widget )
@@ -160,6 +162,14 @@ class NavigationController( BoxLayout ) :
         self._clear_temp_view()
         self.content.add_widget( self.root_widget )
         self._has_root = True
+        self._update_nav()
+
+    def _pop_temp_view( self, *args ) :
+        self._temp_view.disabled = False
+        self.content.remove_widget( self.root_widget )
+        self.root_widget, self._last_kargs = self.stack.pop()
+        if len(self.stack) > 0 : self._last_kargs = self.stack[-1][1]        
+        self.content.add_widget( self.root_widget )
         self._update_nav()
 
     def _clear_temp_view( self, *args ) :
