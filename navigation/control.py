@@ -47,25 +47,50 @@ class NavigationController( BoxLayout ) :
     Solid background color.
     '''
 
-    title = StringProperty( 'Navigation control!' )
+    animation_duracy = NumericProperty( .25 )
+    '''
+    Push & pop animation duracy, default 0.25 seconds.
+    '''
 
+    push_mode = OptionProperty( 'right', options=['left','right'] )
+    '''
+    Left or right, will push/pop views from/to the given direction.
+    '''
+
+    #Navigation bar
+
+    title = StringProperty( 'Navigation control!' )
+    '''
+    Navigation bar title.
+    '''    
+    
     nav_height = NumericProperty( 84 )
+    '''
+    Navigation bar height.
+    '''
     
     nav_color = ListProperty( [.32, .18, .7, 1] )
+    '''
+    Navigation bar color.
+    '''
 
     font_size = NumericProperty( 36 )
+    '''
+    Navigation bar font size.
+    '''
 
     text_color = ListProperty( [1,1,1,1] )
+    '''
+    Navigation bar text color.
+    '''
 
+    #Private stuffs...
     _push_cache = ListProperty( [] )
-
-    actionprev = ObjectProperty( None )
-    actiontext = ObjectProperty( None )
     _anim_area = ObjectProperty( None )
-    content = ObjectProperty( None )
-    animation_duracy = NumericProperty( .25 )
+    _actionprev = ObjectProperty( None )
+    _actiontext = ObjectProperty( None )
+    _content = ObjectProperty( None )
     _width = NumericProperty( float(Config.get('graphics','width')) )
-    push_mode = OptionProperty( 'right', options=['left','right'] )
 
     def __init__( self, **kargs ) :
         super( NavigationController, self ).__init__( **kargs )
