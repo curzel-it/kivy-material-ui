@@ -63,8 +63,9 @@ class NavigationController( BoxLayout ) :
     actiontext = ObjectProperty( None )
     _anim_area = ObjectProperty( None )
     content = ObjectProperty( None )
-    animation_duracy = NumericProperty( .3 )
+    animation_duracy = NumericProperty( .25 )
     _width = NumericProperty( float(Config.get('graphics','width')) )
+    push_mode = OptionProperty( 'left', options=['left','right'] )
 
     def __init__( self, **kargs ) :
         super( NavigationController, self ).__init__( **kargs )
@@ -78,7 +79,8 @@ class NavigationController( BoxLayout ) :
         Will eventually throw EmptyNavigationStack.
         '''
         if len( self.stack ) > 0 :
-            self._save_temp_view( 0, self.root_widget )
+            x = 0 #if self.push_mode == 'left' else 1
+            self._save_temp_view( x, self.root_widget )
             self._run_pop_animation()
 #            self.content.remove_widget( self.root_widget )
 #            self.root_widget, kargs = self.stack.pop()
@@ -107,7 +109,8 @@ class NavigationController( BoxLayout ) :
         if not 'title' in kargs.keys() : kargs['title'] = ''
 
         self._last_kargs = kargs
-        self._save_temp_view( -1, view )
+        x = -1 if self.push_mode == 'left' else 1
+        self._save_temp_view( x, view )
         self._run_push_animation()
 
     def _run_push_animation( self ) :
@@ -122,7 +125,8 @@ class NavigationController( BoxLayout ) :
 
     def _run_pop_animation( self ) :
         try : 
-            anim = Animation( x=-self._temp_view.width, duration=self.animation_duracy )
+            x = self._temp_view.width * ( -1 if self.push_mode == 'left' else 1 )
+            anim = Animation( x=x, duration=self.animation_duracy )
             anim.bind( on_complete=self._pop_temp_view )
             anim.start( self._temp_view ) 
         except : pass
@@ -147,7 +151,7 @@ class NavigationController( BoxLayout ) :
 
     def _save_temp_view( self, p, view ) :
         self._temp_view = view
-        try :
+        try : 
             self._temp_view.pos = [ self._width*p, 0 ]
             self._anim_area.add_widget( self._temp_view )
         except : pass
