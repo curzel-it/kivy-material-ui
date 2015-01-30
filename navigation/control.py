@@ -65,7 +65,7 @@ class NavigationController( BoxLayout ) :
     content = ObjectProperty( None )
     animation_duracy = NumericProperty( .25 )
     _width = NumericProperty( float(Config.get('graphics','width')) )
-    push_mode = OptionProperty( 'left', options=['left','right'] )
+    push_mode = OptionProperty( 'right', options=['left','right'] )
 
     def __init__( self, **kargs ) :
         super( NavigationController, self ).__init__( **kargs )
@@ -79,14 +79,8 @@ class NavigationController( BoxLayout ) :
         Will eventually throw EmptyNavigationStack.
         '''
         if len( self.stack ) > 0 :
-            x = 0 #if self.push_mode == 'left' else 1
-            self._save_temp_view( x, self.root_widget )
+            self._save_temp_view( 0, self.root_widget )
             self._run_pop_animation()
-#            self.content.remove_widget( self.root_widget )
-#            self.root_widget, kargs = self.stack.pop()
-#            self.content.add_widget( self.root_widget )
-#            self._update_nav( kargs )
-
         else :
             raise EmptyNavigationStack()
 
