@@ -63,7 +63,7 @@ class NavigationController( BoxLayout ) :
     actiontext = ObjectProperty( None )
     _anim_area = ObjectProperty( None )
     content = ObjectProperty( None )
-    animation_duracy = NumericProperty( .5 )
+    animation_duracy = NumericProperty( .3 )
     _width = NumericProperty( float(Config.get('graphics','width')) )
 
     def __init__( self, **kargs ) :
@@ -78,14 +78,23 @@ class NavigationController( BoxLayout ) :
         Will eventually throw EmptyNavigationStack.
         '''
         if len( self.stack ) > 0 :
-            self.content.remove_widget( self.root_widget )
+            self._save_temp_view( 0, self.root_widget )
+            self._run_pop_animation()
+#            self.content.remove_widget( self.root_widget )
+#            self.root_widget, kargs = self.stack.pop()
+#            self.content.add_widget( self.root_widget )
+#            self._update_nav( kargs )
 
-            self.root_widget, kargs = self.stack.pop()
-
-            self.content.add_widget( self.root_widget )
-            self._update_nav( kargs )
         else :
             raise EmptyNavigationStack()
+
+    def _pop_temp_view( self, *args ) :
+
+        self.content.remove_widget( self.root_widget )
+        self.root_widget, self._last_kargs = self.stack.pop()
+        if len(self.stack) > 0 : self._last_kargs = self.stack[-1][1]        
+        self.content.add_widget( self.root_widget )
+        self._update_nav()
 
     def push( self, view, **kargs ) :
         '''
@@ -99,21 +108,31 @@ class NavigationController( BoxLayout ) :
 
         self._last_kargs = kargs
         self._save_temp_view( -1, view )
-        self._run_animation( 1 )
+        self._run_push_animation()
 
-    def _run_animation( self, p ) :
+    def _run_push_animation( self ) :
         try : 
-            anim = Animation( x=0, duration=self.animation_duracy )
-            anim.bind( on_complete=self._add_temp_view )
+            anim = Animation( 
+                x=0, 
+                duration=self.animation_duracy if self._has_root else 0
+            )
+            anim.bind( on_complete=self._push_temp_view )
             anim.start( self._temp_view ) 
         except : pass
 
-    def _add_temp_view( self, *args ) :
-      
-        if self._has_root :
-            self.stack.append( [ self.root_widget, self._last_kargs ] )        
+    def _run_pop_animation( self ) :
+        try : 
+            anim = Animation( x=-self._temp_view.width, duration=self.animation_duracy )
+            anim.bind( on_complete=self._pop_temp_view )
+            anim.start( self._temp_view ) 
+        except : pass
+
+    def _push_temp_view( self, *args ) :
+              
+        if self._has_root :            
             self.content.remove_widget( self.root_widget )
 
+        self.stack.append( [ self.root_widget, self._last_kargs ] )
         self.root_widget = self._temp_view
         self._clear_temp_view()
         self.content.add_widget( self.root_widget )
@@ -135,7 +154,7 @@ class NavigationController( BoxLayout ) :
 
     def _update_nav( self ) :
         self.title = self._last_kargs['title']
-        has_previous = len( self.stack ) > 0 
+        has_previous = len( self.stack ) > 1 
         self.actionprev.text = ' < ' if has_previous else ''
         self.actionprev.disabled = not has_previous
 
