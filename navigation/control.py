@@ -1,5 +1,6 @@
 import sys
-
+from kivy.animation import Animation
+from kivy.config import Config
 from kivy.lang import Builder
 from kivy.properties import *
 from kivy.uix.actionbar import ActionBar, ActionItem, ActionPrevious
@@ -13,8 +14,6 @@ from kivy.uix.widget import Widget
 from flatui.flatui import *
 from flatui.labels import *
 from flatui.popups import *
-
-from navigation.control import *
 
 from pkg_resources import resource_filename
 #KV Files
@@ -58,14 +57,20 @@ class NavigationController( BoxLayout ) :
 
     text_color = ListProperty( [1,1,1,1] )
 
+    _push_cache = ListProperty( [] )
+
     actionprev = ObjectProperty( None )
     actiontext = ObjectProperty( None )
+    _anim_area = ObjectProperty( None )
     content = ObjectProperty( None )
+    animation_duracy = NumericProperty( .5 )
+    _width = NumericProperty( float(Config.get('graphics','width')) )
 
     def __init__( self, **kargs ) :
         super( NavigationController, self ).__init__( **kargs )
         self._has_root = False
-        self._last_args = {'title':'', 'push_animation':None, 'pop_animation':None}
+        self._last_args = {'title':'', 'animation':None}
+        self._animation = None
 
     def pop( self, *args ) :
         '''
@@ -86,30 +91,50 @@ class NavigationController( BoxLayout ) :
         '''
         Will append the last view to the list and show the new one.
         Keyword arguments :
-            #is_root_layout, will clean the stack, default False
-            push_animation, animation in entrance, default None
-            pop_animation,  animation on exit, default None
-            title,          navigation bar title, default ''.
+            title
+                Navigation bar title, default ''.
         '''
             
-        #if not 'is_root_layout' in kargs.keys() : kargs['is_root_layout'] = False
-        if not 'push_animation' in kargs.keys() : kargs['push_animation'] = None
-        if not 'pop_animation'  in kargs.keys() : kargs['pop_animation' ] = None
-        if not 'title'          in kargs.keys() : kargs['title'         ] = ''
+        if not 'title' in kargs.keys() : kargs['title'] = ''
 
+        self._last_kargs = kargs
+        self._save_temp_view( -1, view )
+        self._run_animation( 1 )
+
+    def _run_animation( self, p ) :
+        try : 
+            anim = Animation( x=0, duration=self.animation_duracy )
+            anim.bind( on_complete=self._add_temp_view )
+            anim.start( self._temp_view ) 
+        except : pass
+
+    def _add_temp_view( self, *args ) :
+      
         if self._has_root :
             self.stack.append( [ self.root_widget, self._last_kargs ] )        
             self.content.remove_widget( self.root_widget )
 
-        self.root_widget = view
+        self.root_widget = self._temp_view
+        self._clear_temp_view()
         self.content.add_widget( self.root_widget )
-
         self._has_root = True
-        self._update_nav( kargs )
+        self._update_nav()
 
-    def _update_nav( self, kargs ) :
-        self.title = kargs['title']
-        self._last_kargs = kargs
+    def _clear_temp_view( self, *args ) :
+        try : 
+            self._anim_area.remove_widget( self._temp_view )
+        except : pass
+        self._temp_view = None  
+
+    def _save_temp_view( self, p, view ) :
+        self._temp_view = view
+        try :
+            self._temp_view.pos = [ self._width*p, 0 ]
+            self._anim_area.add_widget( self._temp_view )
+        except : pass
+
+    def _update_nav( self ) :
+        self.title = self._last_kargs['title']
         has_previous = len( self.stack ) > 0 
         self.actionprev.text = ' < ' if has_previous else ''
         self.actionprev.disabled = not has_previous

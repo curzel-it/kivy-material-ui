@@ -1,3 +1,18 @@
 <Button>:
     color: .17, .17, .17, 1
 
+<Label>:
+    font_size: 54
+    color: 0,0,0,1
+
+
+<NavigationController>:
+    FloatingAction:
+        size_hint: ( 1, None )
+        icon: 'images/done-32.png'
+        diameter: 70
+        font_size: 24
+        background_color: ( 1, .1, .1, 1 )
+        background_color_down: ( .9, .1, .1, 1 )
+        color: [1,1,1,1]
+        on_press: root.next()

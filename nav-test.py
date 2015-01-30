@@ -19,15 +19,22 @@ from navigation.control import *
 
 Builder.load_file( 'nav-test.kv' )
 
+i = 1
 
 class TestApp( App ) :
     
     def build( self ) : 
-        nav = NavigationController()
-        nav.push( Label(), title='View #1' )
-        nav.push( Label(), title='View #2' )
-        nav.push( Label(), title='View #3' )
-        return nav
+
+        self.nav = NavigationController()
+        self.nav.next = self.next   
+        self.nav.next()
+        return self.nav
+
+    def next( self, *args ) :
+        global i
+        msg = 'SAMPLE #%d' % ( i )
+        self.nav.push( Label( text=msg, size_hint=(1,1) ), title=msg )
+        i += 1
 
 if __name__ == '__main__':
     TestApp().run()

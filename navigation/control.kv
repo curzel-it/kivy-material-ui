@@ -3,6 +3,7 @@
     actionprev:actionprev
     actiontext:actiontext
     content:content
+    _anim_area:_anim_area
 
     canvas.before:
         Color:
@@ -48,6 +49,11 @@
             color: root.text_color
             corner_radius: 0
 
-    BoxLayout:
-        id: content
+    FloatLayout:
+        id: _anim_area
+
+        BoxLayout:
+            id: content
+
+        
 
