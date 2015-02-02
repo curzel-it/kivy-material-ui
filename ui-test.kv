@@ -179,19 +179,6 @@
             FloatLayout:
                 size_hint: ( 1, 1 )
 
-                ResizeableLabel:
-                    root_layout: root
-                    size_hint: (None,None)
-                    pos_hint: { 'x':0, 'y':0 }
-                    text: 'Resizeable Label'
-
-                    canvas.before:
-                        Color:
-                            rgba: .32, .18, .7, 1
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-
             FloatingAction:
                 size_hint: ( 1, None )
                 icon: 'images/done-32.png'
