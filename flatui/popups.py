@@ -1,3 +1,5 @@
+import sys
+
 from kivy.adapters.listadapter import ListAdapter
 from kivy.event import EventDispatcher
 from kivy.lang import Builder
@@ -11,7 +13,10 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
 
-from flatui.flatui import FlatButton, FlatPopup
+if sys.version_info[0] > 2 :
+    exec( 'from flatui.flatui import FlatButton, FlatPopup' )
+else :
+    exec( 'from flatui import FlatButton, FlatPopup' )
 
 import pkg_resources
 

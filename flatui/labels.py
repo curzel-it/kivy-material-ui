@@ -11,8 +11,8 @@ from kivy.uix.label import Label
 
 #KV Lang files
 from pkg_resources import resource_filename
-
 path = resource_filename( __name__, 'labels.kv' )
+
 Builder.load_file( path )
 
 TOP_LEFT, LEFT, BOTTOM_LEFT = 0, 1, 2

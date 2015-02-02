@@ -14,7 +14,10 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
 
-from flatui.labels import BindedLabel
+if sys.version_info[0] > 2 :
+    exec( 'from flatui.labels import BindedLabel' )
+else :
+    exec( 'from labels import BindedLabel' )
 
 from pkg_resources import resource_filename
 #KV Files
