@@ -4,6 +4,7 @@ sys.path.append( '..' )
 from kivy.adapters.listadapter import ListAdapter
 from kivy.event import EventDispatcher
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.properties import *
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
@@ -109,7 +110,7 @@ class FlatButton( _ColorButton ) :
     Completely flat button.
     '''
 
-    corner_radius = NumericProperty( 2 )
+    corner_radius = NumericProperty( dp(2) )
     '''Button corner radius.
 
     .. versionadded:: 1.0
@@ -126,7 +127,7 @@ class FloatingAction( _ColorButton ) :
     Round button with frame.
     '''
 
-    diameter = NumericProperty( 1 )
+    diameter = NumericProperty( dp(1) )
     '''Represents the diameter of the button. 
     Will update widget size.
 
@@ -143,7 +144,7 @@ class FloatingAction( _ColorButton ) :
     :attr:`shadow_offset_x` is a :class:`~kivy.properties.NumericProperty`, default to 0.
     '''
 
-    shadow_offset_y = NumericProperty( 1 )
+    shadow_offset_y = NumericProperty( dp(1) )
     '''Use this to move the shadow.
 
     .. versionadded:: 1.0
@@ -180,7 +181,7 @@ class PopupComboBox( Label ) :
     :attr:`popup` is a :class:`~kivy.properties.ObjectProperty`.
     '''
 
-    item_row_height = NumericProperty( 40 )
+    item_row_height = NumericProperty( dp(40) )
     '''Height of rows shown by the popup
 
     .. versionadded:: 1.0
@@ -343,7 +344,7 @@ class FlatPopup(ModalView):
     defaults to [47 / 255., 167 / 255., 212 / 255., 1.]
     '''
 
-    separator_height = NumericProperty('2dp')
+    separator_height = NumericProperty( dp(2) )
     '''Height of the separator.
 
     .. versionadded:: 1.1.0

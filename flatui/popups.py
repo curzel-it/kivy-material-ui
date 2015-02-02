@@ -3,6 +3,7 @@ import sys
 from kivy.adapters.listadapter import ListAdapter
 from kivy.event import EventDispatcher
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.properties import *
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
@@ -47,7 +48,7 @@ class AlertPopup( FlatPopup ) :
     def __init__( self, **kargs ) :
 
         if not 'title'       in kargs.keys() : kargs['title'      ] = 'Warning'
-        if not 'title_size'  in kargs.keys() : kargs['title_size' ] = 16
+        if not 'title_size'  in kargs.keys() : kargs['title_size' ] = dp(16)
         if not 'size_hint'   in kargs.keys() : kargs['size_hint'  ] = (.4,.3)
         if not 'title_color' in kargs.keys() : kargs['title_color'] = (0,0,0,.8)
 
@@ -71,8 +72,8 @@ class AlertPopup( FlatPopup ) :
 
         button_bar = BoxLayout( 
             orientation='horizontal',\
-            size_hint=(1,None), height=55,\
-            spacing=10, padding=[10,10,10,10] 
+            size_hint=(1,None), height=dp(55),\
+            spacing=dp(10), padding=[10,10,10,10] 
         )
         button_bar.add_widget( BoxLayout() )
         if self.cancel_button_text : button_bar.add_widget( cancel_button )
@@ -108,7 +109,7 @@ class OkButtonPopup( FlatPopup ) :
     def __init__( self, **kargs ) :
 
         if not 'title'       in kargs.keys() : kargs['title'      ] = 'Info'
-        if not 'title_size'  in kargs.keys() : kargs['title_size' ] = 16
+        if not 'title_size'  in kargs.keys() : kargs['title_size' ] = dp(16)
         if not 'size_hint'   in kargs.keys() : kargs['size_hint'  ] = (.8,.5)
         if not 'title_color' in kargs.keys() : kargs['title_color'] = (0,0,0,.8)
 
@@ -125,8 +126,8 @@ class OkButtonPopup( FlatPopup ) :
 
         button_bar = BoxLayout( 
             orientation='horizontal',\
-            size_hint=(1,None), height=55,\
-            spacing=10, padding=[10,10,10,10]
+            size_hint=(1,None), height=dp(55),\
+            spacing=dp(10), padding=[10,10,10,10]
         )
         button_bar.add_widget( BoxLayout( size_hint=(.8,1) ) )
         button_bar.add_widget( ok_button )

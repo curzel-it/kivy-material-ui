@@ -3,7 +3,7 @@
 [AccordionItemTitle@Label]:
     text: ctx.title
     font_name: 'font/Roboto-Light.ttf' if ctx.item.collapse else 'font/Roboto-Medium.ttf'
-    font_size: 20
+    font_size: dp(20)
     color: [ .17, .17, .17, 1 ] if ctx.item.collapse else ( 1, 1, 1, 1 )
 
     canvas.before:
@@ -53,7 +53,7 @@
 
             FlatButton:
                 text: '<'
-                font_size: 36    
+                font_size: dp(36)
                 color: (1,1,1,1)
                 shadow_alpha: 0
                 background_color: (0,0,0,0)
@@ -62,7 +62,7 @@
             size_hint: ( 0.8, 1 )
             Label:
                 font_name: 'font/Roboto-Light.ttf'
-                font_size: 36
+                font_size: dp(36)
                 text: 'Main Header'
                 color: [ 1, 1, 1, 1 ]
                 text_size: self.size[0], self.parent.height
@@ -82,25 +82,25 @@
 
             AccordionItem:
                 title: 'People'
-                height: 150
+                height: dp(150)
                 Label:
                     font_name: 'font/Roboto-Light.ttf'
-                    font_size: 18
+                    font_size: dp(18)
                     color: ( 0, 0, 0, 1 )
                     text: 'Things about people'
             AccordionItem:
                 title: 'Marketing'
-                height: 150
+                height: dp(150)
                 Label:
                     font_name: 'font/Roboto-Light.ttf'
-                    font_size: 18
+                    font_size: dp(18)
                     color: ( 0, 0, 0, 1 )
                     text: 'Marketing!'
             AccordionItem:
                 title: 'More'
                 Label:
                     font_name: 'font/Roboto-Light.ttf'
-                    font_size: 18
+                    font_size: dp(18)
                     color: ( 0, 0, 0, 1 )
                     text: 'More things'
 
@@ -108,7 +108,7 @@
             size_hint: 0.4, 1
             orientation: 'vertical'
             padding: ( 10, 10, 10, 10 )
-            spacing: 10
+            spacing: dp(10)
             id: mainArea
 
             FlatButton:
@@ -129,7 +129,7 @@
                 font_name: 'font/Roboto-Light.ttf'
                 text: "FlatButton"
                 color: 0,0,0,.9
-                corner_radius:5
+                corner_radius:dp(5)
                 background_color: [.95,.8,.06,1]
                 background_color_down: [.95,.61,.07,1]
                 on_press: root.show_popup2()
@@ -138,7 +138,7 @@
                 font_name: 'font/Roboto-Light.ttf'
                 text: "FlatButton"
                 color: 0,0,0,.9
-                corner_radius:10
+                corner_radius:dp(10)
                 background_color: [.61,.35,.81,1]
                 background_color_down: [.57,.27,.67,1]
                 on_press: root.show_popup3()
@@ -147,7 +147,7 @@
                 font_name: 'font/Roboto-Light.ttf'
                 text: "FlatButton"
                 color: 0,0,0,.9
-                corner_radius:20
+                corner_radius:dp(20)
                 background_color: [0,1,1,1]
                 on_press: root.show_popup4()
 
@@ -182,8 +182,8 @@
             FloatingAction:
                 size_hint: ( 1, None )
                 icon: 'images/done-32.png'
-                diameter: 70
-                font_size: 24
+                diameter: dp(70)
+                font_size: dp(24)
                 background_color: ( 1, .1, .1, 1 )
                 background_color_down: ( .9, .1, .1, 1 )
                 color: [1,1,1,1]

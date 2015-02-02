@@ -2,6 +2,7 @@ import sys
 
 from kivy.app import App
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.properties import *
 from kivy.uix.boxlayout import BoxLayout
 
@@ -22,7 +23,7 @@ class Test( BoxLayout ) :
             title='Customizable title', \
             title_align='left', \
             title_color=[0,0,0,.9], \
-            title_size=26
+            title_size=dp(26)
         )
         p.open()
 
