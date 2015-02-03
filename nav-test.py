@@ -36,6 +36,8 @@ class TestApp( App ) :
         self.nav.push( Label( text=msg, size_hint=(1,1) ), title=msg )
         i += 1
 
+    def on_pause( self, *args ) : return True
+
 if __name__ == '__main__':
     TestApp().run()
 

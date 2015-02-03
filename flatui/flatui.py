@@ -15,10 +15,7 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
 
-if sys.version_info[0] > 2 :
-    exec( 'from flatui.labels import BindedLabel' )
-else :
-    exec( 'from labels import BindedLabel' )
+from flatui.labels import BindedLabel
 
 from pkg_resources import resource_filename
 #KV Files
@@ -117,7 +114,7 @@ class FlatButton( _ColorButton ) :
 
     :attr:`corner_radius` is a :class:`~kivy.properties.NumericProperty`.
     '''
-
+    
     def __init__( self, **kargs ) :
         super( FlatButton, self ).__init__( **kargs )
 

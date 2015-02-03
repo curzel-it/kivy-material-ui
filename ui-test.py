@@ -41,6 +41,8 @@ class TestApp( App ) :
     
     def build( self ) : return Test()
 
+    def on_pause( self, *args ) : return True
+
 if __name__ == '__main__':
     TestApp().run()
 

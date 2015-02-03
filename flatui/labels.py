@@ -76,6 +76,7 @@ class ResizeableLabel( BindedLabel ) :
     
     def __init__( self, **kargs ) :
         super( ResizeableLabel, self ).__init__( **kargs )
+        self._touched = False
         self._unique_group = { 'group':'__resizeable_label_%d' % (id(self)) }
 
     def on_touch_down( self, touch ) :
