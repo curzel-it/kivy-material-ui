@@ -14,7 +14,8 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
 
-from flatui.flatui import FlatButton, FlatPopup
+#from flatui.flatui import FlatButton, FlatPopup
+from . import flatui
 
 import pkg_resources
 
@@ -22,7 +23,7 @@ path = pkg_resources.resource_filename( __name__, 'popups.kv' )
 Builder.load_file( path )
 
 
-class AlertPopup( FlatPopup ) :
+class AlertPopup( flatui.FlatPopup ) :
     """
     Quick flat popup to show a generic alert message.
     Provide cancel_button_text or cancel_button_on_press to show a second button.
@@ -51,7 +52,7 @@ class AlertPopup( FlatPopup ) :
 
         super( AlertPopup, self ).__init__( **kargs )
 
-        ok_button = FlatButton( 
+        ok_button = flatui.FlatButton( 
             text=self.ok_button_text,\
             color=self.ok_button_text_color,\
             background_color=self.ok_button_color,\
@@ -59,7 +60,7 @@ class AlertPopup( FlatPopup ) :
         )
         ok_button.bind( on_press=self.on_ok )
         
-        cancel_button = FlatButton( 
+        cancel_button = flatui.FlatButton( 
             text=self.cancel_button_text or '',\
             color=self.cancel_button_text_color,\
             background_color=self.cancel_button_color,\
@@ -91,7 +92,7 @@ class AlertPopup( FlatPopup ) :
 
 
 
-class OkButtonPopup( FlatPopup ) :
+class OkButtonPopup( flatui.FlatPopup ) :
     """
     Quick flat popup to show a generic hint to the user.
     Has and OK button to dismiss itself and nothing more
@@ -112,7 +113,7 @@ class OkButtonPopup( FlatPopup ) :
 
         super( OkButtonPopup, self ).__init__( **kargs )
 
-        ok_button = FlatButton( 
+        ok_button = flatui.FlatButton( 
             text=self.ok_button_text,\
             size_hint=(.2,1),\
             color=self.ok_button_text_color,\

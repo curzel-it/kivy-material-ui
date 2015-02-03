@@ -15,7 +15,8 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
 
-from flatui.labels import BindedLabel
+#from flatui.labels import BindedLabel
+from . import labels
 
 from pkg_resources import resource_filename
 #KV Files
@@ -48,7 +49,7 @@ class FlatTextInput( TextInput ) :
         super( FlatTextInput, self ).__init__( **kargs )
 
 
-class _ColorButton( ButtonBehavior, BindedLabel ) :
+class _ColorButton( ButtonBehavior, labels.BindedLabel ) :
     '''
     Replacement for Button class, just more flexible...
     '''
