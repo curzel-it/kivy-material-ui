@@ -71,7 +71,7 @@ class NavigationController( BoxLayout ) :
     Navigation bar title.
     '''    
     
-    nav_height = NumericProperty( dp(84) )
+    nav_height = NumericProperty( dp(56) )
     '''
     Navigation bar height.
     '''
@@ -81,7 +81,12 @@ class NavigationController( BoxLayout ) :
     Navigation bar color.
     '''
 
-    font_size = NumericProperty( dp(36) )
+    shadow_alpha = NumericProperty( .2 )
+    '''
+    Alpha channel for navigation bar shadow.
+    '''
+
+    font_size = NumericProperty( dp(28) )
     '''
     Navigation bar font size.
     '''
