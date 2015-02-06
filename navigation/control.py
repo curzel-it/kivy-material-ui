@@ -2,6 +2,7 @@ import sys
 from kivy.animation import Animation
 from kivy.config import Config
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.properties import *
 from kivy.uix.actionbar import ActionBar, ActionItem, ActionPrevious
 from kivy.uix.boxlayout import BoxLayout
@@ -70,7 +71,7 @@ class NavigationController( BoxLayout ) :
     Navigation bar title.
     '''    
     
-    nav_height = NumericProperty( 84 )
+    nav_height = NumericProperty( dp(84) )
     '''
     Navigation bar height.
     '''
@@ -80,7 +81,7 @@ class NavigationController( BoxLayout ) :
     Navigation bar color.
     '''
 
-    font_size = NumericProperty( 36 )
+    font_size = NumericProperty( dp(36) )
     '''
     Navigation bar font size.
     '''
