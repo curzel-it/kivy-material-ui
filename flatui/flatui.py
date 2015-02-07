@@ -1,3 +1,11 @@
+"""
+Please refer to Google's Materia UI guidelines :
+http://www.google.com/design
+
+Guidelines for buttons :
+http://www.google.com/design/spec/components/buttons.html
+"""
+
 import sys
 sys.path.append( '..' )
 
@@ -50,7 +58,7 @@ class FlatTextInput( TextInput ) :
         super( FlatTextInput, self ).__init__( **kargs )
 
 
-class _ColorButton( ButtonBehavior, labels.BindedLabel ) :
+class _MateriaButton( ButtonBehavior, labels.BindedLabel ) :
     '''
     Replacement for Button class, just more flexible...
     '''
@@ -101,12 +109,12 @@ class _ColorButton( ButtonBehavior, labels.BindedLabel ) :
     def __init__( self, **kargs ) :
         if not 'valign' in kargs.keys() : kargs['valign'] = 'middle'
         if not 'halign' in kargs.keys() : kargs['halign'] = 'center'
-        super( _ColorButton, self ).__init__( **kargs )
+        super( _MateriaButton, self ).__init__( **kargs )
 
 
-class FlatButton( _ColorButton ) :
+class RaisedButton( _MateriaButton ) :
     '''
-    Completely flat button.
+    Material UI raised button.
     '''
 
     corner_radius = NumericProperty( dp(2) )
@@ -118,10 +126,10 @@ class FlatButton( _ColorButton ) :
     '''
     
     def __init__( self, **kargs ) :
-        super( FlatButton, self ).__init__( **kargs )
+        super( RaisedButton, self ).__init__( **kargs )
 
 
-class FloatingAction( _ColorButton ) :
+class FloatingAction( _MateriaButton ) :
     '''
     Round button with frame.
     '''

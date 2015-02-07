@@ -14,7 +14,7 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
 
-#from flatui.flatui import FlatButton, FlatPopup
+#from flatui.flatui import RaisedButton, FlatPopup
 from . import flatui
 
 import pkg_resources
@@ -52,7 +52,7 @@ class AlertPopup( flatui.FlatPopup ) :
 
         super( AlertPopup, self ).__init__( **kargs )
 
-        ok_button = flatui.FlatButton( 
+        ok_button = flatui.RaisedButton( 
             text=self.ok_button_text,\
             color=self.ok_button_text_color,\
             background_color=self.ok_button_color,\
@@ -60,7 +60,7 @@ class AlertPopup( flatui.FlatPopup ) :
         )
         ok_button.bind( on_press=self.on_ok )
         
-        cancel_button = flatui.FlatButton( 
+        cancel_button = flatui.RaisedButton( 
             text=self.cancel_button_text or '',\
             color=self.cancel_button_text_color,\
             background_color=self.cancel_button_color,\
@@ -113,7 +113,7 @@ class OkButtonPopup( flatui.FlatPopup ) :
 
         super( OkButtonPopup, self ).__init__( **kargs )
 
-        ok_button = flatui.FlatButton( 
+        ok_button = flatui.RaisedButton( 
             text=self.ok_button_text,\
             size_hint=(.2,1),\
             color=self.ok_button_text_color,\
