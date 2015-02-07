@@ -1,3 +1,4 @@
+import pdb
 import sys
 from kivy.animation import Animation
 from kivy.config import Config
@@ -121,6 +122,7 @@ class NavigationController( BoxLayout ) :
         Use this to go back to the last view.
         Will eventually throw EmptyNavigationStack.
         '''
+#        pdb.set_trace()
         if self._animation is None :
             if len( self.stack ) > 0 : 
                 self._save_temp_view( 0, self.root_widget )
@@ -136,8 +138,8 @@ class NavigationController( BoxLayout ) :
                 Navigation bar title, default ''.
         '''
             
+#        pdb.set_trace()
         if self._animation is None :
-
             if not 'title' in kargs.keys() : kargs['title'] = ''
             self._last_kargs = kargs
             x = -1 if self.push_mode == 'left' else 1
@@ -151,7 +153,7 @@ class NavigationController( BoxLayout ) :
             self._animation = Animation( x=0, duration=duracy )
             self._animation.bind( on_complete=self._push_temp_view )
             self._animation.start( self._temp_view ) 
-        except : pass
+        except : pass #Exception as e : print(e)
 
     def _run_pop_animation( self ) :
         try : 
@@ -160,7 +162,7 @@ class NavigationController( BoxLayout ) :
             self._animation = Animation( x=x, duration=self.animation_duracy )
             self._animation.bind( on_complete=self._pop_temp_view )
             self._animation.start( self._temp_view ) 
-        except : pass
+        except : pass #Exception as e : print(e)
 
     def _push_temp_view( self, *args ) :
         self._temp_view.disabled = False

@@ -81,7 +81,7 @@ class _MateriaButton( ButtonBehavior, labels.BindedLabel ) :
     defaults to [ 0.2, 0.65, 0.81, 0.5 ] ( cyano with alpha ).
     '''
 
-    color_down = ListProperty( [ .3, .3, .3, 1 ] )
+    color_down = ListProperty( [ 0, 0, 0, .7 ] )
     '''Represents the rgba color used to render the button text in the down state.
 
     .. versionadded:: 1.0
