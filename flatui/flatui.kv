@@ -154,6 +154,18 @@
             size: min(root.size)/1.2, min(root.size)/1.2
 
 #==============================================================================
+<FlatButton>:
+#==============================================================================
+    canvas:
+        Color:
+            rgba: self.color_down if self.state == 'down' else (self.disabled_color if self.disabled else (self.color if not self.markup else (1, 1, 1, 1) ) )
+        Rectangle:
+            texture: self.texture
+            size: self.texture_size
+            pos: int(self.center_x - self.texture_size[0] / 2.), int(self.center_y - self.texture_size[1] / 2.)
+    
+
+#==============================================================================
 <PopupComboBox>:
 #==============================================================================
     markup: True

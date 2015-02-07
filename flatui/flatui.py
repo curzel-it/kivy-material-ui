@@ -81,6 +81,15 @@ class _MateriaButton( ButtonBehavior, labels.BindedLabel ) :
     defaults to [ 0.2, 0.65, 0.81, 0.5 ] ( cyano with alpha ).
     '''
 
+    color_down = ListProperty( [ .3, .3, .3, 1 ] )
+    '''Represents the rgba color used to render the button text in the down state.
+
+    .. versionadded:: 1.0
+
+    :attr:`color_down` is a :class:`~kivy.properties.ListProperty` and
+    defaults to [ .3, .3, .3, 1 ] ( cyano with alpha ).
+    '''
+
     background_color_disabled = ListProperty( [ 0.4, 0.4, 0.4, 0.5 ] )
     '''Represents the rgba color used to render the button when disabled.
 
@@ -105,17 +114,6 @@ class _MateriaButton( ButtonBehavior, labels.BindedLabel ) :
 
     :attr:`shadow_alpha` is a :class:`~kivy.properties.NumericProperty`, default to 0.4.
     '''
-    
-    def __init__( self, **kargs ) :
-        if not 'valign' in kargs.keys() : kargs['valign'] = 'middle'
-        if not 'halign' in kargs.keys() : kargs['halign'] = 'center'
-        super( _MateriaButton, self ).__init__( **kargs )
-
-
-class RaisedButton( _MateriaButton ) :
-    '''
-    Material UI raised button.
-    '''
 
     corner_radius = NumericProperty( dp(2) )
     '''Button corner radius.
@@ -126,7 +124,24 @@ class RaisedButton( _MateriaButton ) :
     '''
     
     def __init__( self, **kargs ) :
-        super( RaisedButton, self ).__init__( **kargs )
+        if not 'valign' in kargs.keys() : kargs['valign'] = 'middle'
+        if not 'halign' in kargs.keys() : kargs['halign'] = 'center'
+        super( _MateriaButton, self ).__init__( **kargs )
+
+
+class FlatButton( _MateriaButton ) :
+    '''
+    Material UI flat button.
+    '''
+
+    pass
+
+class RaisedButton( _MateriaButton ) :
+    '''
+    Material UI raised button.
+    '''
+   
+    pass
 
 
 class FloatingAction( _MateriaButton ) :
