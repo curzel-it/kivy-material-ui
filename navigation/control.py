@@ -1,4 +1,3 @@
-import pdb
 import sys
 from kivy.animation import Animation
 from kivy.config import Config
@@ -102,9 +101,13 @@ class NavigationController( BoxLayout ) :
     Navigation bar text color.
     '''
 
+    floating_panel = ObjectProperty( None )
+    '''
+    FloatingLayout you can use for any pourpose.
+    '''
+
     #Private stuffs...
     _push_cache = ListProperty( [] )
-    _anim_area = ObjectProperty( None )
     _actionprev = ObjectProperty( None )
     _actiontext = ObjectProperty( None )
     _content = ObjectProperty( None )
@@ -125,6 +128,9 @@ class NavigationController( BoxLayout ) :
 #        pdb.set_trace()
         if self._animation is None :
             if len( self.stack ) > 0 : 
+                try : 
+                    self.root_widget.on_pop( self )
+                except : pass
                 self._save_temp_view( 0, self.root_widget )
                 self._run_pop_animation()
             else :
@@ -189,7 +195,7 @@ class NavigationController( BoxLayout ) :
 
     def _clear_temp_view( self, *args ) :
         try : 
-            self._anim_area.remove_widget( self._temp_view )
+            self.floating_panel.remove_widget( self._temp_view )
         except : pass
         self._temp_view = None  
 
@@ -197,7 +203,7 @@ class NavigationController( BoxLayout ) :
         self._temp_view = view
         try : 
             self._temp_view.pos = [ self._width*p, 0 ]
-            self._anim_area.add_widget( self._temp_view )
+            self.floating_panel.add_widget( self._temp_view )
         except : pass
 
     def _update_nav( self ) :
