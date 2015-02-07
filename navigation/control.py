@@ -86,6 +86,11 @@ class NavigationController( BoxLayout ) :
     Alpha channel for navigation bar shadow.
     '''
 
+    font_name = StringProperty( None )
+    '''
+    Navigation bar font name.
+    '''
+
     font_size = NumericProperty( dp(28) )
     '''
     Navigation bar font size.
@@ -109,6 +114,7 @@ class NavigationController( BoxLayout ) :
         self._has_root = False
         self._last_args = {'title':'', 'animation':None}
         self._animation = None
+        if self.font_name : self._actiontext.font_name = self.font_name
 
     def pop( self, *args ) :
         '''

@@ -6,6 +6,7 @@ from kivy.event import EventDispatcher
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import *
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -163,6 +164,15 @@ class FloatingAction( _ColorButton ) :
         if not 'color' in kargs.keys() : 
             kargs[ 'color' ] = [ 1, 1, 1, 1 ]
         super( FloatingAction, self ).__init__( **kargs )
+
+    def boxed( self ) :    
+        '''
+        Return an AnchorLayout containing the floating button.
+        Anchor is setted to be on le bottom-right corner.
+        '''
+        al = AnchorLayout( anchor_x='right', anchor_y='bottom'  )
+        al.add_widget( self )
+        return al
 
 
 class PopupComboBox( Label ) :
