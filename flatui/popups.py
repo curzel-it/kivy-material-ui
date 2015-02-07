@@ -31,7 +31,7 @@ class AlertPopup( flatui.FlatPopup ) :
 
     text = StringProperty( 'No text argument was provided.' )
 
-    ok_button_text = StringProperty( 'OK' )
+    ok_button_text = StringProperty( '[b]OK[/b]' )
     ok_button_text_color = ListProperty( [1,1,1,1] )
     ok_button_on_press = ObjectProperty( None )
     ok_button_color = ListProperty( [0,.59,.53,1] )
@@ -53,17 +53,17 @@ class AlertPopup( flatui.FlatPopup ) :
         super( AlertPopup, self ).__init__( **kargs )
 
         ok_button = flatui.FlatButton( 
-            text=self.ok_button_text,\
-            #color=self.ok_button_text_color,\
-            color=self.ok_button_color,\
+            text=self.ok_button_text,
+            markup=True,
+            color=self.ok_button_color,
             color_down=self.ok_button_color_down 
         )
         ok_button.bind( on_press=self.on_ok )
         
         cancel_button = flatui.FlatButton( 
-            text=self.cancel_button_text or '',\
-            #color=self.cancel_button_text_color,\
-            color=self.cancel_button_color,\
+            text=self.cancel_button_text or '',
+            markup=True,
+            color=self.cancel_button_color,
             color_down=self.cancel_button_color_down 
         )
         cancel_button.bind( on_press=self.on_cancel )
@@ -98,7 +98,7 @@ class OkButtonPopup( flatui.FlatPopup ) :
     Has and OK button to dismiss itself and nothing more
     """
 
-    ok_button_text = StringProperty( 'OK' )
+    ok_button_text = StringProperty( '[b]OK[/b]' )
     text = StringProperty( 'No text argument was provided.' )
     ok_button_color = ListProperty( [0,.59,.53,1] )
     ok_button_text_color = ListProperty( [1,1,1,1] )
@@ -114,10 +114,10 @@ class OkButtonPopup( flatui.FlatPopup ) :
         super( OkButtonPopup, self ).__init__( **kargs )
 
         ok_button = flatui.FlatButton( 
-            text=self.ok_button_text,\
-            size_hint=(.2,1),\
-            #color=self.ok_button_text_color,\
-            color=self.ok_button_color,\
+            text=self.ok_button_text,
+            markup=True,
+            size_hint=(.2,1),
+            color=self.ok_button_color,
             color_down=self.ok_button_color_down 
         )
         ok_button.bind( on_press=self.on_ok )
