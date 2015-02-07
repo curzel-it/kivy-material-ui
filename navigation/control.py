@@ -82,7 +82,7 @@ class NavigationController( BoxLayout ) :
     Navigation bar color.
     '''
 
-    shadow_alpha = NumericProperty( .2 )
+    shadow_alpha = NumericProperty( .1 )
     '''
     Alpha channel for navigation bar shadow.
     '''
