@@ -11,6 +11,7 @@ sys.path.append( '..' )
 
 from kivy.adapters.listadapter import ListAdapter
 from kivy.event import EventDispatcher
+from kivy.graphics import Color, Rectangle
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import *
@@ -197,6 +198,9 @@ class FloatingAction( _MateriaButton ) :
             anchor_x='right', anchor_y='bottom',
             padding=padding
         )
+        with al.canvas :
+            Color( 0,1,0,1 )
+            Rectangle( pos=self.pos, size=self.size )
         al.add_widget( self )
         return al
 
