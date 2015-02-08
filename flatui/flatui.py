@@ -188,7 +188,7 @@ class FloatingAction( _MateriaButton ) :
             kargs[ 'color' ] = [ 1, 1, 1, 1 ]
         super( FloatingAction, self ).__init__( **kargs )
 
-    def boxed( self, padding=[0,0,0,0] ) :    
+    def boxed( self, padding=[0,0] ) :    
         '''
         Return an AnchorLayout containing the floating button.
         Anchor is setted to be on le bottom-right corner.
