@@ -1,5 +1,5 @@
 """
-Please refer to Google's Materia UI guidelines :
+Please refer to Google's Material UI guidelines :
 http://www.google.com/design
 
 Guidelines for buttons :
@@ -10,6 +10,7 @@ import sys
 sys.path.append( '..' )
 
 from kivy.adapters.listadapter import ListAdapter
+from kivy.config import Config
 from kivy.event import EventDispatcher
 from kivy.graphics import Color, Rectangle
 from kivy.lang import Builder
@@ -189,21 +190,31 @@ class FloatingAction( _MateriaButton ) :
             kargs[ 'color' ] = [ 1, 1, 1, 1 ]
         super( FloatingAction, self ).__init__( **kargs )
 
-    def boxed( self, padding=[0,0] ) :    
+    def __boxed( self, padding=None ) :    
         '''
         Return an AnchorLayout containing the floating button.
         Anchor is setted to be on le bottom-right corner.
         '''
+        if not padding : padding = [ dp(28), dp(28) ]
+    
         al = AnchorLayout( 
             anchor_x='right', anchor_y='bottom',
+            size=[ 2*self.diameter, 2*self.diameter ],
             padding=padding
         )
         with al.canvas :
-            Color( 0,1,0,1 )
-            Rectangle( pos=self.pos, size=self.size )
+            Color( 0,1,0,.4 )
+            Rectangle( pos=al.pos, size=al.size )
         al.add_widget( self )
         return al
-
+    
+    def add_to_bottom_right( self, parent ) :    
+        self.pos = [ parent.width-self.diameter*1.2, self.diameter*0.3 ]
+        parent.bind( size=self._repose )
+        parent.add_widget( self )
+    
+    def _repose( self, i, v ) :
+        self.pos = [ v[0]-self.diameter*1.2, self.diameter*0.3 ]
 
 class PopupComboBox( Label ) :
     '''
