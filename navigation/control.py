@@ -21,6 +21,7 @@ from pkg_resources import resource_filename
 path = resource_filename( __name__, 'control.kv' )
 Builder.load_file( path )
 
+#icon_back_32 = resource_filename( __name__, 'images/backbutton.png' )
 
 class NavigationController( BoxLayout ) :
     '''
@@ -210,6 +211,7 @@ class NavigationController( BoxLayout ) :
         self.title = self._last_kargs['title']
         has_previous = len( self.stack ) > 1 
         self.actionprev.text = ' < ' if has_previous else ''
+        #self.actionprev.icon = icon_back_32 if has_previous else ''
         self.actionprev.disabled = not has_previous
 
 

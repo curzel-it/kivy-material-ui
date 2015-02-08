@@ -43,13 +43,13 @@ class FlatTextInput( TextInput ) :
     If true a line of the same color of the cursor will be drawn under the text.
     '''
 
-    cursor_color = ListProperty( [ 1, 0, 0, 1 ] )
+    cursor_color = ListProperty( [ 1, 0, 0, .8 ] )
     '''Represents the rgba color used to render the cursor.
 
     .. versionadded:: 1.0
 
     :attr:`cursor_color` is a :class:`~kivy.properties.ListProperty` and
-    defaults to [ 1, 0, 0, 1 ] ( red ).
+    defaults to [ 1, 0, 0, .8 ].
     '''
 
     def __init__( self, **kargs ) :
@@ -188,12 +188,15 @@ class FloatingAction( _MateriaButton ) :
             kargs[ 'color' ] = [ 1, 1, 1, 1 ]
         super( FloatingAction, self ).__init__( **kargs )
 
-    def boxed( self ) :    
+    def boxed( self, padding=[0,0,0,0] ) :    
         '''
         Return an AnchorLayout containing the floating button.
         Anchor is setted to be on le bottom-right corner.
         '''
-        al = AnchorLayout( anchor_x='right', anchor_y='bottom'  )
+        al = AnchorLayout( 
+            anchor_x='right', anchor_y='bottom',
+            padding=padding
+        )
         al.add_widget( self )
         return al
 
