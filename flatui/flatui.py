@@ -11,6 +11,7 @@ sys.path.append( '..' )
 
 from kivy.adapters.listadapter import ListAdapter
 from kivy.config import Config
+from kivy.core.window import Window
 from kivy.event import EventDispatcher
 from kivy.graphics import Color, Rectangle
 from kivy.lang import Builder
@@ -216,6 +217,7 @@ class FloatingAction( _MateriaButton ) :
     def _repose( self, i, v ) :
         self.pos = [ v[0]-self.diameter*1.2, self.diameter*0.3 ]
 
+
 class PopupComboBox( Label ) :
     '''
     When a click on this button occur, a popup will be shown to pick a value.
@@ -334,7 +336,7 @@ class PopupComboBox( Label ) :
         self.list_adapter.get_view(i).trigger_action( duration=0 )
 
 
-class FlatPopup(ModalView):
+class FlatPopup(ModalView) :
     '''Code copy-pasted from kivy.uix.popup, just some more properties.
     '''
 
@@ -402,9 +404,36 @@ class FlatPopup(ModalView):
     defaults to 2dp.
     '''
 
+    close_on_esc = BooleanProperty( True )
+    '''If false keyboard is not binded and popup is not closed by key events.
+
+    .. versionadded:: 1.0.0
+
+    :attr:`close_on_esc` is a :class:`~kivy.properties.BooleanProperty` and
+    defaults to True.
+    '''
+
     # Internal properties used for graphical representation.
 
     _container = ObjectProperty(None)
+
+    def open(self, **kargs) :
+        super( FlatPopup, self ).open( **kargs )
+        if self.close_on_esc : self._bind_keyboard()
+
+    def _bind_keyboard(self) :
+        self._keyboard = Window.request_keyboard(self._unbind_keyboard, self)
+        self._keyboard.bind(on_key_down=self._on_keyboard_down)
+
+    def _unbind_keyboard(self) :
+        self._keyboard.unbind(on_key_down=self._on_keyboard_down)
+        self._keyboard = None
+
+    def _on_keyboard_down(self, keyboard, keycode, text, modifiers) :
+        if keycode[0] == 27 : #Escape
+            self._unbind_keyboard()
+            self.dismiss()
+        return True
 
     def add_widget(self, widget):
         if self._container:
