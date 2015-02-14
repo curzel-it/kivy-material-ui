@@ -213,6 +213,15 @@ class FloatingAction( _MateriaButton ) :
         self.pos = [ parent.width-self.diameter*1.2, self.diameter*0.3 ]
         parent.bind( size=self._repose )
         parent.add_widget( self )
+        self.parent = parent
+
+    def remove_from_parent( self ) :
+        try :
+            self.parent.unbind( size=self._repose )
+            self.parent.remove_widget( self )
+            print( 'Floating action removed!' ) 
+        except :
+            print( 'Floating action parent is not set...' )
     
     def _repose( self, i, v ) :
         self.pos = [ v[0]-self.diameter*1.2, self.diameter*0.3 ]

@@ -179,6 +179,7 @@ class NavigationController( BoxLayout ) :
 
         self.stack.append( [ self.root_widget, self._last_kargs ] )
         self.root_widget = self._temp_view
+#        self.root_widget.nav = self
         self._clear_temp_view()
         self.content.add_widget( self.root_widget )
         self._has_root = True
