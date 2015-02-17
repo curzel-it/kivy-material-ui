@@ -9,6 +9,7 @@ http://www.google.com/design/spec/components/buttons.html
 import sys
 sys.path.append( '..' )
 
+from kivy.animation import Animation
 from kivy.adapters.listadapter import ListAdapter
 from kivy.config import Config
 from kivy.core.window import Window
@@ -26,6 +27,8 @@ from kivy.uix.listview import ListItemButton, ListView
 from kivy.uix.modalview import ModalView
 from kivy.uix.popup import PopupException
 from kivy.uix.textinput import TextInput
+
+import pdb
 
 #from flatui.labels import BindedLabel
 from . import labels
@@ -185,43 +188,63 @@ class FloatingAction( _MateriaButton ) :
     :attr:`shadow_ratio` is a :class:`~kivy.properties.NumericProperty`, default to 1.03.
     '''
 
+    animation_duracy = NumericProperty( .1 )
+    '''Used to move button when loading a new view
+
+    .. versionadded:: 1.0
+
+    :attr:`animation_duracy` is a :class:`~kivy.properties.NumericProperty`, default to 0.1.
+    '''
+
+    entrance = OptionProperty('down', options=['', 'down', 'up', 'left','right'])
+    '''Direction the button will come from.
+
+    :attr:`entrance` is a :class:`~kivy.properties.OptionProperty` and
+    defaults to ''. Available options are '', down, up, left, right
+    '''
+
     def __init__( self, **kargs ) :
 
         if not 'color' in kargs.keys() : 
             kargs[ 'color' ] = [ 1, 1, 1, 1 ]
         super( FloatingAction, self ).__init__( **kargs )
 
-    def __boxed( self, padding=None ) :    
-        '''
-        Return an AnchorLayout containing the floating button.
-        Anchor is setted to be on le bottom-right corner.
-        '''
-        if not padding : padding = [ dp(28), dp(28) ]
-    
-        al = AnchorLayout( 
-            anchor_x='right', anchor_y='bottom',
-            size=[ 2*self.diameter, 2*self.diameter ],
-            padding=padding
-        )
-        with al.canvas :
-            Color( 0,1,0,.4 )
-            Rectangle( pos=al.pos, size=al.size )
-        al.add_widget( self )
-        return al
-    
-    def add_to_bottom_right( self, parent ) :    
-        self.pos = [ parent.width-self.diameter*1.2, self.diameter*0.3 ]
+    def add_to_bottom_right( self, parent ) : 
+
+        nx = parent.width-self.diameter*1.2
+        ny = self.diameter*0.3
+
         parent.bind( size=self._repose )
         parent.add_widget( self )
-        self.parent = parent
 
-    def remove_from_parent( self ) :
-        try :
-            self.parent.unbind( size=self._repose )
-            self.parent.remove_widget( self )
-            print( 'Floating action removed!' ) 
-        except :
-            print( 'Floating action parent is not set...' )
+        duracy = self.animation_duracy if self.entrance != '' else 0
+
+        if self.entrance == 'down'  : self.pos = [ nx, -self.height ]
+        if self.entrance == 'up'    : self.pos = [ nx, self.pos[1]+self.height ]
+        if self.entrance == 'left'  : self.pos = [ -self.width, ny ]
+        if self.entrance == 'right' : self.pos = [ +self.width, ny ]
+
+        animation = Animation( 
+            x=nx, y=ny, duration=duracy 
+        )
+        animation.start( self ) 
+ 
+    def remove_from_parent( self, *args ) :  
+        duracy = self.animation_duracy if self.entrance != '' else 0
+        nx, ny = 0, 0
+    
+        if self.entrance == 'down'  : ny = 0
+        if self.entrance == 'up'    : ny = self.height
+        if self.entrance == 'left'  : nx = -self.width
+        if self.entrance == 'right' : nc = self.width
+
+        animation = Animation( x=nx, y=ny, duration=duracy )
+        animation.bind( on_complete=self._remove_from_parent )
+        animation.start( self ) 
+
+    def _remove_from_parent( self ) :
+        self.parent.unbind( size=self._repose )
+        self.parent.remove_widget( self )
     
     def _repose( self, i, v ) :
         self.pos = [ v[0]-self.diameter*1.2, self.diameter*0.3 ]

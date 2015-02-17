@@ -1,5 +1,6 @@
 import sys
 
+from kivy.animation import Animation
 from kivy.adapters.listadapter import ListAdapter
 from kivy.event import EventDispatcher
 from kivy.lang import Builder
