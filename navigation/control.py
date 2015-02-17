@@ -119,7 +119,7 @@ class NavigationController( BoxLayout ) :
         self._has_root = False
         self._last_args = {'title':'', 'animation':None}
         self._animation = None
-        if self.font_name : self._actiontext.font_name = self.font_name
+        #if self.font_name : self._actiontext.font_name = self.font_name
 
     def pop( self, *args ) :
         '''
@@ -185,6 +185,9 @@ class NavigationController( BoxLayout ) :
         self._has_root = True
         self._update_nav()
         self._animation = None
+        try : 
+            self.root_widget.on_push( self )
+        except : pass
 
     def _pop_temp_view( self, *args ) :
         self._temp_view.disabled = False
