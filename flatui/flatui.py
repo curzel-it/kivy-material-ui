@@ -224,25 +224,24 @@ class FloatingAction( _MateriaButton ) :
         if self.entrance == 'left'  : self.pos = [ -self.width, ny ]
         if self.entrance == 'right' : self.pos = [ +self.width, ny ]
 
-        animation = Animation( 
-            x=nx, y=ny, duration=duracy 
-        )
+        animation = Animation( x=nx, y=ny, duration=duracy )
         animation.start( self ) 
+        self.parent = parent
  
-    def remove_from_parent( self, *args ) :  
+    def remove_from_parent( self ) :  
         duracy = self.animation_duracy if self.entrance != '' else 0
-        nx, ny = 0, 0
+        nx, ny = self.pos
     
         if self.entrance == 'down'  : ny = 0
-        if self.entrance == 'up'    : ny = self.height
+        if self.entrance == 'up'    : ny = self.parent.height+self.height
         if self.entrance == 'left'  : nx = -self.width
-        if self.entrance == 'right' : nc = self.width
+        if self.entrance == 'right' : nx = self.parent.width
 
         animation = Animation( x=nx, y=ny, duration=duracy )
         animation.bind( on_complete=self._remove_from_parent )
         animation.start( self ) 
 
-    def _remove_from_parent( self ) :
+    def _remove_from_parent( self, *args ) :
         self.parent.unbind( size=self._repose )
         self.parent.remove_widget( self )
     
