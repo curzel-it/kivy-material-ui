@@ -196,7 +196,7 @@ class FloatingAction( _MateriaButton ) :
     :attr:`animation_duracy` is a :class:`~kivy.properties.NumericProperty`, default to 0.1.
     '''
 
-    entrance = OptionProperty('down', options=['', 'down', 'up', 'left','right'])
+    entrance = OptionProperty('', options=['', 'down', 'up', 'left','right'])
     '''Direction the button will come from.
 
     :attr:`entrance` is a :class:`~kivy.properties.OptionProperty` and
@@ -219,13 +219,16 @@ class FloatingAction( _MateriaButton ) :
 
         duracy = self.animation_duracy if self.entrance != '' else 0
 
-        if self.entrance == 'down'  : self.pos = [ nx, -self.height ]
-        if self.entrance == 'up'    : self.pos = [ nx, self.pos[1]+self.height ]
-        if self.entrance == 'left'  : self.pos = [ -self.width, ny ]
-        if self.entrance == 'right' : self.pos = [ +self.width, ny ]
+        if duracy > 0 :
+            if self.entrance == 'down'  : self.pos = [ nx, -self.height ]
+            if self.entrance == 'up'    : self.pos = [ nx, self.pos[1]+self.height ]
+            if self.entrance == 'left'  : self.pos = [ -self.width, ny ]
+            if self.entrance == 'right' : self.pos = [ +self.width, ny ]
 
-        animation = Animation( x=nx, y=ny, duration=duracy )
-        animation.start( self ) 
+            animation = Animation( x=nx, y=ny, duration=duracy )
+            animation.start( self ) 
+        else :
+            self.pos = nx, ny
         self.parent = parent
  
     def remove_from_parent( self ) :  
