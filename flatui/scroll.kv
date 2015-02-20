@@ -1,0 +1,46 @@
+<ReloadSpinner>:
+
+    do_rotation: False
+    do_translation: False
+    do_scale: False
+    size_hint: None, None
+    width: self.diameter
+    height: self.diameter
+    pos_hint: { 'y':.85 }
+    pos: (self.root_layout.width-self.width) / 2, 0
+
+    Label:
+        color: root._color
+        text: 'L'
+        font_size: root.font_size
+        size: root.diameter, root.diameter
+
+        canvas.before:
+
+            PushMatrix:
+            Translate:
+                x: self.center_x
+                y: self.center_y
+            
+		    #Shadow
+		    Color:
+                rgba: 0, 0, 0, .1
+            Ellipse:
+                size: root.diameter*1.1, root.diameter*1.1
+                pos: -root.diameter*1.1/2, -root.diameter*1.1/2
+            Ellipse:
+                size: root.diameter*1.17, root.diameter*1.17
+                pos: -root.diameter*1.17/2, -root.diameter*1.17/2
+            Ellipse:
+                size: root.diameter*1.24, root.diameter*1.24
+                pos: -root.diameter*1.24/2, -root.diameter*1.24/2
+
+
+		    #Content
+		    Color:
+                rgba: 1, 1, 1, 1
+		    Ellipse:
+			    size: root.diameter, root.diameter
+			    pos: -root.diameter/2, -root.diameter/2
+
+            PopMatrix:
