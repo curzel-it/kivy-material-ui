@@ -291,7 +291,7 @@ class PopupComboBox( Label ) :
     :attr:`selected` is a :class:`~kivy.properties.ObjectProperty`.
     '''
 
-    selected_color = ListProperty( [ 0.2, 0.65, 0.81, .5 ] )
+    selected_color = ListProperty( [ .423, 0.647, 0.745, .8] )
     '''Color used to render selected rows.
 
     .. versionadded:: 1.0
@@ -360,6 +360,8 @@ class PopupComboBox( Label ) :
             'deselected_color' : self.deselected_color, \
             'size_hint_y'      : None, \
             'height'           : self.item_row_height, \
+            'font_size'        : dp(12), \
+            'font_name'        : self.font_name, \
             'text'             : o['label'], \
             'rowid'            : o['rowid'] \
         }
@@ -414,7 +416,7 @@ class FlatPopup(ModalView) :
     defaults to 'left'. Available options are left, middle, right and justify.
     '''
 
-    title_font = StringProperty('DroidSans' )
+    title_font = StringProperty( 'DroidSans' )
     '''Font used to render the title text.
 
     :attr:`title_font` is a :class:`~kivy.properties.StringProperty`.
