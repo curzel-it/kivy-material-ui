@@ -121,7 +121,7 @@ class RefreshableScrollView( ScrollView ) :
     Set this property to change spinner appearance.
     '''
     
-    spinner_diameter = NumericProperty( dp(128) )
+    spinner_diameter = NumericProperty( dp(52) )
     '''
     Size of the spinner
     '''
