@@ -7,6 +7,7 @@ import pdb
 import sys
 import traceback
 
+from kivy.animation import Animation
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window
@@ -137,29 +138,69 @@ class RefreshableScrollView( ScrollView ) :
         if self.reload_spinner : self.reload_spinner.stop()
     
 
-class ReloadSpinner( Scatter ) :
+class ReloadSpinner( Widget ) :
 
     root_layout = ObjectProperty( None )
     diameter = NumericProperty( dp(48) )
     font_size = NumericProperty( dp(36) )
     _angle = NumericProperty( 0 )
     _color = ListProperty( [0,0,0,1] )
+    duracy = NumericProperty( .2 )
 
     def __init__( self, **kargs ) :
         super( ReloadSpinner, self ).__init__( **kargs )
     
     def update_animation( self, *args ) :
-        self.rotation += 5
+        self._angle -= 5
     
     def start( self ) :
-        self.rotation = 0
+
+        self.pos = ( 
+            self.root_layout.width/2 - self.width/2, 
+            self.root_layout.height+self.height
+        )
+
+        animation = Animation( 
+            y=self.root_layout.height-2*self.height, 
+            duration=self.duracy*1.5
+        )
+        animation.start( self )         
+
+        self._angle = 0
         self._hex = 0
         self._color = 0, 0, 0, 1 
         self.root_layout.add_widget( self )
         Clock.schedule_interval( self.update_animation, 0.04 )
     
     def stop( self ) : 
+        animation = Animation( 
+            y=self.root_layout.height-2*self.height, 
+            duration=self.duracy
+        )
+        animation.bind(
+            on_complete=self._remove_animation_done
+        )
+        animation.start( self )         
+
+    def _remove_animation_done( self, *args ) :
         self.root_layout.remove_widget( self )
         Clock.unschedule( self.update_animation )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

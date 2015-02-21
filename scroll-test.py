@@ -33,7 +33,7 @@ class Test( FloatLayout ) :
         self.add_widget( self.myscroll )
 
     def on_start_reload( self, *args ) :
-        Clock.schedule_once( self.myscroll.reload_done, 2 )
+        Clock.schedule_once( self.myscroll.reload_done, 3 )
 
 
 class TestApp( App ) :
