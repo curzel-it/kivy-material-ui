@@ -130,7 +130,7 @@ class RefreshableScrollView( ScrollView ) :
     Size of the spinner
     '''
 
-    spinner_duracy = NumericProperty( .15 )
+    spinner_duracy = NumericProperty( .2 )
     '''
     Spinner entrance\exit animation duracy
     '''
