@@ -11,6 +11,7 @@ sys.path.append( '..' )
 
 from kivy.animation import Animation
 from kivy.adapters.listadapter import ListAdapter
+from kivy.base import EventLoop
 from kivy.config import Config
 from kivy.core.window import Window
 from kivy.event import EventDispatcher
@@ -397,7 +398,7 @@ class FlatPopup(ModalView) :
     'No title'.
     '''
 
-    title_size = NumericProperty('14sp')
+    title_size = NumericProperty( dp(14) )
     '''Represents the font size of the popup title.
 
     .. versionadded:: 1.6.0
@@ -413,11 +414,10 @@ class FlatPopup(ModalView) :
     defaults to 'left'. Available options are left, middle, right and justify.
     '''
 
-    title_font = StringProperty('DroidSans')
+    title_font = StringProperty('DroidSans' )
     '''Font used to render the title text.
 
-    :attr:`title_font` is a :class:`~kivy.properties.StringProperty` and
-    defaults to 'DroidSans'.
+    :attr:`title_font` is a :class:`~kivy.properties.StringProperty`.
     '''
 
     content = ObjectProperty(None)
@@ -463,27 +463,35 @@ class FlatPopup(ModalView) :
     defaults to True.
     '''
 
+    is_shown = BooleanProperty( False )
+    '''
+    True whenever the popup is visibile
+    '''
+
     # Internal properties used for graphical representation.
+    _container = ObjectProperty( None )
 
-    _container = ObjectProperty(None)
+    # Added for keyboard request
+    password = BooleanProperty( False )
+    keyboard_suggestions =  BooleanProperty( False )
 
-    def open(self, **kargs) :
-        super( FlatPopup, self ).open( **kargs )
+    def open(self, *args, **kargs) :
+        super( FlatPopup, self ).open( *args, **kargs )
+        self.is_shown = True
         if self.close_on_esc : self._bind_keyboard()
 
+    def dismiss(self, *args, **kargs) :
+        self.is_shown = False
+        super( FlatPopup, self ).dismiss( *args, **kargs )
+
     def _bind_keyboard(self) :
-        self._keyboard = Window.request_keyboard(self._unbind_keyboard, self)
-        self._keyboard.bind(on_key_down=self._on_keyboard_down)
+        EventLoop.window.bind( on_key_down=self._on_keyboard_down)
 
-    def _unbind_keyboard(self) :
-        self._keyboard.unbind(on_key_down=self._on_keyboard_down)
-        self._keyboard = None
-
-    def _on_keyboard_down(self, keyboard, keycode, text, modifiers) :
-        if keycode[0] == 27 : #Escape
-            self._unbind_keyboard()
+    def _on_keyboard_down( self, window, key, *args ) :
+        if self.is_shown and key == 27 : #Escape
             self.dismiss()
-        return True
+            return True
+        return False
 
     def add_widget(self, widget):
         if self._container:
