@@ -108,6 +108,7 @@ class RefreshableScrollView( ScrollView ) :
     This is a very simple subclass of ScrollView.
     When the user does overscroll the view, a 'ReloadSpinner' is shown.
     You will need to call 'reload_done' once you've dove your loading.
+    A ReloadSpinner widget will be added to the root_layout.    
     '''
 
     on_start_reload = ObjectProperty( None )
@@ -115,8 +116,30 @@ class RefreshableScrollView( ScrollView ) :
     Will be called whenever overscroll occurs.
     '''
 
-    reload_spinner = ObjectProperty( None )
+    spinner_image = StringProperty( 'spinner.png' )
+    '''
+    Set this property to change spinner appearance.
+    '''
+    
+    spinner_diameter = NumericProperty( dp(48) )
+    '''
+    Size of the spinner
+    '''
+
+    spinner_duracy = NumericProperty( .2 )
+    '''
+    Spinner entrance\exit animation duracy
+    '''
+    
     root_layout = ObjectProperty( None )
+    '''
+    The spinner will be attached to this layout.
+    ''' 
+
+    reload_spinner = ObjectProperty( None )
+    '''
+    Spinner widget reference used internally
+    ''' 
 
     def __init__( self, **kargs ) :
         super( RefreshableScrollView, self ).__init__( **kargs )
@@ -127,7 +150,10 @@ class RefreshableScrollView( ScrollView ) :
     def on_touch_up( self, *args ) :
         if self._did_overscroll and not self._reloading :
             if self.on_start_reload : self.on_start_reload()
-            self.reload_spinner = ReloadSpinner( root_layout=self.root_layout )
+            self.reload_spinner = ReloadSpinner( 
+                root_layout=self.root_layout,
+                spinner_image=self.spinner_image
+            )
             self.reload_spinner.start()     
             self._reloading = True
             self._did_overscroll = False
@@ -140,12 +166,27 @@ class RefreshableScrollView( ScrollView ) :
 
 class ReloadSpinner( Widget ) :
 
+    spinner_image = StringProperty( 'spinner.png' )
+    '''
+    Set this property to change spinner appearance.
+    '''
+
     root_layout = ObjectProperty( None )
+    '''
+    The spinner will be attached to this layout.
+    ''' 
+    
     diameter = NumericProperty( dp(48) )
-    font_size = NumericProperty( dp(36) )
-    _angle = NumericProperty( 0 )
-    _color = ListProperty( [0,0,0,1] )
+    '''
+    Size of the spinner
+    '''
+
     duracy = NumericProperty( .2 )
+    '''
+    Animation duracy
+    '''
+
+    _angle = NumericProperty( 0 )
 
     def __init__( self, **kargs ) :
         super( ReloadSpinner, self ).__init__( **kargs )
