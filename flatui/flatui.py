@@ -290,6 +290,22 @@ class PopupComboBox( Label ) :
     :attr:`selected` is a :class:`~kivy.properties.ObjectProperty`.
     '''
 
+    selected_color = ListProperty( [ 0.2, 0.65, 0.81, .5 ] )
+    '''Color used to render selected rows.
+
+    .. versionadded:: 1.0
+
+    :attr:`selected_color` is a :class:`~kivy.properties.ListProperty`.
+    '''
+
+    deselected_color = ListProperty( [ 1, 1, 1, 1 ] )
+    '''Color used to render unselected rows.
+
+    .. versionadded:: 1.0
+
+    :attr:`deselected_color` is a :class:`~kivy.properties.ListProperty`.
+    '''
+
     def __init__( self, **kargs ) :
 
         super( PopupComboBox, self ).__init__( **kargs )
@@ -339,8 +355,8 @@ class PopupComboBox( Label ) :
     def adapter_converter( self ) :
         return lambda i, o : { \
             'is_selected'      : o['is_selected'], \
-            'selected_color'   : [ 0.2, 0.65, 0.81, 1 ], \
-            'deselected_color' : [ 1, 1, 1, 1 ], \
+            'selected_color'   : self.selected_color, \
+            'deselected_color' : self.deselected_color, \
             'size_hint_y'      : None, \
             'height'           : self.item_row_height, \
             'text'             : o['label'], \
