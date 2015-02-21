@@ -130,7 +130,7 @@ class RefreshableScrollView( ScrollView ) :
     Size of the spinner
     '''
 
-    spinner_duracy = NumericProperty( .1 )
+    spinner_duracy = NumericProperty( .15 )
     '''
     Spinner entrance\exit animation duracy
     '''
@@ -138,6 +138,11 @@ class RefreshableScrollView( ScrollView ) :
     root_layout = ObjectProperty( None )
     '''
     The spinner will be attached to this layout.
+    ''' 
+
+    spinner_speed = NumericProperty( 12 )
+    '''
+    Angle of rotation per-frame used by the spinner
     ''' 
 
     reload_spinner = ObjectProperty( None )
@@ -158,7 +163,8 @@ class RefreshableScrollView( ScrollView ) :
                 root_layout=self.root_layout,
                 spinner_image=self.spinner_image,
                 diameter=self.spinner_diameter,
-                duracy=self.spinner_duracy
+                duracy=self.spinner_duracy,
+                speed=self.spinner_speed
             )
             self.reload_spinner.start()     
             self._reloading = True
@@ -192,13 +198,18 @@ class ReloadSpinner( Widget ) :
     Animation duracy
     '''
 
+    speed = NumericProperty( 6 )
+    '''
+    Angle of rotation
+    '''
+
     _angle = NumericProperty( 0 )
 
     def __init__( self, **kargs ) :
         super( ReloadSpinner, self ).__init__( **kargs )
     
     def update_animation( self, *args ) :
-        self._angle -= 5
+        self._angle -= self.speed
     
     def start( self ) :
 
@@ -209,7 +220,7 @@ class ReloadSpinner( Widget ) :
 
         animation = Animation( 
             y=self.root_layout.height-2*self.height, 
-            duration=self.duracy*1.5
+            duration=self.duracy
         )
         animation.start( self )         
 
