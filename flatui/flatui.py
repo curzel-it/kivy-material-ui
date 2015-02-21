@@ -257,6 +257,8 @@ class PopupComboBox( Label ) :
     '''
     When a click on this button occur, a popup will be shown to pick a value.
     Arguments named popup_* will be passed down to the popup for customizations.
+
+    To customize ListItemButton selected_color and deselected_color please use kv lang.
     '''
 
     popup = ObjectProperty( None )
@@ -289,22 +291,6 @@ class PopupComboBox( Label ) :
     .. versionadded:: 1.0
 
     :attr:`selected` is a :class:`~kivy.properties.ObjectProperty`.
-    '''
-
-    selected_color = ListProperty( [ .423, 0.647, 0.745, .8] )
-    '''Color used to render selected rows.
-
-    .. versionadded:: 1.0
-
-    :attr:`selected_color` is a :class:`~kivy.properties.ListProperty`.
-    '''
-
-    deselected_color = ListProperty( [ 1, 1, 1, 1 ] )
-    '''Color used to render unselected rows.
-
-    .. versionadded:: 1.0
-
-    :attr:`deselected_color` is a :class:`~kivy.properties.ListProperty`.
     '''
 
     def __init__( self, **kargs ) :
@@ -356,12 +342,12 @@ class PopupComboBox( Label ) :
     def adapter_converter( self ) :
         return lambda i, o : { \
             'is_selected'      : o['is_selected'], \
-            'selected_color'   : self.selected_color, \
-            'deselected_color' : self.deselected_color, \
+#            'selected_color'   : self.selected_color, \
+#            'deselected_color' : self.deselected_color, \
             'size_hint_y'      : None, \
             'height'           : self.item_row_height, \
-            'font_size'        : dp(12), \
-            'font_name'        : self.font_name, \
+#            'font_size'        : dp(12), \
+#            'font_name'        : self.font_name, \
             'text'             : o['label'], \
             'rowid'            : o['rowid'] \
         }
@@ -472,10 +458,6 @@ class FlatPopup(ModalView) :
 
     # Internal properties used for graphical representation.
     _container = ObjectProperty( None )
-
-    # Added for keyboard request
-    password = BooleanProperty( False )
-    keyboard_suggestions =  BooleanProperty( False )
 
     def open(self, *args, **kargs) :
         super( FlatPopup, self ).open( *args, **kargs )

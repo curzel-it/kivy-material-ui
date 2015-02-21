@@ -120,6 +120,16 @@ class NavigationController( BoxLayout ) :
         self._last_args = {'title':'', 'animation':None}
         self._animation = None
         #if self.font_name : self._actiontext.font_name = self.font_name
+        self._bind_keyboard()
+
+    def _bind_keyboard(self) :
+        EventLoop.window.bind( on_key_down=self._on_keyboard_down)
+
+    def _on_keyboard_down( self, window, key, *args ) :
+        if key == 27 : #Escape
+            self.pop()
+            return True
+        return False
 
     def pop( self, *args ) :
         '''
