@@ -77,7 +77,7 @@ class NavigationController( BoxLayout ) :
     Navigation bar height.
     '''
     
-    nav_color = ListProperty( [.32, .18, .7, 1] )
+    nav_color = ListProperty( [.35, .57, .67, 1] )
     '''
     Navigation bar color.
     '''
