@@ -27,9 +27,13 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
 
 from pkg_resources import resource_filename
+
 #KV Files
 path = resource_filename( __name__, 'scroll.kv' )
 Builder.load_file( path )
+
+#Resources
+spinner_image_default = resource_filename( __name__, 'spinner.png' )
 
 
 class _RefreshScrollEffect( ScrollEffect ) :
@@ -116,7 +120,7 @@ class RefreshableScrollView( ScrollView ) :
     Will be called whenever overscroll occurs.
     '''
 
-    spinner_image = StringProperty( 'spinner.png' )
+    spinner_image = StringProperty( spinner_image_default )
     '''
     Set this property to change spinner appearance.
     '''
