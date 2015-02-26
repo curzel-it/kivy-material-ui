@@ -77,12 +77,12 @@ class NavigationController( BoxLayout ) :
     Navigation bar height.
     '''
     
-    nav_color = ListProperty( [ .423, 0.647, 0.745, 1] )
+    nav_color = ListProperty( [ .54, .765, .86, 1] )
     '''
     Navigation bar color.
     '''
 
-    shadow_alpha = NumericProperty( .08 )
+    shadow_alpha = NumericProperty( .065 )
     '''
     Alpha channel for navigation bar shadow.
     '''
