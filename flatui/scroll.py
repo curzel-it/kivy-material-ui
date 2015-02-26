@@ -145,6 +145,11 @@ class RefreshableScrollView( ScrollView ) :
     Angle of rotation per-frame used by the spinner
     ''' 
 
+    spinner_shadow_alpha = NumericProperty( .05 )
+    '''
+    Value of the shadow alpha channel.
+    ''' 
+
     reload_spinner = ObjectProperty( None )
     '''
     Spinner widget reference used internally
@@ -162,6 +167,7 @@ class RefreshableScrollView( ScrollView ) :
             self.reload_spinner = ReloadSpinner( 
                 root_layout=self.root_layout,
                 spinner_image=self.spinner_image,
+                shadow_alpha=self.spinner_shadow_alpha,
                 diameter=self.spinner_diameter,
                 duracy=self.spinner_duracy,
                 speed=self.spinner_speed
@@ -182,6 +188,11 @@ class ReloadSpinner( Widget ) :
     '''
     Set this property to change spinner appearance.
     '''
+
+    shadow_alpha = NumericProperty( .05 )
+    '''
+    Value of the shadow alpha channel.
+    ''' 
 
     root_layout = ObjectProperty( None )
     '''
