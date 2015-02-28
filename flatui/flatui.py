@@ -114,7 +114,7 @@ class _MateriaButton( ButtonBehavior, labels.BindedLabel ) :
     :attr:`icon` is a :class:`~kivy.properties.StringProperty`, default to ''.
     '''
 
-    shadow_alpha = NumericProperty( 0.5 )
+    shadow_alpha = NumericProperty( 0.05 )
     '''Alpha channel used to render the rgba shadow.
 
     .. versionadded:: 1.0
@@ -179,14 +179,6 @@ class FloatingAction( _MateriaButton ) :
     .. versionadded:: 1.0
 
     :attr:`shadow_offset_y` is a :class:`~kivy.properties.NumericProperty`, default to 1.
-    '''
-
-    shadow_ratio = NumericProperty( 1.03 )
-    '''Used to get a bigger shadow.
-
-    .. versionadded:: 1.0
-
-    :attr:`shadow_ratio` is a :class:`~kivy.properties.NumericProperty`, default to 1.03.
     '''
 
     animation_duracy = NumericProperty( .1 )

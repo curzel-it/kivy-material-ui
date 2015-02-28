@@ -34,22 +34,44 @@
     
     width: self.diameter
     height: self.diameter
+    shadow_alpha: 0.07
 
 	canvas.before:
-
         PushMatrix:
         Translate:
             x: root.center_x
             y: root.center_y
+
+
+    #Shadow
+
+        PushMatrix:
+        Translate:
+            x: -root.diameter/2+root.shadow_offset_x
+            y: -root.diameter/2-root.shadow_offset_y
         
-		#Shadow
 		Color:
             rgba: [ 0.3, 0.3, 0.3, root.shadow_alpha if root.state != 'down' else 0 ]
-		Ellipse:
-			size: root.diameter*root.shadow_ratio, root.diameter*root.shadow_ratio
-			pos: -root.diameter*root.shadow_ratio/2+root.shadow_offset_x, -root.diameter*root.shadow_ratio/2-root.shadow_offset_y
 
-		#Content
+		Ellipse:
+			size: root.diameter+dp(1), root.diameter+dp(1)
+			pos: 0, 0
+		Ellipse:
+			size: root.diameter+dp(2), root.diameter+dp(2)
+			pos: -dp(1), -dp(1)
+		Ellipse:
+			size: root.diameter+dp(3), root.diameter+dp(3)
+			pos: -dp(1.5), -dp(1.5)
+		Ellipse:
+			size: root.diameter+dp(4), root.diameter+dp(4)
+			pos: -dp(2), -dp(2)
+		Ellipse:
+			size: root.diameter+dp(5), root.diameter+dp(5)
+			pos: -dp(2.5), -dp(2.5)
+
+        PopMatrix:
+    
+	#Content
 		Color:
             rgba: ( root.background_color if root.state == 'normal' else root.background_color_down ) if not root.disabled else root.background_color_disabled
 		Ellipse:
