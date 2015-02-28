@@ -34,7 +34,7 @@
     
     width: self.diameter
     height: self.diameter
-    shadow_alpha: 0.06
+    shadow_alpha: 0.05
 
 	canvas.before:
         PushMatrix:
@@ -55,7 +55,7 @@
 
 		Ellipse:
 			size: root.diameter+dp(1), root.diameter+dp(1)
-			pos: 0, 0
+			pos: -dp(0.5), -dp(0.5)
 		Ellipse:
 			size: root.diameter+dp(2), root.diameter+dp(2)
 			pos: -dp(1), -dp(1)
