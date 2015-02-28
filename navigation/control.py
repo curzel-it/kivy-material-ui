@@ -116,19 +116,31 @@ class NavigationController( BoxLayout ) :
 
     def __init__( self, **kargs ) :
         super( NavigationController, self ).__init__( **kargs )
+        self._keyboard_show = False
+        self._keyboard_just_show = False
         self._has_root = False
         self._last_args = {'title':'', 'animation':None}
         self._animation = None
-        #if self.font_name : self._actiontext.font_name = self.font_name
         self._bind_keyboard()
 
     def _bind_keyboard(self) :
-        EventLoop.window.bind( on_key_down=self._on_keyboard_down)
+        EventLoop.window.bind( on_keyboard=self._on_keyboard_show )
+        EventLoop.window.bind( on_key_down=self._on_keyboard_down )
+
+    def _on_keyboard_show( self, *args ) :
+        self._keyboard_show = True
 
     def _on_keyboard_down( self, window, key, *args ) :
+
+        if self._keyboard_show : 
+            self._keyboard_show = False
+            EventLoop.window.release_all_keyboards()
+            return True
+
         if key == 27 : #Escape
             self.pop()
             return True
+
         return False
 
     def pop( self, *args ) :
