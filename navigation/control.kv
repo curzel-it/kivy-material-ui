@@ -43,7 +43,7 @@
         BindedLabel:
             id: actiontext
             text: root.title
-            font_name: root.font_name
+            font_name: root.font_name if root.font_name else 'DroidSans'
             font_size: root.font_size
             halign: 'left'
             valign: 'middle'

@@ -1,0 +1,60 @@
+#:kivy 1.8
+
+#Set default font to Roboto
+<Label>:
+    font_name: '../font/Roboto-Light.ttf'
+
+<Button>:
+    font_name: '../font/Roboto-Light.ttf'
+
+<TextInput>:
+    font_name: '../font/Roboto-Light.ttf'
+
+
+<RaisedButton>:
+    color: ( .067, .067, .067, 1 )
+
+<Popup>:
+    separator_height: 1
+    separator_color: [ 0.26, 0.69, 0.84, 1 ]
+    title_color: [ 0.26, 0.69, 0.84, 1 ]
+    title_font: '../font/Roboto-Light.ttf'
+    title_align: 'center'
+#    background: 'transparent.png'
+
+<FlatPopup>:
+    title_font: '../font/Roboto-Light.ttf'
+    title_align: 'center'
+#    background: 'transparent.png'
+
+<ListItemButton>:
+    font_name: '../font/Roboto-Light.ttf' if not self.is_selected else '../font/Roboto-Medium.ttf'
+    font_size: dp(15)
+    color: [ .423, 0.647, 0.745, 1]  if not self.is_selected else ( 1, 1, 1, 1 )
+    selected_color: [ .423, 0.647, 0.745, 1] 
+    deselected_color: [ 1, 1, 1, 1 ]
+
+[AccordionItemTitle@Label]:
+    text: ctx.title
+    font_name: '../font/Roboto-Light.ttf' if ctx.item.collapse else '../font/Roboto-Medium.ttf'
+    font_size: 20
+    color: [ .17, .17, .17, 1 ] if ctx.item.collapse else ( 1, 1, 1, 1 )
+
+    canvas.before:
+        Color:
+            rgb: 1, 1, 1
+        BorderImage:
+            source:
+                ctx.item.background_normal if ctx.item.collapse else ctx.item.background_selected
+            pos: self.pos
+            size: self.size
+        PushMatrix
+        Translate:
+            xy: self.center_x, self.center_y
+        Rotate:
+            angle: 90 if ctx.item.orientation == 'horizontal' else 0
+            axis: 0, 0, 1
+        Translate:
+            xy: -self.center_x, -self.center_y
+    canvas.after:
+        PopMatrix

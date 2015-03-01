@@ -1,0 +1,43 @@
+#:kivy 1.8
+
+<ErrorForm>:
+    size: root.size
+    pos: root.pos
+    orientation: 'vertical'
+
+    Image:
+        size_hint: (1,None)
+        height: dp(128)
+        source: root.icon
+        pos: root.size[0]/2-sp(64), root.size[1]-dp(128)
+        size: dp(128), dp(128)
+
+    Label:
+        text: root.texth2
+        font_size: dp(21)
+        color: 0, 0, 0, .7
+        halign: 'center'
+        size_hint: (None,None)
+        width: root.width - dp(20)
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+
+    Label:
+        text: root.details
+        font_size: dp(16)
+        color: 0, 0, 0, .7
+        halign: 'center'
+        size_hint: (None,None)
+        width: root.width - dp(20)
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+
+    Label:
+        color: 0, 0, 0, .4
+        text: root.strace
+        halign: 'center'
+        valign: 'top'
+        font_size: dp(13)
+        size_hint: (1,1)
