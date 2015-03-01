@@ -9,16 +9,12 @@
 
         PushMatrix:
         
-        #Rotation
+    #Image center
         Translate:
             x: self.center_x
             y: self.center_y
-        Rotate:
-            angle: root._angle
-            axis: 0, 0, 1
-            origin: 0, 0
             
-        #Shadow
+    #Shadow
         Color:
             rgba: 0, 0, 0, root.shadow_alpha
         Ellipse:
@@ -27,23 +23,40 @@
         Ellipse:
             size: root.diameter*1.15, root.diameter*1.15
             pos: -root.diameter*1.15/2, -root.diameter*1.15/2
-#        Ellipse:
-#            size: root.diameter*1.2, root.diameter*1.2
-#            pos: -root.diameter*1.2/2, -root.diameter*1.2/2
 
-        #White background
+    #White background
 		Color:
             rgba: 1, 1, 1, 1
 		Ellipse:
 		    pos: -root.diameter/2, -root.diameter/2   
 		    size: root.diameter, root.diameter
 
-        #Content
+    #Rotation
+        Rotate:
+            angle: root.angle
+            axis: 0, 0, 1
+            origin: 0, 0
+
+
+<ImageSpinner>:
+
+    canvas.after:
+
+    #Content
         Rectangle:
 		    pos: -root.diameter*1.1/2, -root.diameter*1.1/2   
 		    size: root.diameter*1.1, root.diameter*1.1
             source: root.spinner_image
-
-    canvas.after:
         PopMatrix:
 
+<LollipopSpinner>:
+
+    canvas.after:
+
+    #Content
+        Color:
+            rgba: root.color
+        Line:
+            width: dp(1.5)
+		    circle: 0, 0, root.diameter/4, 0, self.angle2
+        PopMatrix:

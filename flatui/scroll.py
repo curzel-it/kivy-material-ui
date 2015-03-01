@@ -112,12 +112,20 @@ class RefreshableScrollView( ScrollView ) :
     This is a very simple subclass of ScrollView.
     When the user does overscroll the view, a 'ReloadSpinner' is shown.
     You will need to call 'reload_done' once you've dove your loading.
-    A ReloadSpinner widget will be added to the root_layout.    
+    A ReloadSpinner widget will be added to the root_layout (you can choose ReloadSpinner class to use).
     '''
 
     on_start_reload = ObjectProperty( None )
     '''
     Will be called whenever overscroll occurs.
+    '''
+    
+    spinner_class = StringProperty( 'LollipopSpinner' )
+    '''
+    Different class means a different effect.
+    For a spinning image, for example, use ImageSpinner.
+    By default class is 'LollipopSpinner', based on the latest android GMail app spinner.
+    Class loading is done using eval, be careful.
     '''
 
     spinner_image = StringProperty( spinner_image_default )
@@ -164,7 +172,7 @@ class RefreshableScrollView( ScrollView ) :
     def on_touch_up( self, *args ) :
         if self._did_overscroll and not self._reloading :
             if self.on_start_reload : self.on_start_reload()
-            self.reload_spinner = ReloadSpinner( 
+            self.reload_spinner = self._spinner_class()( 
                 root_layout=self.root_layout,
                 spinner_image=self.spinner_image,
                 shadow_alpha=self.spinner_shadow_alpha,
@@ -181,8 +189,18 @@ class RefreshableScrollView( ScrollView ) :
         self._reloading = False
         if self.reload_spinner : self.reload_spinner.stop()
     
+    def _spinner_class( self ) :
+        return eval( self.spinner_class ) 
+
 
 class ReloadSpinner( Widget ) :
+    '''
+    Override this class if you want a custom spinner.
+    There are fiew thigs to now :
+        - Canvas is centered in the spinner center!
+        - You need to PopMatrix when you're done drawing content
+    See scroll.kv for more informations.
+    '''
 
     spinner_image = StringProperty( 'spinner.png' )
     '''
@@ -201,26 +219,36 @@ class ReloadSpinner( Widget ) :
     
     diameter = NumericProperty( dp(48) )
     '''
-    Size of the spinner
+    Size of the spinner.
     '''
 
     duracy = NumericProperty( .2 )
     '''
-    Animation duracy
+    Animation duracy.
     '''
 
     speed = NumericProperty( 6 )
     '''
-    Angle of rotation
+    Angle of rotation increment.
     '''
 
-    _angle = NumericProperty( 0 )
+    angle = NumericProperty( 0 )
+    '''
+    Current rotation.
+    '''
+    
+    on_update_animation = ObjectProperty( None )
+    '''
+    Called after update_animation.
+    '''
 
     def __init__( self, **kargs ) :
         super( ReloadSpinner, self ).__init__( **kargs )
     
     def update_animation( self, *args ) :
-        self._angle -= self.speed
+        self.angle += self.speed
+        if self.angle >= 360 : self.angle = 0
+        if self.on_update_animation : self.on_update_animation( self, *args )
     
     def start( self ) :
 
@@ -235,7 +263,7 @@ class ReloadSpinner( Widget ) :
         )
         animation.start( self )         
 
-        self._angle = 0
+        self.angle = 0
         self._hex = 0
         self._color = 0, 0, 0, 1 
         self.root_layout.add_widget( self )
@@ -256,10 +284,50 @@ class ReloadSpinner( Widget ) :
         Clock.unschedule( self.update_animation )
 
 
+class ImageSpinner( ReloadSpinner ) :
+    '''
+    Based on the default spinner, kv lang provides image rendering.
+    '''
+    pass
 
 
+class LollipopSpinner( ReloadSpinner ) :
+    '''
+    Based on the android gmail app spinner.
+    '''
 
+    color = ListProperty( [ 0, 0, 0, 1 ] )
+    '''
+    Current color of the inner arrow.
+    '''
 
+    angle2 = NumericProperty( 0 )
+    '''
+    Secon angle of rotation, will move slower.
+    '''
+
+    colors = ListProperty( [ [.051,.635,.376,1], [.867,.314,.267,1], [.227,.494,.953,1], [.969,.773,.253,1] ] )
+    '''
+    Colors to use.
+    '''
+
+    def __init__( self, **kargs ) :
+        self._current_color = 0
+        self.color = self.colors[ self._current_color ]     
+
+        kargs['on_update_animation'] = self.update_angle2
+        kargs['speed'] = 12
+        super( LollipopSpinner, self ).__init__( **kargs )
+
+    def update_angle2( self, *args ) :
+        self.angle2 -= self.speed / 2.0
+        if abs(self.angle2) == 360 : self.angle2 = 0
+
+        if self.angle == self.angle2 == 0 :
+            self._current_color += 1
+            if self._current_color == len( self.colors ) : self._current_color = 0
+            self.color = self.colors[ self._current_color ]     
+        
 
 
 
