@@ -65,7 +65,7 @@ class FlatTextInput( TextInput ) :
         super( FlatTextInput, self ).__init__( **kargs )
 
 
-class _MateriaButton( ButtonBehavior, labels.BindedLabel ) :
+class _MaterialButton( ButtonBehavior, labels.BindedLabel ) :
     '''
     Replacement for Button class, just more flexible...
     '''
@@ -133,17 +133,17 @@ class _MateriaButton( ButtonBehavior, labels.BindedLabel ) :
     def __init__( self, **kargs ) :
         if not 'valign' in kargs.keys() : kargs['valign'] = 'middle'
         if not 'halign' in kargs.keys() : kargs['halign'] = 'center'
-        super( _MateriaButton, self ).__init__( **kargs )
+        super( _MaterialButton, self ).__init__( **kargs )
 
 
-class FlatButton( _MateriaButton ) :
+class FlatButton( _MaterialButton ) :
     '''
     Material UI flat button.
     '''
 
     pass
 
-class RaisedButton( _MateriaButton ) :
+class RaisedButton( _MaterialButton ) :
     '''
     Material UI raised button.
     '''
@@ -151,7 +151,7 @@ class RaisedButton( _MateriaButton ) :
     pass
 
 
-class FloatingAction( _MateriaButton ) :
+class FloatingAction( _MaterialButton ) :
     '''
     Round button with frame.
     '''
@@ -450,6 +450,12 @@ class FlatPopup(ModalView) :
 
     # Internal properties used for graphical representation.
     _container = ObjectProperty( None )
+
+    def __init__( self, **kargs ) :
+
+        if not 'separator_height' in kargs.keys() : 
+            kargs['separator_height'] = 0
+        super( FlatPopup, self ).__init__( **kargs )
 
     def open(self, *args, **kargs) :
         super( FlatPopup, self ).open( *args, **kargs )

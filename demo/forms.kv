@@ -1,0 +1,129 @@
+<Label>:
+    color: 0, 0, 0, .8
+    font_size: dp(15)
+    font_name: 'font/Roboto-Light.ttf'
+
+<FlatTextInput>:
+    font_size: dp(15)
+    font_name: 'font/Roboto-Light.ttf'
+
+    
+<Screen1>:
+    title: 'UI Elements'    
+    orientation: 'vertical'
+
+# FlatTextInput
+
+    Label:
+        text: '- FlatTextInput -'
+        font_size: dp(18)
+
+    BoxLayout:
+        orientation: 'horizontal'  
+        padding: dp(20), dp(20)
+
+        FlatTextInput:
+            text: 'Red cursor'
+            cursor_color: 1, 0, 0, 1
+
+        FlatTextInput:
+            text: 'Blue cursor'
+            cursor_color: 0, 0, 1, 1
+
+        FlatTextInput:
+            text: 'Gree cursor'
+            cursor_color: 0, 1, 0, 1
+
+# Buttons
+
+    Label:
+        text: '- FlatButton and RaisedButton -'
+        font_size: dp(18)
+
+    BoxLayout:
+        orientation: 'horizontal'   
+        padding: dp(20), dp(20)
+        spacing: dp(20)
+
+        FlatButton:
+            text: 'Flat button'
+            font_size: dp(15)
+            font_name: 'font/Roboto-Bold.ttf'
+            color: 0, 0, 0, .8
+            color_down: .5, 0, 0, .8
+
+        FlatButton:
+            text: 'Colored text'
+            font_size: dp(15)
+            font_name: 'font/Roboto-Bold.ttf'
+            color: 0, 0, 0, .8
+            color_down: 0, .5, 0, .8
+
+        RaisedButton:
+            text: "Raised button"
+            font_size: dp(15)
+            font_name: 'font/Roboto-Bold.ttf'
+
+        RaisedButton:
+            text: "Rounded edges"
+            font_size: dp(15)
+            font_name: 'font/Roboto-Bold.ttf'
+
+# Popups
+
+    Label:
+        text: '- Popups -'
+        font_size: dp(18)
+
+    BoxLayout:
+        orientation: 'horizontal'   
+        padding: dp(20), dp(20)
+        spacing: dp(30)
+
+        RaisedButton:
+            text: "Flat popup"
+            on_press: root.show_flat_popup()
+
+        RaisedButton:
+            text: "Alert popup"
+            on_press: root.show_alert_popup()
+
+        RaisedButton:
+            text: "Ok button popup"
+            on_press: root.show_okbutton_popup()
+
+# Next
+
+    BoxLayout:
+        orientation: 'horizontal'   
+        padding: dp(20), dp(20)
+        spacing: dp(30)
+
+        RaisedButton:
+            text: "Next page >"
+            on_press: root.next_page()
+
+      
+<Screen2>:
+    title: 'Refreshable ScrollView'    
+
+
+<Screen3>:
+    title: 'Just an empty screen'    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

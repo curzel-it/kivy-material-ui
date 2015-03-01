@@ -12,19 +12,19 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
 
-from dashboard import DashBoardForm
+from demo.forms import Screen1
 from navigation.control import *
 
-Builder.load_file( 'commons.kv' )
+Builder.load_file( 'demo/commons.kv' )
 
 class TestApp( App ) :
     
     def build( self ) :
         self.nav = NavigationController( 
             push_mode='left',
-            font_name='../font/Roboto-Regular.ttf'
+            font_name='font/Roboto-Regular.ttf'
         )
-        DashBoardForm( shared_navigation_controller=self.nav ).push() 
+        Screen1( shared_navigation_controller=self.nav ).push() 
         return self.nav
 
 if __name__ == '__main__':
