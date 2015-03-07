@@ -1,5 +1,6 @@
+#===============================================================================
 <ReloadSpinner>:
-
+#===============================================================================
     size_hint: None, None
     width: self.diameter
     height: self.diameter
@@ -20,9 +21,6 @@
         Ellipse:
             size: root.diameter*1.1, root.diameter*1.1
             pos: -root.diameter*1.1/2, -root.diameter*1.1/2
-        Ellipse:
-            size: root.diameter*1.15, root.diameter*1.15
-            pos: -root.diameter*1.15/2, -root.diameter*1.15/2
 
     #White background
 		Color:
@@ -38,8 +36,9 @@
             origin: 0, 0
 
 
+#===============================================================================
 <ImageSpinner>:
-
+#===============================================================================
     canvas.after:
 
     #Content
@@ -49,8 +48,9 @@
             source: root.spinner_image
         PopMatrix:
 
+#===============================================================================
 <LollipopSpinner>:
-
+#===============================================================================
     canvas.after:
 
     #Content
