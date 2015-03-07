@@ -314,6 +314,7 @@ class PopupComboBox( Label ) :
             self.text = '[ref=main]%s[/ref]' % ( text ) 
 
     def build_list_data( self, data ) :
+        print(data)
         if len( data ) > 0 :
             if data[0].__class__ == str :
                 l2dict = [ {'is_selected':False,'rowid':0,'label':x} for x in data ]
