@@ -198,8 +198,18 @@ class FloatingAction( _MaterialButton ) :
 
     def __init__( self, **kargs ) :
 
+        if not 'diameter' in kargs.keys() : 
+            kargs[ 'diameter' ] = dp(56)
+
         if not 'color' in kargs.keys() : 
             kargs[ 'color' ] = [ 1, 1, 1, 1 ]
+
+        if not 'background_color' in kargs.keys() : 
+            kargs[ 'background_color' ] = [ 0.9, 0.2, 0.15, 1 ]
+
+        if not 'background_color_down' in kargs.keys() : 
+            kargs[ 'background_color_down' ] = [ 0.9, 0.3, 0.2, 1 ]
+
         super( FloatingAction, self ).__init__( **kargs )
 
     def add_to_bottom_right( self, parent ) : 
@@ -314,7 +324,6 @@ class PopupComboBox( Label ) :
             self.text = '[ref=main]%s[/ref]' % ( text ) 
 
     def build_list_data( self, data ) :
-        print(data)
         if len( data ) > 0 :
             if data[0].__class__ == str :
                 l2dict = [ {'is_selected':False,'rowid':0,'label':x} for x in data ]
