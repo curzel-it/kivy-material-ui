@@ -49,3 +49,19 @@ Use RefreshableScrollView for that.
 Just like you would do with overscroll effects, you can assign different reloading animations.  
 
 The default animation for RefreshableScrollView is LollipopSpinner, based on gapps spinners.
+
+
+### Some screenshots
+Those are taken from demo.py, using forms and a navigation controller.  
+
+#### Some flat widgets
+![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/demo/screenshots/ui.png)
+
+#### Scrollview during realod
+![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/demo/screenshots/list-realod.png)
+
+#### Flat popups
+![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/demo/screenshots/popup1.png)
+
+#### Sample error form 
+![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/demo/screenshots/nonetwork.png)
