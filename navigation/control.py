@@ -21,7 +21,14 @@ from pkg_resources import resource_filename
 path = resource_filename( __name__, 'control.kv' )
 Builder.load_file( path )
 
-#icon_back_32 = resource_filename( __name__, 'images/backbutton.png' )
+class EmptyNavigationStack( Exception ) :
+    '''
+    Raised whenever you pop with an empty navigation stack.
+    '''
+    def __init__( self ) :
+        super( EmptyNavigationStack, self ).__init__(
+            'Cannot pop view, navigation stack is empty'
+        )
 
 class NavigationController( BoxLayout ) :
     '''
@@ -124,26 +131,6 @@ class NavigationController( BoxLayout ) :
         self._animation = None
         self._bind_keyboard()
 
-    def _bind_keyboard(self) :
-        EventLoop.window.bind( on_keyboard=self._on_keyboard_show )
-        EventLoop.window.bind( on_key_down=self._on_keyboard_down )
-
-    def _on_keyboard_show( self, *args ) :
-        self._keyboard_show = True
-
-    def _on_keyboard_down( self, window, key, *args ) :
-
-        if self._keyboard_show : 
-            self._keyboard_show = False
-            EventLoop.window.release_all_keyboards()
-            return True
-
-        if key == 27 : #Escape
-            self.pop()
-            return True
-
-        return False
-
     def pop( self, *args ) :
         '''
         Use this to go back to the last view.
@@ -168,13 +155,37 @@ class NavigationController( BoxLayout ) :
                 Navigation bar title, default ''.
         '''
             
-#        pdb.set_trace()
         if self._animation is None :
             if not 'title' in kargs.keys() : kargs['title'] = ''
             self._last_kargs = kargs
             x = -1 if self.push_mode == 'left' else 1
             self._save_temp_view( x, view )
             self._run_push_animation()
+
+
+#================================================================================
+# Private stuff of various use...
+#================================================================================
+
+    def _bind_keyboard(self) :
+        EventLoop.window.bind( on_keyboard=self._on_keyboard_show )
+        EventLoop.window.bind( on_key_down=self._on_keyboard_down )
+
+    def _on_keyboard_show( self, *args ) :
+        self._keyboard_show = True
+
+    def _on_keyboard_down( self, window, key, *args ) :
+
+        if self._keyboard_show : 
+            self._keyboard_show = False
+            EventLoop.window.release_all_keyboards()
+            return True
+
+        if key == 27 : #Escape
+            self.pop()
+            return True
+
+        return False
 
     def _run_push_animation( self ) :
         try : 
@@ -202,7 +213,6 @@ class NavigationController( BoxLayout ) :
 
         self.stack.append( [ self.root_widget, self._last_kargs ] )
         self.root_widget = self._temp_view
-#        self.root_widget.nav = self
         self._clear_temp_view()
         self.content.add_widget( self.root_widget )
         self._has_root = True
@@ -240,21 +250,4 @@ class NavigationController( BoxLayout ) :
         self.actionprev.text = ' < ' if has_previous else ''
         #self.actionprev.icon = icon_back_32 if has_previous else ''
         self.actionprev.disabled = not has_previous
-
-
-class EmptyNavigationStack( Exception ) :
-    def __init__( self ) :
-        super( EmptyNavigationStack, self ).__init__(
-            'Cannot pop view, navigation stack is empty'
-        )
-
-#================================================================================
-# Private stuff of various use...
-#================================================================================
-
-def _navbar_args( kargs ) :
-    result = {}
-    for key in filter( lambda k:k.startswith('navbar_'), kargs.keys() ) :
-        result[ key.replace('navbar_','') ] = kargs[key]
-    return result
 
