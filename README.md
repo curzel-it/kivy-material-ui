@@ -25,9 +25,9 @@ Flat version of the standard TextInput.
 Supports cursor color and underlined text while editing.
 
 #### Material UI buttons
-* Raised button, transparent background and support to text colors.
-* Flat button, supports background and text colors, icons, and shadow.
-* Floating action, round button with shadow, supports shadow and colors
+* **Raised button**, transparent background and support to text colors.
+* **Flat button**, supports background and text colors, icons, and shadow.
+* **Floating action**, round button with shadow, supports shadow and colors
 
 #### Popups
 I've simply copy-pasted from kivy.uix.popup to create a class named FlatPopup, there are just a fiew more properties, such as *text_align* and *text_font*.
