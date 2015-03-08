@@ -12,9 +12,9 @@ from kivy.uix.spinner import Spinner
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.widget import Widget
 
-from flatui.flatui import *
-from flatui.labels import *
-from flatui.popups import *
+from material_ui.flatui.flatui import *
+from material_ui.flatui.labels import *
+from material_ui.flatui.popups import *
 
 from pkg_resources import resource_filename
 #KV Files

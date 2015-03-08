@@ -13,13 +13,13 @@ from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 
-from navigation.form import Form
-from navigation.error import ErrorForm
-from navigation.nonetwork import NoNetworkForm
+from material_ui.navigation.form import Form
+from material_ui.navigation.error import ErrorForm
+from material_ui.navigation.nonetwork import NoNetworkForm
 
-from flatui.flatui import FlatPopup, FloatingAction
-from flatui.popups import AlertPopup, OkButtonPopup
-from flatui.scroll import RefreshableScrollView
+from material_ui.flatui.flatui import FlatPopup, FloatingAction
+from material_ui.flatui.popups import AlertPopup, OkButtonPopup
+from material_ui.flatui.scroll import RefreshableScrollView
 
 #KV Lang files
 from pkg_resources import resource_filename

@@ -7,6 +7,8 @@ setup(
     url         ='https://github.com/Cuuuurzel/kivy-material-ui',
     author      ='Federico Curzel',
     author_email='cuuuurzel@gmail.com',
-    packages    =['material_ui'],
-    zip_safe    =False
+    packages    =['material_ui.flatui', 'material_ui.navigation'],
+    zip_safe    =False,
+    install_requires=['kivy'],
+    include_package_data=True,
 )

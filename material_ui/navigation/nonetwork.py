@@ -10,7 +10,7 @@ from kivy.metrics import dp
 from kivy.properties import *
 from kivy.uix.boxlayout import BoxLayout
 
-from navigation.error import ErrorForm
+from material_ui.navigation.error import ErrorForm
 
 from pkg_resources import resource_filename
 icon = resource_filename( __name__, '../images/nonetwork.png' )

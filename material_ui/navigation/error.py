@@ -9,7 +9,7 @@ from kivy.metrics import dp
 from kivy.properties import *
 from kivy.uix.boxlayout import BoxLayout
 
-from navigation.form import Form
+from material_ui.navigation.form import Form
 
 #KV Lang files
 from pkg_resources import resource_filename
