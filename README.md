@@ -3,10 +3,18 @@ Bunch of classes, layouts and images I use in my projects.
 For graphical objects I've tried to follow Google's Materia UI guidelines.  
 Also, I've tried to keep the project documented and clean...  
 
-### Custom kivy theme
+### Usage
+* **Override Kivy default theme**
 You will need to replace the 'defaulttheme-0.png' with mine.  
 ( Path is ~kivy/data/images )  
-  
+* **Copy folders to your project** 
+The development is still in early stages, so I didn't create python package yet.  
+* **Import files** 
+
+### Custom kivy theme
+I've poorly customized kivy's defaulttheme-0.png to have more white and rounded edges.  
+It's not artwork but looks quite good to me.  
+
 ### Navigation system 
 I've implemented a basic ios-like navigation system.  
 You will need to put a NavigationController widget as top widget in your app, this will provide :  
