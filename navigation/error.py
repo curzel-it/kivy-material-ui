@@ -14,6 +14,7 @@ from navigation.form import Form
 #KV Lang files
 from pkg_resources import resource_filename
 path = resource_filename( __name__, 'error.kv' )
+icon = resource_filename( __name__, '../images/awsnap.png' )
 Builder.load_file( path )
 
 class ErrorForm( Form ) :
@@ -21,7 +22,7 @@ class ErrorForm( Form ) :
     texth1  = StringProperty( 'Generic error' )
     texth2  = StringProperty( "We're sorry, but this is bad :/" )
     strace  = StringProperty( '' )
-    icon    = StringProperty( 'awsnap.png' )
+    icon    = StringProperty( icon )
     details = StringProperty( """
 If you see this page the software got an error and causes are unknown.
 """ )  

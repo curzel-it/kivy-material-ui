@@ -11,6 +11,9 @@ from kivy.uix.boxlayout import BoxLayout
 
 from error import ErrorForm
 
+from pkg_resources import resource_filename
+icon = resource_filename( __name__, '../images/nonetwork.png' )
+
 class NoNetworkForm( ErrorForm ) :
 
     def __init__( self, **kargs ) :
@@ -18,7 +21,7 @@ class NoNetworkForm( ErrorForm ) :
         kargs['texth1' ] = kargs['texth1' ] if 'texth1'  in kargs.keys() else 'You might be offline... Or server is down'
         kargs['details'] = kargs['details'] if 'details' in kargs.keys() else 'Please check your internet connection.'
         kargs['strace' ] = kargs['strace' ] if 'strace'  in kargs.keys() else ''
-        kargs['icon'   ] = kargs['icon'   ] if 'icon'    in kargs.keys() else 'nonetwork.png'
+        kargs['icon'   ] = kargs['icon'   ] if 'icon'    in kargs.keys() else icon
         super( NoNetworkForm, self ).__init__( **kargs )
         if not 'title' in kargs.keys() : self.title = 'Network problems'
 

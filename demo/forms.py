@@ -24,6 +24,7 @@ from flatui.scroll import RefreshableScrollView
 #KV Lang files
 from pkg_resources import resource_filename
 path = resource_filename( __name__, 'forms.kv' )
+icon_done = resource_filename( __name__, '../images/done-32.png' )
 Builder.load_file( path )
 
 
@@ -131,7 +132,7 @@ class Screen2( Form ) :
     def on_push( self, controller ) :
 
         self.fbutton = FloatingAction(
-            icon='demo/done-32.png',
+            icon=icon_done,
             diameter=dp(56),
             size_hint=(None,None),
             background_color=( 1, .1, .1, 1 ),
