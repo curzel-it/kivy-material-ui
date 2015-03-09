@@ -13,7 +13,7 @@ from kivy.uix.boxlayout import BoxLayout
 from material_ui.navigation.error import ErrorForm
 
 from pkg_resources import resource_filename
-icon = resource_filename( __name__, '../images/nonetwork.png' )
+icon = resource_filename( __name__, 'images/nonetwork.png' )
 
 class NoNetworkForm( ErrorForm ) :
 

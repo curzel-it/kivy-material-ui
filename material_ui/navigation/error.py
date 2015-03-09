@@ -14,7 +14,7 @@ from material_ui.navigation.form import Form
 #KV Lang files
 from pkg_resources import resource_filename
 path = resource_filename( __name__, 'error.kv' )
-icon = resource_filename( __name__, '../images/awsnap.png' )
+icon = resource_filename( __name__, 'images/awsnap.png' )
 Builder.load_file( path )
 
 class ErrorForm( Form ) :

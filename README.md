@@ -4,12 +4,8 @@ For graphical objects I've tried to follow Google's Materia UI guidelines.
 Also, I've tried to keep the project documented and clean...  
 
 ### Usage
-* **Override Kivy default theme**
-You will need to replace the 'defaulttheme-0.png' with mine.  
-( Path is ~kivy/data/images )  
-* **Copy folders to your project** 
-The development is still in early stages, so I didn't create python package yet.  
-* **Import files** 
+* Run python setup.py install
+* Override kivy default theme
 
 ### Custom kivy theme
 I've poorly customized kivy's defaulttheme-0.png to have more white and rounded edges.  
