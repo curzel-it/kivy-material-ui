@@ -119,18 +119,20 @@ class RefreshableScrollView( ScrollView ) :
         self._did_overscroll = False
 
     def on_touch_up( self, *args ) :
+
         if self._did_overscroll and not self._reloading :
+
             if self.on_start_reload : self.on_start_reload()
             self.reload_spinner = self._spinner_class()( 
-                root_layout=self.root_layout,
-                spinner_image=self.spinner_image,
-                shadow_alpha=self.spinner_shadow_alpha,
-                diameter=self.spinner_diameter,
-                duracy=self.spinner_duracy,
-                speed=self.spinner_speed
+                root_layout   = self.root_layout,
+                spinner_image = self.spinner_image,
+                shadow_alpha  = self.spinner_shadow_alpha,
+                diameter      = self.spinner_diameter,
+                duracy        = self.spinner_duracy,
+                speed         = self.spinner_speed
             )
             self.reload_spinner.start()     
-            self._reloading = True
+            self._reloading      = True
             self._did_overscroll = False
             return True
         
@@ -205,7 +207,7 @@ class ReloadSpinner( Widget ) :
 
         self.pos = ( 
             self.root_layout.width/2 - self.width/2, 
-            self.root_layout.height+self.height
+            self.root_layout.height+self.height/2-dp(56)
         )
 
         animation = Animation( 
@@ -269,7 +271,7 @@ class LollipopSpinner( ReloadSpinner ) :
         super( LollipopSpinner, self ).__init__( **kargs )
         self.speed = 12
         self.on_update_animation = self.update_angle2
-        self.angle2 = 0 #180
+        self.angle2 = 0
 
     def update_angle2( self, *args ) :
         self.angle2 -= self.speed
