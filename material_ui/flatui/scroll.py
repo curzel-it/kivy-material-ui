@@ -207,7 +207,7 @@ class ReloadSpinner( Widget ) :
 
         self.pos = ( 
             self.root_layout.width/2 - self.width/2, 
-            self.root_layout.height+self.height/2-dp(56)
+            self.root_layout.height+self.height-dp(56)
         )
 
         animation = Animation( 

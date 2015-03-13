@@ -115,6 +115,10 @@ class NavigationController( BoxLayout ) :
     FloatingLayout you can use for any pourpose.
     '''
 
+    splash_image = StringProperty( None )
+    '''
+    Image used as splash screen.
+    '''
     #Private stuffs...
     _push_cache = ListProperty( [] )
     _actionprev = ObjectProperty( None )
@@ -129,7 +133,7 @@ class NavigationController( BoxLayout ) :
         self._has_root = False
         self._last_args = {'title':'', 'animation':None}
         self._animation = None
-        self._bind_keyboard()
+        self._bind_keyboard()        
 
     def pop( self, *args ) :
         '''
