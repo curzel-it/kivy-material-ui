@@ -266,12 +266,13 @@ class LollipopSpinner( ReloadSpinner ) :
         self._current_color = 0
         self.color = self.colors[ self._current_color ]     
 
-        kargs['on_update_animation'] = self.update_angle2
-        kargs['speed'] = 15
         super( LollipopSpinner, self ).__init__( **kargs )
+        self.speed = 12
+        self.on_update_animation = self.update_angle2
+        self.angle2 = 0 #180
 
     def update_angle2( self, *args ) :
-        self.angle2 -= self.speed / 2.0
+        self.angle2 -= self.speed
         if abs(self.angle2) == 360 : self.angle2 = 0
 
         if self.angle == self.angle2 == 0 :
