@@ -24,7 +24,11 @@
             Rectangle:
                 pos: self.pos
                 size: self.size    
-            Image:
+            Color:
+                rgba: 0, 0, 0, 0
+            Rectangle:
+                pos: root.center[0]-dp(64), root.center[1]-dp(64)
+                size: dp(128), dp(128)
                 source: root.splash_image
 
         Button:
