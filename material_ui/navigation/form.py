@@ -28,9 +28,18 @@ class Form( BoxLayout ) :
     Title provided in the navigation bar.
     '''
 
+    background_color = ListProperty( None )
+    '''
+    Solid background color, same color as the navigation controller by default
+    '''
+    
     def __init__( self, **kargs ) :
-        if not 'shared_navigation_controller' in kargs.keys() :
+        if 'shared_navigation_controller' not in kargs.keys() :
             raise ValueError( 'You MUST provide a valid controller for shared_navigation_controller' )
+
+        if 'background_color' not in kargs.keys() :
+            kargs['background_color'] = kargs['shared_navigation_controller'].background_color
+
         super( Form, self ).__init__( **kargs )
 
     def push( self ) :
