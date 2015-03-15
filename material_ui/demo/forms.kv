@@ -92,6 +92,27 @@
             text: "Ok button popup"
             on_press: root.show_okbutton_popup()
 
+# Combo boxes
+
+    Label:
+        text: '- List pickers -'
+        font_size: dp(18)
+
+    BoxLayout:
+        orientation: 'horizontal'   
+        padding: dp(20), dp(20)
+        spacing: dp(30)
+
+        RaisedButton:
+            text: "Popup List View"
+            on_press: root.show_popup_list_view()
+
+        PopupComboBox:
+            popup_args: { 'size_hint':[.5,.8], 'title':'Simple value-picker', 'title_size':dp(22), 'title_font':'../font/Roboto-Bold.ttf', 'title_color':[.5,0,0,1] }
+            list_data: [ {'label': 'Luigi', 'rowid': 0, 'is_selected': False}, {'label': 'Gianni', 'rowid': 0, 'is_selected': False}, {'label': 'Federico', 'rowid': 0, 'is_selected': False}, {'label': 'Alessandro', 'rowid': 0, 'is_selected': False}, {'label': 'Massimo', 'rowid': 0, 'is_selected': False}, {'label': 'Mattia', 'rowid': 0, 'is_selected': False}]
+            text: "Popup Combo Box"
+
+    
 # Next
 
     BoxLayout:

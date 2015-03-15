@@ -17,8 +17,8 @@ from material_ui.navigation.form import Form
 from material_ui.navigation.error import ErrorForm
 from material_ui.navigation.nonetwork import NoNetworkForm
 
-from material_ui.flatui.flatui import FlatPopup, FloatingAction
-from material_ui.flatui.popups import AlertPopup, OkButtonPopup
+from material_ui.flatui.flatui import FloatingAction
+from material_ui.flatui.popups import AlertPopup, FlatPopup, OkButtonPopup, PopupComboBox, PopupListView
 from material_ui.flatui.scroll import RefreshableScrollView
 
 #KV Lang files
@@ -61,6 +61,15 @@ class Screen1( Form ) :
             title_size=dp(22), title_font='../font/Roboto-Bold.ttf', title_color=[.5,0,0,1], 
             title='Ok button popup', 
             text=txt, size_hint=(.8,.6)
+        )
+        popup.open()
+
+    def show_popup_list_view( self ) :
+        data = 'Mario Maria Luigi Gianni Federico Alessandro Massimo Mattia'.split(' ')
+        popup = PopupListView( 
+            data, size_hint=[.5,.8],
+            title='Stateless value-picker', 
+            title_size=dp(22), title_font='../font/Roboto-Bold.ttf', title_color=[.5,0,0,1]
         )
         popup.open()
 
