@@ -36,9 +36,11 @@ Supports cursor color and underlined text while editing.
 #### Popups
 I've simply copy-pasted from kivy.uix.popup to create a class named FlatPopup, there are just a fiew more properties, such as *text_align* and *text_font*.
 
+* **PopupListView**  
+Simple popup which shows a list you can use to pick a value (Stateless).  
+
 * **PopupComboBox**  
-When a click on this button occur, a popup will be shown to pick a value.  
-Arguments named popup_* will be passed down to the popup for customizations.
+Non-Stateless version of PopupListView.  
 
 * **AlertPopup**  
 FlatPopup subclass which allows you to show an alert in a single line of code.  
