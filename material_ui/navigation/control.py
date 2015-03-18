@@ -102,7 +102,7 @@ class NavigationController( BoxLayout ) :
     Navigation bar font name.
     '''
 
-    font_size = NumericProperty( dp(21) )
+    font_size = NumericProperty( dp(22) )
     '''
     Navigation bar font size.
     '''
