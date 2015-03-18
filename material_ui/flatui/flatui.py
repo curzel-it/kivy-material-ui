@@ -204,10 +204,10 @@ class FloatingAction( _MaterialButton ) :
             kargs[ 'color' ] = [ 1, 1, 1, 1 ]
 
         if not 'background_color' in kargs.keys() : 
-            kargs[ 'background_color' ] = [ 0.9, 0.2, 0.15, 1 ]
+            kargs[ 'background_color' ] = [ 0.9137254901960784, 0.18823529411764706, 0.21176470588235294, 1 ]
 
         if not 'background_color_down' in kargs.keys() : 
-            kargs[ 'background_color_down' ] = [ 0.9, 0.3, 0.2, 1 ]
+            kargs[ 'background_color_down' ] = [ 0.9137254901960784, 0.18823529411764706, 0.21176470588235294, 1 ]
 
         super( FloatingAction, self ).__init__( **kargs )
 
