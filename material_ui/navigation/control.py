@@ -11,6 +11,7 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.spinner import Spinner
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.widget import Widget
+from kivy.utils import platform as PLATFORM
 
 from material_ui.flatui.flatui import *
 from material_ui.flatui.labels import *
@@ -22,6 +23,8 @@ from pkg_resources import resource_filename
 alphapng = resource_filename( __name__, 'alpha.png' )
 path = resource_filename( __name__, 'control.kv' )
 Builder.load_file( path )
+
+MOBILE = PLATFORM in ( 'android', 'ios' )
 
 class EmptyNavigationStack( Exception ) :
     '''
@@ -175,23 +178,21 @@ class NavigationController( BoxLayout ) :
 #================================================================================
 
     def _bind_keyboard(self) :
-        #EventLoop.window.bind( on_keyboard=self._on_keyboard_show )
+        EventLoop.window.bind( on_keyboard=self._on_keyboard_show )
         EventLoop.window.bind( on_key_down=self._on_keyboard_down )
 
     def _on_keyboard_show( self, *args ) :
         self._keyboard_show = True
 
     def _on_keyboard_down( self, window, key, *args ) :
-        """
-        if self._keyboard_show : 
-            self._keyboard_show = False
-            EventLoop.window.release_all_keyboards()
-            return True
-        """
-        if key == 27 : #Escape
-            self.pop()
-            return True
 
+        if key == 27 :
+            if self._keyboard_show : 
+                self._keyboard_show = False
+                EventLoop.window.release_all_keyboards()
+            else : 
+                self.pop()
+            return True
         return False
 
     def _run_push_animation( self ) :
