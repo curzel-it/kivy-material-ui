@@ -126,8 +126,8 @@ class NavigationController( BoxLayout ) :
     _push_cache = ListProperty( [] )
     _actionprev = ObjectProperty( None )
     _actiontext = ObjectProperty( None )
-    _content = ObjectProperty( None )
-    _width = NumericProperty( float(Config.get('graphics','width')) )
+    _content    = ObjectProperty( None )
+    _width      = NumericProperty( float(Config.get('graphics','width')) )
 
     def __init__( self, **kargs ) :
         super( NavigationController, self ).__init__( **kargs )
@@ -175,19 +175,19 @@ class NavigationController( BoxLayout ) :
 #================================================================================
 
     def _bind_keyboard(self) :
-        EventLoop.window.bind( on_keyboard=self._on_keyboard_show )
+        #EventLoop.window.bind( on_keyboard=self._on_keyboard_show )
         EventLoop.window.bind( on_key_down=self._on_keyboard_down )
 
     def _on_keyboard_show( self, *args ) :
         self._keyboard_show = True
 
     def _on_keyboard_down( self, window, key, *args ) :
-
+        """
         if self._keyboard_show : 
             self._keyboard_show = False
             EventLoop.window.release_all_keyboards()
             return True
-
+        """
         if key == 27 : #Escape
             self.pop()
             return True

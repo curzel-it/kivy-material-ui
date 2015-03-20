@@ -136,8 +136,7 @@ class FlatPopup(ModalView) :
     def add_widget(self, widget):
         if self._container:
             if self.content:
-                raise PopupException(
-                    'Popup can have only one widget as content')
+                raise PopupException('Popup can have only one widget as content')
             self.content = widget
         else:
             super(FlatPopup, self).add_widget(widget)
