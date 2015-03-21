@@ -1,3 +1,4 @@
+import pdb
 import sys
 sys.path.append( '..' )
 
@@ -30,8 +31,8 @@ class BindedLabel( Label ) :
     fill_color = ListProperty( [0,0,0,0] )
 
     def __init__( self, **kargs ) : 
-        t = str( kargs['text'] if 'text' in kargs.keys() else '' )
-        kargs['text'] = str( t )
+        t = kargs['text'] if 'text' in kargs.keys() else u''
+        kargs['text'] = t
         super( BindedLabel, self ).__init__( **kargs )    
         self.bind( size=self.setter('text_size') )
 
