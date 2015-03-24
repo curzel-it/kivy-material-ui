@@ -31,6 +31,9 @@ class BindedLabel( Label ) :
     fill_color = ListProperty( [0,0,0,0] )
 
     def __init__( self, **kargs ) : 
+        kargs['valign'] = kargs['valign'] if 'valign' in kargs.keys() else 'middle'
+        kargs['halign'] = kargs['halign'] if 'halign' in kargs.keys() else 'center'
+
         t = kargs['text'] if 'text' in kargs.keys() else u''
         kargs['text'] = t
         super( BindedLabel, self ).__init__( **kargs )    
