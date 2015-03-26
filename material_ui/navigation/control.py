@@ -1,4 +1,6 @@
+import pdb
 import sys
+
 from kivy.animation import Animation
 from kivy.config import Config
 from kivy.lang import Builder
@@ -16,6 +18,7 @@ from kivy.utils import platform as PLATFORM
 from material_ui.flatui.flatui import *
 from material_ui.flatui.labels import *
 from material_ui.flatui.popups import *
+from material_ui.navigation.form import Form
 
 from pkg_resources import resource_filename
 
@@ -61,7 +64,7 @@ class NavigationController( BoxLayout ) :
     Solid background color.
     '''
 
-    animation_duracy = NumericProperty( .25 )
+    animation_duracy = NumericProperty( 0 )#.25 )
     '''
     Push & pop animation duracy, default 0.25 seconds.
     '''
@@ -89,7 +92,6 @@ class NavigationController( BoxLayout ) :
     Navigation bar height.
     '''
     
-#    nav_color = ListProperty( [ .54, .765, .86, 1] )
     nav_color = ListProperty( [ .1, .11, .11, 1] )
     '''
     Navigation bar color.
@@ -140,15 +142,16 @@ class NavigationController( BoxLayout ) :
         self._last_args = {'title':'', 'animation':None}
         self._animation = None
         self._bind_keyboard()        
+        self.push( Form( shared_navigation_controller=self ) )
 
     def pop( self, *args ) :
         '''
         Use this to go back to the last view.
         Will eventually throw EmptyNavigationStack.
         '''
-#        pdb.set_trace()
+
         if self._animation is None :
-            if len( self.stack ) > 0 : 
+            if len( self.stack ) > 2 : 
                 try : 
                     self.root_widget.on_pop( self )
                 except : pass
@@ -156,7 +159,7 @@ class NavigationController( BoxLayout ) :
                 self._run_pop_animation()
             else :
                 raise EmptyNavigationStack()
-
+                        
     def push( self, view, **kargs ) :
         '''
         Will append the last view to the list and show the new one.
@@ -171,7 +174,6 @@ class NavigationController( BoxLayout ) :
             x = -1 if self.push_mode == 'left' else 1
             self._save_temp_view( x, view )
             self._run_push_animation()
-
 
 #================================================================================
 # Private stuff of various use...
@@ -234,7 +236,10 @@ class NavigationController( BoxLayout ) :
         self._temp_view.disabled = False
         self.content.remove_widget( self.root_widget )
         self.root_widget, self._last_kargs = self.stack.pop()
-        if len(self.stack) > 0 : self._last_kargs = self.stack[-1][1]        
+
+        if len(self.stack) > 1 : 
+            self._last_kargs = self.stack[-1][1]        
+
         self.content.add_widget( self.root_widget )
         self._update_nav()
         self._animation = None
@@ -254,8 +259,7 @@ class NavigationController( BoxLayout ) :
 
     def _update_nav( self ) :
         self.title = self._last_kargs['title']
-        has_previous = len( self.stack ) > 1 
+        has_previous = len( self.stack ) > 2 
         self.actionprev.text = ' < ' if has_previous else ''
-        #self.actionprev.icon = icon_back_32 if has_previous else ''
         self.actionprev.disabled = not has_previous
 
