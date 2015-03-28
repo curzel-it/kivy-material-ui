@@ -38,6 +38,15 @@ class EmptyNavigationStack( Exception ) :
             'Cannot pop view, navigation stack is empty'
         )
 
+class DidPopLastViewException( Exception ) :
+    '''
+    Raised whenever you pop the last view in the stack.
+    '''
+    def __init__( self ) :
+        super( DidPopLastViewException, self ).__init__(
+            'Navigation stack is now empty'
+        )
+
 class NavigationController( BoxLayout ) :
     '''
     Custom layout you can use to manage navigation in your app.
@@ -151,12 +160,15 @@ class NavigationController( BoxLayout ) :
         '''
 
         if self._animation is None :
-            if len( self.stack ) > 2 : 
-                try : 
-                    self.root_widget.on_pop( self )
-                except : pass
-                self._save_temp_view( 0, self.root_widget )
-                self._run_pop_animation()
+            if len( self.stack ) > 1 :
+                if len( self.stack ) > 2 : 
+                    try : 
+                        self.root_widget.on_pop( self )
+                    except : pass
+                    self._save_temp_view( 0, self.root_widget )
+                    self._run_pop_animation()
+                else :
+                    raise DidPopLastViewException()
             else :
                 raise EmptyNavigationStack()
                         
@@ -167,7 +179,7 @@ class NavigationController( BoxLayout ) :
             title
                 Navigation bar title, default ''.
         '''
-            
+
         if self._animation is None :
             if not 'title' in kargs.keys() : kargs['title'] = ''
             self._last_kargs = kargs
