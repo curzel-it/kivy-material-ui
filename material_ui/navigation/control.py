@@ -179,7 +179,7 @@ class NavigationController( BoxLayout ) :
             title
                 Navigation bar title, default ''.
         '''
-
+    
         if self._animation is None :
             if not 'title' in kargs.keys() : kargs['title'] = ''
             self._last_kargs = kargs
@@ -212,10 +212,13 @@ class NavigationController( BoxLayout ) :
     def _run_push_animation( self ) :
         try : 
             self._temp_view.disabled = self.disable_widget 
-            duracy = self.animation_duracy if self._has_root else 0
-            self._animation = Animation( x=0, duration=duracy )
-            self._animation.bind( on_complete=self._push_temp_view )
-            self._animation.start( self._temp_view ) 
+
+            if self._has_root :
+                self._animation = Animation( x=0, duration=self.animation_duracy )
+                self._animation.bind( on_complete=self._push_temp_view )
+                self._animation.start( self._temp_view ) 
+            else : 
+                self._push_temp_view()
         except : pass #Exception as e : print(e)
 
     def _run_pop_animation( self ) :

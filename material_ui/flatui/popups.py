@@ -36,7 +36,7 @@ class FlatPopup(ModalView) :
     'No title'.
     '''
 
-    title_align = OptionProperty('left', options=['left', 'center', 'right','justify'])
+    title_align = OptionProperty( 'left', options=['left', 'center', 'right','justify'] )
     '''Horizontal alignment of the title.
 
     :attr:`title_align` is a :class:`~kivy.properties.OptionProperty` and

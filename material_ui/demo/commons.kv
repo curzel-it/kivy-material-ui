@@ -1,6 +1,7 @@
 #:kivy 1.8
 
 #Set default font to Roboto
+
 <Label>:
     font_name: 'font/Roboto-Light.ttf'
 
@@ -14,18 +15,6 @@
 <RaisedButton>:
     color: ( .067, .067, .067, 1 )
 
-<Popup>:
-    separator_height: 1
-    separator_color: [ 0.26, 0.69, 0.84, 1 ]
-    title_color: [ 0.26, 0.69, 0.84, 1 ]
-    title_font: 'font/Roboto-Light.ttf'
-    title_align: 'center'
-#    background: 'transparent.png'
-
-<FlatPopup>:
-    title_font: 'font/Roboto-Light.ttf'
-    title_align: 'center'
-#    background: 'transparent.png'
 
 <ListItemButton>:
     font_name: 'font/Roboto-Light.ttf' if not self.is_selected else 'font/Roboto-Medium.ttf'
