@@ -132,6 +132,7 @@ class _MaterialButton( ButtonBehavior, labels.BindedLabel ) :
     def __init__( self, **kargs ) :
         if not 'valign' in kargs.keys() : kargs['valign'] = 'middle'
         if not 'halign' in kargs.keys() : kargs['halign'] = 'center'
+        kargs['color'] = [1,0,0,1]
         super( _MaterialButton, self ).__init__( **kargs )
 
 
@@ -141,6 +142,7 @@ class FlatButton( _MaterialButton ) :
     '''
 
     pass
+
 
 class RaisedButton( _MaterialButton ) :
     '''

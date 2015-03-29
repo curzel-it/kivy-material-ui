@@ -223,7 +223,7 @@ class AlertPopup( FlatPopup ) :
 
     text = StringProperty( 'No text argument was provided.' )
 
-    ok_button_text     = StringProperty( '[b]OK[/b]' )
+    ok_button_text     = StringProperty( 'OK' )
     ok_button_on_press = ObjectProperty( None )
 
     cancel_button_text     = StringProperty( None )
@@ -235,7 +235,6 @@ class AlertPopup( FlatPopup ) :
 
         ok_button = flatui.FlatButton( 
             text=self.ok_button_text,
-            markup=True,
             color=self.buttons_text_color,
             color_down=self.buttons_text_color_down,
             font_name=self.buttons_font_name,
@@ -245,7 +244,6 @@ class AlertPopup( FlatPopup ) :
         
         cancel_button = flatui.FlatButton( 
             text=self.cancel_button_text or '',
-            markup=True,
             color=self.buttons_text_color,
             color_down=self.buttons_text_color_down,
             font_name=self.buttons_font_name,
@@ -263,7 +261,7 @@ class AlertPopup( FlatPopup ) :
         button_bar.add_widget( ok_button )
 
         self.content = BoxLayout( orientation='vertical' )        
-        lbl = Label( text=self.text, size_hint=(1,.9), color=self.title_color )
+        lbl = Label( text=self.text, size_hint=(1,.9), color=self.title_text_color )
         self.content.add_widget( lbl )
         self.content.add_widget( button_bar )
         
@@ -274,47 +272,6 @@ class AlertPopup( FlatPopup ) :
     def on_cancel( self, *args ) :
         self.dismiss()
         if self.cancel_button_on_press : self.cancel_button_on_press( *args )
-
-
-
-class OkButtonPopup( FlatPopup ) :
-    """
-    Quick flat popup to show a generic hint to the user.
-    Has and OK button to dismiss itself and nothing more
-    """
-
-    ok_button_text = StringProperty( '[b]OK[/b]' )
-    text = StringProperty( 'No text argument was provided.' )
-
-    def __init__( self, **kargs ) :
-
-        super( OkButtonPopup, self ).__init__( **kargs )
-
-        ok_button = flatui.FlatButton( 
-            text=self.ok_button_text,
-            markup=True,
-            color=self.buttons_text_color,
-            color_down=self.buttons_text_color_down,
-            font_name=self.buttons_font_name,
-            font_size=self.buttons_font_size
-        )
-        ok_button.bind( on_press=self.on_ok )
-
-        button_bar = BoxLayout( 
-            orientation='horizontal',\
-            size_hint=(1,None), height=dp(55),\
-            spacing=dp(10), padding=[10,10,10,10]
-        )
-        button_bar.add_widget( BoxLayout( size_hint=(.8,1) ) )
-        button_bar.add_widget( ok_button )
-
-        self.content = BoxLayout( orientation='vertical' )        
-        lbl = Label( text=self.text, color=self.title_color, size_hint=(1,.8) )
-        self.content.add_widget( lbl )
-        self.content.add_widget( button_bar )
-        
-    def on_ok( self, *args ) :
-        self.dismiss()
 
         
 class PopupListView( FlatPopup ) :
@@ -469,4 +426,50 @@ class PopupComboBox( flatui.FlatButton ) :
 
     def show_choices( self, *args ) :
         self.popup.show_choices()
+
+
+
+class AskTextPopup( AlertPopup ) :
+    '''Simple popup that requires the user to input text.
+    '''
+
+    input_field = ObjectProperty( None )
+
+    text_hint = StringProperty( '' )
+    
+    def __init__( self, **kargs ) :
+
+        super( AskTextPopup, self ).__init__( **kargs )
+        self.input_field = flatui.FlatTextInput(
+            hint = self.text_hint,
+            font_name = self.content_font_name,
+            font_size = self.content_font_size,
+            size_hint = [ .8, 1 ]
+        )        
+    
+        b = BoxLayout()
+        b.add_widget( Label( size_hint=[.1,1] ) )
+        b.add_widget( self.input_field )
+        b.add_widget( Label( size_hint=[.1,1] ) )
+
+        self.content.add_widget( b, 1 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
