@@ -36,15 +36,6 @@ class FlatPopup(ModalView) :
     'No title'.
     '''
 
-    title_size = NumericProperty( dp(14) )
-    '''Represents the font size of the popup title.
-
-    .. versionadded:: 1.6.0
-
-    :attr:`title_size` is a :class:`~kivy.properties.NumericProperty` and
-    defaults to '14sp'.
-    '''
-
     title_align = OptionProperty('left', options=['left', 'center', 'right','justify'])
     '''Horizontal alignment of the title.
 
@@ -52,29 +43,88 @@ class FlatPopup(ModalView) :
     defaults to 'left'. Available options are left, middle, right and justify.
     '''
 
-    title_font = StringProperty( 'DroidSans' )
+    title_font_name = StringProperty( 'DroidSans' )
     '''Font used to render the title text.
 
-    :attr:`title_font` is a :class:`~kivy.properties.StringProperty`.
+    :attr:`title_font_name` is a :class:`~kivy.properties.StringProperty`.
     '''
 
-    content = ObjectProperty(None)
-    '''Content of the popup that is displayed just under the title.
+    content_font_name = StringProperty( 'DroidSans' )
+    '''Font used to render the popup content.
 
-    :attr:`content` is an :class:`~kivy.properties.ObjectProperty` and defaults
-    to None.
+    :attr:`content_font_name` is a :class:`~kivy.properties.StringProperty`.
     '''
 
-    title_color = ListProperty([1, 1, 1, 1])
+    buttons_font_name = StringProperty( 'DroidSans' )
+    '''Font used to render buttons.
+
+    :attr:`buttons_font` is a :class:`~kivy.properties.StringProperty`.
+    '''
+
+    title_font_size = NumericProperty( dp(16) )
+    '''Represents the font size of the popup title.
+
+    .. versionadded:: 1.6.0
+
+    :attr:`title_font_size` is a :class:`~kivy.properties.NumericProperty` and
+    defaults to '16dp'.
+    '''
+
+    content_font_size = NumericProperty( dp(12) )
+    '''Represents the font size of the popup title.
+
+    .. versionadded:: 1.6.0
+
+    :attr:`content_font_size` is a :class:`~kivy.properties.NumericProperty` and
+    defaults to '12dp'.
+    '''
+
+    buttons_font_size = NumericProperty( dp(14) )
+    '''Represents the font size of the popup title.
+
+    .. versionadded:: 1.6.0
+
+    :attr:`buttons_font_size` is a :class:`~kivy.properties.NumericProperty` and
+    defaults to '14dp'.
+    '''
+
+    title_text_color = ListProperty( [ 0, 0, 0, .9 ] )
     '''Color used by the Title.
 
     .. versionadded:: 1.8.0
 
-    :attr:`title_color` is a :class:`~kivy.properties.ListProperty` and
-    defaults to [1, 1, 1, 1].
+    :attr:`title_text_color` is a :class:`~kivy.properties.ListProperty` and
+    defaults to [ 0, 0, 0, .9 ].
     '''
 
-    separator_color = ListProperty([47 / 255., 167 / 255., 212 / 255., 1.])
+    content_text_color = ListProperty( [ 0, 0, 0, .9 ] )
+    '''Color used by the Title.
+
+    .. versionadded:: 1.8.0
+
+    :attr:`content_text_color` is a :class:`~kivy.properties.ListProperty` and
+    defaults to [ 0, 0, 0, .9 ].
+    '''
+
+    buttons_text_color = ListProperty( [ 0, 150/225.0, 136/255.0, 1 ] )
+    '''Color used by the Title.
+
+    .. versionadded:: 1.8.0
+
+    :attr:`buttons_text_color` is a :class:`~kivy.properties.ListProperty` and
+    defaults to [ 0, 150/225.0, 136/255.0, 1 ].
+    '''
+
+    buttons_text_color_down = ListProperty( [ 0, 100/225.0, 80/255.0, 1 ] )
+    '''Color used by the Title.
+
+    .. versionadded:: 1.8.0
+
+    :attr:`buttons_text_color_down` is a :class:`~kivy.properties.ListProperty` and
+    defaults to [ 0, 100/225.0, 80/255.0, 1 ].
+    '''
+
+    separator_color = ListProperty( [ 0, 0, 0, 0 ] )
     '''Color used by the separator between title and content.
 
     .. versionadded:: 1.1.0
@@ -83,7 +133,7 @@ class FlatPopup(ModalView) :
     defaults to [47 / 255., 167 / 255., 212 / 255., 1.]
     '''
 
-    separator_height = NumericProperty( dp(2) )
+    separator_height = NumericProperty( dp(1) )
     '''Height of the separator.
 
     .. versionadded:: 1.1.0
@@ -106,13 +156,17 @@ class FlatPopup(ModalView) :
     True whenever the popup is visibile
     '''
 
+    content = ObjectProperty(None)
+    '''Content of the popup that is displayed just under the title.
+
+    :attr:`content` is an :class:`~kivy.properties.ObjectProperty` and defaults
+    to None.
+    '''
+
     # Internal properties used for graphical representation.
     _container = ObjectProperty( None )
 
     def __init__( self, **kargs ) :
-
-        if not 'separator_height' in kargs.keys() : 
-            kargs['separator_height'] = 0
         super( FlatPopup, self ).__init__( **kargs )
 
     def open(self, *args, **kargs) :
@@ -169,40 +223,33 @@ class AlertPopup( FlatPopup ) :
 
     text = StringProperty( 'No text argument was provided.' )
 
-    ok_button_text = StringProperty( '[b]OK[/b]' )
-    ok_button_text_color = ListProperty( [1,1,1,1] )
+    ok_button_text     = StringProperty( '[b]OK[/b]' )
     ok_button_on_press = ObjectProperty( None )
-    ok_button_color = ListProperty( [0,.59,.53,1] )
-    ok_button_color_down = ListProperty( [0,.41,.36,1] )
 
-    cancel_button_text = StringProperty( None )
-    cancel_button_text_color = ListProperty( [1,1,1,1] )
+    cancel_button_text     = StringProperty( None )
     cancel_button_on_press = ObjectProperty( None )
-    cancel_button_color = ListProperty( [0,.59,.53,1] )
-    cancel_button_color_down = ListProperty( [0,.41,.36,1] )
 
     def __init__( self, **kargs ) :
-
-        if not 'title'       in kargs.keys() : kargs['title'      ] = 'Warning'
-        if not 'title_size'  in kargs.keys() : kargs['title_size' ] = dp(16)
-        if not 'size_hint'   in kargs.keys() : kargs['size_hint'  ] = (.4,.3)
-        if not 'title_color' in kargs.keys() : kargs['title_color'] = (0,0,0,.8)
 
         super( AlertPopup, self ).__init__( **kargs )
 
         ok_button = flatui.FlatButton( 
             text=self.ok_button_text,
             markup=True,
-            color=self.ok_button_color,
-            color_down=self.ok_button_color_down 
+            color=self.buttons_text_color,
+            color_down=self.buttons_text_color_down,
+            font_name=self.buttons_font_name,
+            font_size=self.buttons_font_size
         )
         ok_button.bind( on_press=self.on_ok )
         
         cancel_button = flatui.FlatButton( 
             text=self.cancel_button_text or '',
             markup=True,
-            color=self.cancel_button_color,
-            color_down=self.cancel_button_color_down 
+            color=self.buttons_text_color,
+            color_down=self.buttons_text_color_down,
+            font_name=self.buttons_font_name,
+            font_size=self.buttons_font_size
         )
         cancel_button.bind( on_press=self.on_cancel )
 
@@ -238,25 +285,18 @@ class OkButtonPopup( FlatPopup ) :
 
     ok_button_text = StringProperty( '[b]OK[/b]' )
     text = StringProperty( 'No text argument was provided.' )
-    ok_button_color = ListProperty( [0,.59,.53,1] )
-    ok_button_text_color = ListProperty( [1,1,1,1] )
-    ok_button_color_down = ListProperty( [0,.41,.36,1] )
 
     def __init__( self, **kargs ) :
-
-        if not 'title'       in kargs.keys() : kargs['title'      ] = 'Info'
-        if not 'title_size'  in kargs.keys() : kargs['title_size' ] = dp(16)
-        if not 'size_hint'   in kargs.keys() : kargs['size_hint'  ] = (.8,.5)
-        if not 'title_color' in kargs.keys() : kargs['title_color'] = (0,0,0,.8)
 
         super( OkButtonPopup, self ).__init__( **kargs )
 
         ok_button = flatui.FlatButton( 
             text=self.ok_button_text,
             markup=True,
-            size_hint=(.2,1),
-            color=self.ok_button_color,
-            color_down=self.ok_button_color_down 
+            color=self.buttons_text_color,
+            color_down=self.buttons_text_color_down,
+            font_name=self.buttons_font_name,
+            font_size=self.buttons_font_size
         )
         ok_button.bind( on_press=self.on_ok )
 
@@ -311,7 +351,6 @@ class PopupListView( FlatPopup ) :
 
     def __init__( self, list_data, **kargs ) :
         super( PopupListView, self ).__init__( **kargs )
-        #if len(list_data) == 0 : raise ValueError( 'Empty list data.' )
         self.list_data = self.build_list_data( list_data )
         self.content = self._build_list_view( kargs )
 
