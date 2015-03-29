@@ -46,9 +46,6 @@ Non-Stateless version of PopupListView.
 FlatPopup subclass which allows you to show an alert in a single line of code.  
 Supports two action buttons.  
 
-* **OkButtonPopup**  
-FlatPopup subclass with a single 'OK' button.
-
 #### Scroll views
 You can use an android-like control to refresh scroll view contents.  
 Use RefreshableScrollView for that.  
