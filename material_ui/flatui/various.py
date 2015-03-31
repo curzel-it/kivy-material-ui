@@ -34,7 +34,7 @@ class SnackBar( labels.BindedLabel ) :
         self._bound = False
         super( SnackBar, self ).__init__( **kargs )
         self.color      = [ 1, 1, 1, 1 ]
-        self.fill_color = [ .1961, .1961, .1961, 1 ]
+        self.fill_color = [ .1961, .1961, .1961, self.alpha ]
         self.size_hint  = 1, None
         self.height = dp(80) if '\n' in self.text else dp(48)
     
@@ -59,6 +59,7 @@ class SnackBar( labels.BindedLabel ) :
         if -(self._duration) > self._timeout_down:
             Window.remove_widget(self)
             return False
+        self.fill_color = [ .1961, .1961, .1961, self.alpha ]
 
 """
 def do_toast( text, **kargs ):
