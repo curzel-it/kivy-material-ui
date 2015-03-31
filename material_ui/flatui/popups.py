@@ -455,7 +455,8 @@ class AskTextPopup( AlertPopup ) :
 
         super( AskTextPopup, self ).__init__( **kargs )
         self.input_field = flatui.FlatTextInput(
-            hint = self.text_hint,
+            focus     = True,
+            hint      = self.text_hint,
             font_name = self.content_font_name,
             font_size = self.content_font_size,
             size_hint = [ .8, 1 ]
@@ -470,6 +471,10 @@ class AskTextPopup( AlertPopup ) :
 
         if not self.multiline :
             pass
+
+    def on_ok( self, *args ) :
+        super( AskTextPopup, self ).on_ok( *args )
+        self.input_field.focus = False
 
     def _on_keyboard_down( self, window, key, *args ) :
         if self.is_shown and key == 13 : #Enter

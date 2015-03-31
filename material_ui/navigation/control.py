@@ -1,4 +1,3 @@
-import pdb
 import sys
 
 from kivy.animation import Animation
@@ -131,6 +130,12 @@ class NavigationController( BoxLayout ) :
     FloatingLayout you can use for any pourpose.
     '''
 
+    floating_action = ObjectProperty( None )
+    '''
+    FloatingAction managed by the controller.
+    Press 'Menu' key to fire the on-press event.
+    '''
+
     splash_image = StringProperty( alphapng )
     '''
     Image used as splash screen.
@@ -199,8 +204,13 @@ class NavigationController( BoxLayout ) :
         self._keyboard_show = True
 
     def _on_keyboard_down( self, window, key, *args ) :
+    
+        if key == 319 : # Menu
+            if self.floating_action :
+                self.floating_action.on_press()
+                return True
 
-        if key == 27 :
+        if key == 27 : # Escape
             if self._keyboard_show : 
                 self._keyboard_show = False
                 EventLoop.window.release_all_keyboards()
