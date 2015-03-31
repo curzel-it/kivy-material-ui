@@ -12,14 +12,14 @@
 
 		#Cursor
         Color:
-            rgba: ( self.cursor_color if self.focus and not self.cursor_blink else [0,0,0,0] )
+            rgba: ( self.cursor_color if self.focus and not self.cursor_blink else [ 0, 0, 0, 0 ] )
         Rectangle:
             pos: [int(x) for x in self.cursor_pos]
             size: sp(2), -self.line_height
 
 		#Underline
         Color:
-            rgba: self.cursor_color if self.focus and self.show_underline else [.75, .75, .75, 1]
+            rgba: self.cursor_color if self.focus and self.show_underline else [ 0, 0, 0, .1 ]
         Rectangle:
             size: ( self.size[0]-3, 1 )
             pos: self.pos[0], self.cursor_pos[1] - self.line_height - 3

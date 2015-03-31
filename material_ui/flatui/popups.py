@@ -300,7 +300,16 @@ class PopupListView( FlatPopup ) :
     '''
 
     selected = ObjectProperty( None )
-    '''Bind this property to your on-selection function.
+    '''Data selected.
+
+    .. versionadded:: 1.0
+
+    :attr:`selected` is a :class:`~kivy.properties.ObjectProperty`.
+    '''
+
+
+    selected = ObjectProperty( None )
+    '''Index of selected data.
 
     .. versionadded:: 1.0
 
@@ -367,8 +376,10 @@ class PopupListView( FlatPopup ) :
 
     def on_selection_change( self, adapter, *args ) : 
         if ( adapter.selection ) :
-            self.selected = self.list_data[ adapter.selection[0].index ]
-            if self.on_selection : self.on_selection( self )
+            self.selected_index = adapter.selection[0].index
+            self.selected = self.list_data[ self.selected_index ]
+            if self.on_selection : 
+                self.on_selection( self, self.selected, self.selected_index )
             self.dismiss()
 
     def select( self, i ) :

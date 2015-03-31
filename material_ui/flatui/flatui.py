@@ -30,7 +30,6 @@ from kivy.uix.listview import ListItemButton, ListView
 from kivy.uix.modalview import ModalView
 from kivy.uix.textinput import TextInput
 
-#from flatui.labels import BindedLabel
 from . import labels
 
 from pkg_resources import resource_filename
