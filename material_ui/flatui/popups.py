@@ -1,4 +1,3 @@
-import pdb
 import sys
 
 from kivy.animation import Animation
@@ -233,38 +232,47 @@ class AlertPopup( FlatPopup ) :
     def __init__( self, **kargs ) :
 
         super( AlertPopup, self ).__init__( **kargs )
+        """
+        'color': [0, 0.6666666666666666, 0.5333333333333333, 1], 
+        'text': 'OK', 
+        'font_size': 16.0, 
+        'font_name': 'font/RobotoCondensed-Bold.ttf', 
+        'color_down': [0, 0.4444444444444444, 0.3137254901960784, 1]
+        """
 
-        ok_button = flatui.FlatButton( 
+
+        self.ok_button = flatui.FlatButton( 
             text=self.ok_button_text,
             color=self.buttons_text_color,
             color_down=self.buttons_text_color_down,
             font_name=self.buttons_font_name,
             font_size=self.buttons_font_size
         )
-        ok_button.bind( on_press=self.on_ok )
+        self.ok_button.bind( on_press=self.on_ok )
         
-        cancel_button = flatui.FlatButton( 
+        self.cancel_button = flatui.FlatButton( 
             text=self.cancel_button_text or '',
             color=self.buttons_text_color,
             color_down=self.buttons_text_color_down,
             font_name=self.buttons_font_name,
             font_size=self.buttons_font_size
         )
-        cancel_button.bind( on_press=self.on_cancel )
+        self.cancel_button.bind( on_press=self.on_cancel )
 
-        button_bar = BoxLayout( 
+        self.button_bar = BoxLayout( 
             orientation='horizontal',\
             size_hint=(1,None), height=dp(55),\
             spacing=dp(10), padding=[10,10,10,10] 
         )
-        button_bar.add_widget( BoxLayout() )
-        if self.cancel_button_text : button_bar.add_widget( cancel_button )
-        button_bar.add_widget( ok_button )
+        self.button_bar.add_widget( BoxLayout() )
+
+        if self.cancel_button_text : self.button_bar.add_widget( self.cancel_button )
+        self.button_bar.add_widget( self.ok_button )
 
         self.content = BoxLayout( orientation='vertical' )        
         lbl = Label( text=self.text, size_hint=(1,.9), color=self.title_text_color )
         self.content.add_widget( lbl )
-        self.content.add_widget( button_bar )
+        self.content.add_widget( self.button_bar )
         
     def on_ok( self, *args ) :
         self.dismiss()
@@ -428,6 +436,9 @@ class PopupComboBox( flatui.FlatButton ) :
     def show_choices( self, *args ) :
         self.popup.show_choices()
 
+    def on_selection_change( self, adapter, *args ) : 
+        super( PopupComboBox, self ).on_selection_change( adapter, *args )
+        self.text = self.selected
 
 
 class AskTextPopup( AlertPopup ) :
@@ -438,6 +449,8 @@ class AskTextPopup( AlertPopup ) :
 
     text_hint = StringProperty( '' )
     
+    multiline = BooleanProperty( False )
+
     def __init__( self, **kargs ) :
 
         super( AskTextPopup, self ).__init__( **kargs )
@@ -455,8 +468,14 @@ class AskTextPopup( AlertPopup ) :
 
         self.content.add_widget( b, 1 )
 
+        if not self.multiline :
+            pass
 
-
+    def _on_keyboard_down( self, window, key, *args ) :
+        if self.is_shown and key == 13 : #Enter
+            self.on_ok()
+            return True
+        return super( AskTextPopup, self )._on_keyboard_down( window, key, *args )
 
 
 

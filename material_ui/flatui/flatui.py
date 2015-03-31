@@ -30,8 +30,6 @@ from kivy.uix.listview import ListItemButton, ListView
 from kivy.uix.modalview import ModalView
 from kivy.uix.textinput import TextInput
 
-import pdb
-
 #from flatui.labels import BindedLabel
 from . import labels
 
@@ -71,7 +69,7 @@ class _MaterialButton( ButtonBehavior, Label ) : #labels.BindedLabel ) :
     Replacement for Button class, just more flexible...
     '''
 
-    background_color = ListProperty( [ 0, 0, 0, 0 ] )
+    background_color = ListProperty( [ 1, 1, 1, 1 ] )
     '''Represents the rgba color used to render the frame in the normal state.
 
     .. versionadded:: 1.0
@@ -132,6 +130,9 @@ class _MaterialButton( ButtonBehavior, Label ) : #labels.BindedLabel ) :
         if not 'valign' in kargs.keys() : kargs['valign'] = 'middle'
         if not 'halign' in kargs.keys() : kargs['halign'] = 'center'
         super( _MaterialButton, self ).__init__( **kargs )
+    
+        for key in kargs.keys() :
+            self.__setattr__( key, kargs[key] )
 
 
 class FlatButton( _MaterialButton ) :
@@ -139,10 +140,7 @@ class FlatButton( _MaterialButton ) :
     Material UI flat button.
     '''
     
-    def __init__( self, **kargs ) :
-        super( FlatButton, self ).__init__( **kargs )
-        self.color = [0,1,0,1]
-
+    pass        
 
 class RaisedButton( _MaterialButton ) :
     '''
