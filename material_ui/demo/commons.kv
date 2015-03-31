@@ -1,25 +1,32 @@
 #:kivy 1.8
 
-#Set default font to Roboto
-
 <Label>:
+    color: 0, 0, 0, .8
     font_name: 'font/Roboto-Light.ttf'
 
 <Button>:
     font_name: 'font/Roboto-Light.ttf'
 
 <TextInput>:
+    color: 0, 0, 0, .8
     font_name: 'font/Roboto-Light.ttf'
 
+<FlatPopup>:
+    title_font_size:   dp(18)
+    content_font_size: dp(13)
+    buttons_font_size: dp(16)
+    title_font_name:   'font/RobotoCondensed-Bold.ttf'
+    content_font_name: 'font/Roboto-Light.ttf'
+    buttons_font_name: 'font/RobotoCondensed-Bold.ttf'
 
 <RaisedButton>:
-    color: ( .067, .067, .067, 1 )
+    color: ( 0, 0, 0, .8 )
 
 
 <ListItemButton>:
     font_name: 'font/Roboto-Light.ttf' if not self.is_selected else 'font/Roboto-Medium.ttf'
     font_size: dp(15)
-    color: [ .423, 0.647, 0.745, 1]  if not self.is_selected else ( 1, 1, 1, 1 )
+    color: [ 0, 0, 0, .8 ]  if not self.is_selected else ( 1, 1, 1, 1 )
     selected_color: [ .423, 0.647, 0.745, 1] 
     deselected_color: [ 1, 1, 1, 1 ]
 

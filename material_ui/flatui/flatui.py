@@ -1,3 +1,5 @@
+__all__ = [ 'FlatTextInput', 'FlatButton', 'RaisedButton', 'FloatingAction' ]
+
 """
 Please refer to Google's Material UI guidelines :
 http://www.google.com/design
@@ -64,45 +66,42 @@ class FlatTextInput( TextInput ) :
         super( FlatTextInput, self ).__init__( **kargs )
 
 
-class _MaterialButton( ButtonBehavior, labels.BindedLabel ) :
+class _MaterialButton( ButtonBehavior, Label ) : #labels.BindedLabel ) :
     '''
     Replacement for Button class, just more flexible...
     '''
 
-    background_color = ListProperty( [1, 1, 1, 1] )
+    background_color = ListProperty( [ 0, 0, 0, 0 ] )
     '''Represents the rgba color used to render the frame in the normal state.
 
     .. versionadded:: 1.0
 
     The :attr:`background_color` is a
-    :class:`~kivy.properties.ListProperty` and defaults to [1, 1, 1, 1].
+    :class:`~kivy.properties.ListProperty` and defaults to [ 0, 0, 0, 0 ].
     '''
 
-    background_color_down = ListProperty( [ 0.2, 0.65, 0.81, 1 ] )
+    background_color_down = ListProperty( [ 0, 0, 0, .2 ] )
     '''Represents the rgba color used to render the frame in the down state.
 
     .. versionadded:: 1.0
 
-    :attr:`background_color_down` is a :class:`~kivy.properties.ListProperty` and
-    defaults to [ 0.2, 0.65, 0.81, 0.5 ] ( cyano with alpha ).
+    :attr:`background_color_down` is a :class:`~kivy.properties.ListProperty`.
     '''
 
-    color_down = ListProperty( [ 0, 0, 0, .7 ] )
+    color_down = ListProperty( [ 0, 0, 0, .8 ] )
     '''Represents the rgba color used to render the button text in the down state.
 
     .. versionadded:: 1.0
 
-    :attr:`color_down` is a :class:`~kivy.properties.ListProperty` and
-    defaults to [ .3, .3, .3, 1 ] ( cyano with alpha ).
+    :attr:`color_down` is a :class:`~kivy.properties.ListProperty`.
     '''
 
-    background_color_disabled = ListProperty( [ 0.4, 0.4, 0.4, 0.5 ] )
+    background_color_disabled = ListProperty( [ 0, 0, 0, .1 ] )
     '''Represents the rgba color used to render the button when disabled.
 
     .. versionadded:: 1.0
 
-    :attr:`background_color_down` is a :class:`~kivy.properties.ListProperty` and
-    defaults to [ 0.4, 0.4, 0.4, 0.5 ] ( grey with alpha ).
+    :attr:`background_color_down` is a :class:`~kivy.properties.ListProperty`
     '''
 
     icon = StringProperty( '' )
@@ -132,7 +131,6 @@ class _MaterialButton( ButtonBehavior, labels.BindedLabel ) :
     def __init__( self, **kargs ) :
         if not 'valign' in kargs.keys() : kargs['valign'] = 'middle'
         if not 'halign' in kargs.keys() : kargs['halign'] = 'center'
-        kargs['color'] = [1,0,0,1]
         super( _MaterialButton, self ).__init__( **kargs )
 
 
@@ -140,8 +138,10 @@ class FlatButton( _MaterialButton ) :
     '''
     Material UI flat button.
     '''
-
-    pass
+    
+    def __init__( self, **kargs ) :
+        super( FlatButton, self ).__init__( **kargs )
+        self.color = [0,1,0,1]
 
 
 class RaisedButton( _MaterialButton ) :

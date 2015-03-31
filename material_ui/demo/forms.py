@@ -1,3 +1,4 @@
+import pdb
 import sys
 sys.path.append( '..' )
 
@@ -40,17 +41,17 @@ class Screen1( Form ) :
         txt = 'FlatPopup has attributed title'
         lbl = Label( text=txt )
         popup = FlatPopup( 
-            title_size=dp(22), title_font='../font/Roboto-Bold.ttf', title_color=[.5,0,0,1], 
             title='Flat popup',
-            size_hint=(.8,.8), content=lbl 
+            size_hint=(.8,.8), 
+            content=lbl 
         )
         popup.open()
 
     def show_alert_popup( self ) :
         txt = 'AlertPopup comes with two buttons.\nYou can set callbacks on them.'
         popup = AlertPopup( 
-            title_size=dp(22), title_font='../font/Roboto-Bold.ttf', title_color=[.5,0,0,1], 
-            title='Alert popup', ok_button_text='Yes', cancel_button_text='No',
+            title='Alert popup', 
+            ok_button_text='YES', cancel_button_text='NO',
             text=txt, size_hint=(.8,.6)
         )
         popup.open()
@@ -58,18 +59,18 @@ class Screen1( Form ) :
     def show_okbutton_popup( self ) :
         txt = "Use AlertPopup with a single 'OK' button."
         popup = AlertPopup( 
-            title_size=dp(22), title_font='../font/Roboto-Bold.ttf', title_color=[.5,0,0,1], 
             title='Ok button popup', 
-            text=txt, size_hint=(.8,.6)
-        )
+            text=txt, 
+            size_hint=(.8,.6)
+        )        
         popup.open()
 
     def show_popup_list_view( self ) :
         data = 'Mario Maria Luigi Gianni Federico Alessandro Massimo Mattia'.split(' ')
         popup = PopupListView( 
-            data, size_hint=[.5,.8],
+            data, 
+            size_hint=[.5,.8],
             title='Stateless value-picker', 
-            title_size=dp(22), title_font='../font/Roboto-Bold.ttf', title_color=[.5,0,0,1]
         )
         popup.open()
 

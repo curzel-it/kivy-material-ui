@@ -1,3 +1,4 @@
+import pdb
 import sys
 
 from kivy.animation import Animation
@@ -58,16 +59,16 @@ class FlatPopup(ModalView) :
     buttons_font_name = StringProperty( 'DroidSans' )
     '''Font used to render buttons.
 
-    :attr:`buttons_font` is a :class:`~kivy.properties.StringProperty`.
+    :attr:`buttons_font_name` is a :class:`~kivy.properties.StringProperty`.
     '''
 
-    title_font_size = NumericProperty( dp(16) )
+    title_font_size = NumericProperty( dp(18) )
     '''Represents the font size of the popup title.
 
     .. versionadded:: 1.6.0
 
     :attr:`title_font_size` is a :class:`~kivy.properties.NumericProperty` and
-    defaults to '16dp'.
+    defaults to '18dp'.
     '''
 
     content_font_size = NumericProperty( dp(12) )
@@ -79,7 +80,7 @@ class FlatPopup(ModalView) :
     defaults to '12dp'.
     '''
 
-    buttons_font_size = NumericProperty( dp(14) )
+    buttons_font_size = NumericProperty( dp(15) )
     '''Represents the font size of the popup title.
 
     .. versionadded:: 1.6.0

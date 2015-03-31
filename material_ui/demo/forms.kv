@@ -1,12 +1,8 @@
 <Label>:
-    color: 0, 0, 0, .8
     font_size: dp(15)
-    font_name: 'font/Roboto-Light.ttf'
 
 <FlatTextInput>:
     font_size: dp(15)
-    font_name: 'font/Roboto-Light.ttf'
-
     
 <Screen1>:
     title: 'UI Elements'    
@@ -16,7 +12,9 @@
 
     Label:
         text: '- FlatTextInput -'
-        font_size: dp(18)
+        font_size: dp(15)
+        size_hint: 1, None
+        height: dp(30)
 
     BoxLayout:
         orientation: 'horizontal'  
@@ -38,7 +36,9 @@
 
     Label:
         text: '- FlatButton and RaisedButton -'
-        font_size: dp(18)
+        font_size: dp(15)
+        size_hint: 1, None
+        height: dp(30)
 
     BoxLayout:
         orientation: 'horizontal'   
@@ -49,15 +49,15 @@
             text: 'Flat button'
             font_size: dp(15)
             font_name: 'font/Roboto-Bold.ttf'
-            color: 0, 0, 0, .8
-            color_down: .5, 0, 0, .8
+            color: .5, 0, 0, .8
+            color_down: .2, 0, 0, .8
 
         FlatButton:
             text: 'Colored text'
             font_size: dp(15)
             font_name: 'font/Roboto-Bold.ttf'
-            color: 0, 0, 0, .8
-            color_down: 0, .5, 0, .8
+            color: 0, .5, 0, .8
+            color_down: 0, .2, 0, .8
 
         RaisedButton:
             text: "Raised button"
@@ -73,7 +73,9 @@
 
     Label:
         text: '- Popups -'
-        font_size: dp(18)
+        font_size: dp(15)
+        size_hint: 1, None
+        height: dp(30)
 
     BoxLayout:
         orientation: 'horizontal'   
@@ -96,7 +98,9 @@
 
     Label:
         text: '- List pickers -'
-        font_size: dp(18)
+        font_size: dp(15)
+        size_hint: 1, None
+        height: dp(30)
 
     BoxLayout:
         orientation: 'horizontal'   
@@ -111,7 +115,6 @@
             popup_args: { 'size_hint':[.5,.8], 'title':'Simple value-picker', 'title_size':dp(22), 'title_font':'../font/Roboto-Bold.ttf', 'title_color':[.5,0,0,1] }
             list_data: [ {'label': 'Luigi', 'rowid': 0, 'is_selected': False}, {'label': 'Gianni', 'rowid': 0, 'is_selected': False}, {'label': 'Federico', 'rowid': 0, 'is_selected': False}, {'label': 'Alessandro', 'rowid': 0, 'is_selected': False}, {'label': 'Massimo', 'rowid': 0, 'is_selected': False}, {'label': 'Mattia', 'rowid': 0, 'is_selected': False}]
             text: "Popup Combo Box"
-
     
 # Next
 
