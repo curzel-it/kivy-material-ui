@@ -58,13 +58,13 @@ The default animation for RefreshableScrollView is LollipopSpinner, based on gap
 Those are taken from demo.py, using forms and a navigation controller.  
 
 #### Some flat widgets
-![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/demo/screenshots/ui.png)
+![alt tag](https://raw.github.com/Cuuuurzel/kivy-material-ui/master/material_ui/demo/screenshots/ui.png)
 
 #### Scrollview during realod
-![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/demo/screenshots/list-realod.png)
+![alt tag](https://raw.github.com/Cuuuurzel/kivy-material-ui/master/material_ui/demo/screenshots/list-realod.png)
 
 #### Flat popups
-![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/demo/screenshots/popup1.png)
+![alt tag](https://raw.github.com/Cuuuurzel/kivy-material-ui/master/material_ui/demo/screenshots/popup1.png)
 
 #### Sample error form 
-![alt tag]( https://github.com/Cuuuurzel/kivy-material-ui/blob/master/demo/screenshots/nonetwork.png)
+![alt tag](https://raw.github.com/Cuuuurzel/kivy-material-ui/master/material_ui/demo/screenshots/nonetwork.png)
