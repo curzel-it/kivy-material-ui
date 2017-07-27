@@ -52,7 +52,7 @@ class Form( BoxLayout ) :
         '''
         Will pop\dismiss this form.
         '''
-        self.shared_navigation_controller.push()
+        self.shared_navigation_controller.pop()
 
     def on_push( self, controller ) :
         '''
