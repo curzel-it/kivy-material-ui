@@ -1,3 +1,8 @@
+### Sorry, but maintainance is discontinued.
+It seems there is still some interest in this repo every once in a while.
+Please do as you please, but keep in mind the project has not been maintained in at least 3 years.
+Kivy is an awesome framework - I just don't have time at the moment, please understand.
+
 # kivy-material-ui
 Bunch of classes, layouts and images I use in my projects.  
 For graphical objects I've tried to follow Google's Materia UI guidelines.  
